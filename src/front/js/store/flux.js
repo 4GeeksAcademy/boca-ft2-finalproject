@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			userCordinates: null,
 			spotifyToken: null,
 			message: null,
 			demo: [
@@ -23,6 +24,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 
+			convertZipToCoordinates: (userZip) => {
+				fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${userZip}&key=AIzaSyCsCQ-or4JxE_vQUmnX-FwVdn_YAK8a73I&=&=`)
+					.then(response => {
+						return response.json();
+					})
+					.then(res => {
+						setStore({ userCordinates: res.results[0].geometry.location })
+					})
+			},
+
+
 			//Function Refreshes On Load
 			spotifyTokenRefresh: () => {
 				const clientID = "5eedb8285f214e62985fddba0f324895"
@@ -40,7 +52,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return res.json();
 					})
 					.then(newToken => {
-						setStore({ spotifyToken: newToken })
+						setStore({ spotifyToken: newToken.access_token })
 					})
 			},
 
