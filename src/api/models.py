@@ -11,6 +11,13 @@ class User(db.Model):
     last_name = db.Column(db.String(120), nullable=False)
     postal_code = db.Column(db.String(120), nullable=False)
     dob = db.Column(db.String(120), nullable=False)
+    user_info = db.relationship('UserPage', backref='user', lazy=True)
+    user_playlist = db.relationship('Playlist', backref='user', lazy=True)
+    user_post = db.relationship('Post', backref='user', lazy=True)
+    user_comment = db.relationship('Comment', backref='user', lazy=True)
+    user_event = db.relationship('Event', backref='user', lazy=True)
+
+
 
     def __repr__(self):
         return f'<User {self.email}>'
@@ -63,10 +70,10 @@ class PlaylistSongs(db.Model):
     song_genre = db.Column(db.String(120))
     song_id = db.Column(db.Integer)
     
-class Follower(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    uid = db.Column(db.Integer, db.ForeignKey(User.uid))
-    follower_id = db.Column(db.Integer, db.ForeignKey(User.uid))
+#class Follower(db.Model):
+#    id = db.Column(db.Integer, primary_key=True)
+#    uid = db.Column(db.Integer, db.ForeignKey(User.uid))
+#    follower_id = db.Column(db.Integer, db.ForeignKey(User.uid))
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
