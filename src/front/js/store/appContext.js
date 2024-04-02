@@ -28,7 +28,9 @@ const injectContext = PassedComponent => {
 			 * you should do your ajax requests or fetch api requests here. Do not use setState() to save data in the
 			 * store, instead use actions, like this:
 			 **/
+			state.actions.spotifyTokenRefresh();
 			state.actions.getMessage(); // <---- calling this function from the flux.js actions
+			// state.actions.convertZipToCoordinates("4000 NE 21st Ave Fort Lauderdale Fl")
 		}, []);
 
 		// The initial value for the context is not null anymore, but the current state of this component,
