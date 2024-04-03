@@ -16,7 +16,7 @@ export const Album = () => {
 		const opts = {
 			method: "GET",
 			headers: {
-				Authorization: `Bearer ${ store.spotifyToken}` 
+				Authorization: `Bearer ${store.spotifyToken}`
 			}
 		}
 		fetch(`https://api.spotify.com/v1/search?q=${userInput}&type=album&market=US&limit=10`, opts)
@@ -29,13 +29,13 @@ export const Album = () => {
 	}
 	useEffect(() => {
 		getAlbumSpotify()
-	  }, [userInput]);
+	}, [userInput]);
 	return (
 		<div className="container">
 			<div className="row">Album Page</div>
 			<div className="mb-3">
 				<label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-				<input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={userInput} onChange={(e)=>setUserInput(e.target.value)}/>
+				<input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={userInput} onChange={(e) => setUserInput(e.target.value)} />
 				<div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
 			</div>
 		</div>

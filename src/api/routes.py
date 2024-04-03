@@ -32,7 +32,8 @@ def handle_create_user():
     else:
         return 'UNKNOWN ERROR', 400
     
-@api.route('/getuser', methods=['POST'])
+@api.route('/login', methods=['POST'])
+#protected
 def handle_get_user():
     sent_info = request.json
     get_user = User.query.filter_by(username=sent_info['username'], password=sent_info['password'])
