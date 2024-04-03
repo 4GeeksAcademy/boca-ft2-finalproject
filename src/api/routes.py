@@ -54,6 +54,11 @@ def handle_delete_user(uid):
 #def handle_update_profile():
 #    sent_info = request.json
 #    current_user = User.query.filter_by(uid=sent_info['uid']).first()
+#    current_user.about_me = sent_info['about_me']
+#    current_user.prof_pic_url = sent_info['prof_pic_url']
+#    db.session.commit()
+#    new_info = User.query.filter_by(uid=sent_info['uid]).first()
+#    return jsonify(new_info), 
 # I've put this on backlog for now, I believe once we have the front end profile page set up and know what we're displaying, we'll know what we can update.
 
 @api.route('/changepassword', methods=['PUT'])
