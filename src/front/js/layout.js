@@ -4,20 +4,18 @@ import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 import injectContext from "./store/appContext";
 //Page Imports
-import { Landingpage } from "./pages/LandingPage/LandingPage";
+import { Landingpage } from "./pages/LandingPage/LandingPage.jsx";
 import { CreateAccount } from "./pages/Login Page/CreateAccount";
 import { Login } from "./pages/Login Page/Login";
 import { ResetPassword } from "./pages/Login Page/ResetPassword";
 //Main Components
-import { Home } from "./pages/Home/Home";
-import { BottomNav } from "./component/BottomNav/BottomNav";
+import { Home } from "./pages/Home/Home.jsx";
+import { SideNav } from "./component/Side Nav/SideNav.jsx";
 import { Post } from "./pages/Post/Post";
 import { Discover } from "./pages/Discover/Discover";
 import { MyAccount } from "./pages/My Account/MyAccount.js";
 import { Inbox } from "./pages/Inbox/Inbox.js";
-import { Navbar } from "./component/navbar";
-import { Footer } from "./component/footer";
-import { Searchpage } from "./pages/Search/SearchPage";
+import { Searchpage } from "./pages/Search/SearchPage.jsx";
 //Sub Views
 import { FriendPlaylist } from "./pages/FriendsContent/FriendPlaylist.js";
 import { FriendProfile } from "./pages/FriendsContent/FriendProfile.js"
@@ -41,7 +39,7 @@ const Layout = () => {
         <div>
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
-                    <Navbar />
+                <SideNav />
                     <Routes>
                         <Route element={<Landingpage />} path="/" />
                         <Route element={<CreateAccount />} path="/createaccount" />
@@ -67,8 +65,6 @@ const Layout = () => {
     
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
-                    <BottomNav />
-                    <Footer />
                 </ScrollToTop>
             </BrowserRouter>
         </div>

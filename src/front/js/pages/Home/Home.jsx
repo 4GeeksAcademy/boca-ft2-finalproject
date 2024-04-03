@@ -10,11 +10,17 @@ export const Home = () => {
 
 
     return (
-        <div className="container">
-            
-            <h2>Home</h2>
-            <Feed></Feed>
-        </div>
 
+        <div className="container">
+            <div className="row">
+                <div className="col-5"></div>
+
+                <div className="col-4">
+                    <h2>Home</h2>
+                    <Feed></Feed>
+                </div>
+                <div className="col-4"></div>
+            </div>
+        </div>
     );
 };

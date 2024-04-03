@@ -1,0 +1,11 @@
+.button-rounded{
+	border-radius: 40px !important;
+}
+
+.searchbarstyle{
+	border-radius: 20px !important;
+	border-color: black;
+}
+.searchbarstyle::placeholder {
+	color: black;
+  }

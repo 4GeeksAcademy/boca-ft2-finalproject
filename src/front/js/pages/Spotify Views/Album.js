@@ -1,25 +1,27 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { Navigate, useNavigate } from "react-router-dom"
+import { Navigate, useNavigate, useLocation } from "react-router-dom"
+import "../../pages/Spotify Views/Album.css"
+
 
 import { Context } from "../../store/appContext";
 export const Album = () => {
 
 
 	const { store, actions } = useContext(Context);
-	const [userInput, setUserInput] = useState([]);
 	const [searchResults, setSearchResults] = useState([]);
 	const navigate = useNavigate();
 
 
 	const getAlbumSpotify = () => {
+
 		const opts = {
 			method: "GET",
 			headers: {
-				Authorization: `Bearer ${ store.spotifyToken}` 
+				Authorization: `Bearer ${store.spotifyToken}`
 			}
 		}
-		fetch(`https://api.spotify.com/v1/search?q=${userInput}&type=album&market=US&limit=10`, opts)
+		fetch(`https://api.spotify.com/v1/search?q=${store.userSearchBarInput}&type=album&market=US&limit=10`, opts)
 			.then(response => {
 				return response.json();
 			})
@@ -29,15 +31,33 @@ export const Album = () => {
 	}
 	useEffect(() => {
 		getAlbumSpotify()
-	  }, [userInput]);
+	}, [store.userSearchBarInput]);
+
 	return (
+
+
 		<div className="container">
-			<div className="row">Album Page</div>
-			<div className="mb-3">
-				<label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-				<input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={userInput} onChange={(e)=>setUserInput(e.target.value)}/>
-				<div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
-			</div>
+
+			{
+				searchResults.map((data, ind) => {
+					return (
+						<div class="card">
+							<div class="cover">
+								<img src={data.images[0].url} alt="cover" />
+								<div class="play-icon">
+									<i class="fa fa-play"></i>
+								</div>
+							</div>
+							<div class="card-content">
+								<h4>{data.name}</h4>
+								<p>Listen to <a hraf="#">Muses</a>'s singles now, including Supermassive black hole</p>
+							</div>
+						</div>
+
+					)
+				}
+			)}
+				
 		</div>
 	);
 };
