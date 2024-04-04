@@ -42,24 +42,6 @@ def handle_get_user():
         return jsonify(return_user), 200
     else:
         return 'USER NOT FOUND PLEASE SIGN UP', 403
-    
-@api.route('/deleteuser/<uid>', methods=['DELETE'])
-def handle_delete_user(uid):
-    get_user_to_delete = User.query.filter_by(uid=uid).first()
-    db.session.delete(get_user_to_delete)
-    db.session.commit()
-    return jsonify('User has been deleted.'), 200
-
-#@api.route('/updateprofile', methods=['PUT'])
-#def handle_update_profile():
-#    sent_info = request.json
-#    current_user = User.query.filter_by(uid=sent_info['uid']).first()
-#    current_user.about_me = sent_info['about_me']
-#    current_user.prof_pic_url = sent_info['prof_pic_url']
-#    db.session.commit()
-#    new_info = User.query.filter_by(uid=sent_info['uid]).first()
-#    return jsonify(new_info), 
-# I've put this on backlog for now, I believe once we have the front end profile page set up and know what we're displaying, we'll know what we can update.
 
 @api.route('/changepassword', methods=['PUT'])
 def handle_change_password():

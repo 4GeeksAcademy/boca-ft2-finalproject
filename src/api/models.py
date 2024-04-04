@@ -63,6 +63,14 @@ class Playlist(db.Model):
     playlist_name = db.Column(db.String(120), nullable=False)
     top_three = db.Column(db.String(120), nullable=True)
 
+    def serialize(self):
+        return {
+            "pid": self.pid,
+            "uid": self.uid,
+            "playlist_name": self.playlist_name,
+            "top_three": self.top_three
+        }
+
 class PlaylistSongs(db.Model):
     psid = db.Column(db.Integer, primary_key=True)
     pid = db.Column(db.Integer, db.ForeignKey(Playlist.pid))
@@ -70,6 +78,14 @@ class PlaylistSongs(db.Model):
     song_genre = db.Column(db.String(120))
     song_id = db.Column(db.Integer)
     
+    def serialize(self):
+        return {
+            "psid": self.psid,
+            "pid": self.pid,
+            "song_name": self.song_name,
+            "song_genre": self.song_genre,
+            "song_id": self.song_id
+        }
 #class Follower(db.Model):
 #    id = db.Column(db.Integer, primary_key=True)
 #    uid = db.Column(db.Integer, db.ForeignKey(User.uid))
@@ -80,6 +96,14 @@ class Post(db.Model):
     uid = db.Column(db.Integer, db.ForeignKey(User.uid))
     content = db.Column(db.String(250))
     likes = db.Column(db.Integer)
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "uid": self.uid,
+            "content": self.content,
+            "likes": self.likes
+        }
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
