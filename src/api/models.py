@@ -16,6 +16,7 @@ class User(db.Model):
     user_post = db.relationship('Post', backref='user', lazy=True)
     user_comment = db.relationship('Comment', backref='user', lazy=True)
     user_event = db.relationship('Event', backref='user', lazy=True)
+    user_top_genre = db.relationship('TrackGenre', backref='user', lazy=True)
 
 
 
@@ -127,3 +128,27 @@ class Event(db.Model):
     date = db.Column(db.String(120))
     img_url = db.Column(db.String(120))
     attended_with = db.Column(db.String(120))
+
+class TrackGenre(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    uid = db.Column(db.Integer, db.ForeignKey(User.uid))
+    genre = db.Column(db.String(250))
+    count = db.Column(db.Integer, default=0)
+
+    def track_genre(genre, uid):
+        for genre in genre:
+            genre_obj = TrackGenre.query.filter_by(uid=uid, genre=genre).first()
+            if genre_obj:
+                genre_obj.count += 1
+            else: 
+                genre_obj = TrackGenre(uid=uid, genre=genre, count=1)
+                db.session.add(genre_obj)
+            db.session.commit()
+
+    def serialize(self): 
+        return {
+            "id": self.id,
+            "uid": self.uid,
+            "genre": self.genre,
+            "count": self.count
+        }

@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User, TrackGenre
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 
@@ -52,3 +52,28 @@ def handle_change_password():
         return 'Password Updated', 200
     else: 
         return 'Incorrect Password', 401
+
+#Discover Endpoints
+@api.route('/trackgenre', methods=['POST'])
+def handle_track_genre():
+    sent_info = request.json
+    TrackGenre.track_genre(sent_info['genre'], sent_info['uid'])
+    return jsonify('Tracked Genre'), 200
+
+@api.route('/gettracked/<uid>', methods=['GET'])
+def handle_get_tracked(uid):
+    find_tracked = TrackGenre.query.filter_by(uid=uid)
+    listed = list(map(lambda x: x.serialize(), find_tracked))
+    return jsonify(listed), 200
+
+@api.route('/gettopthree/<uid>', methods=['GET'])
+def handle_get_top_three(uid):
+    current_user_top_three = TrackGenre.query.filter_by(uid=uid).order_by(TrackGenre.count.desc()).limit(3).all()
+    listed = list(map(lambda x: x.serialize(), current_user_top_three))
+    return jsonify(listed), 200
+
+@api.route('/getothersgenres/<uid>', methods=['GET'])
+def handle_test(uid):
+    genres = TrackGenre.query.filter(TrackGenre.uid!=uid)
+    listed = list(map(lambda x: x.serialize(), genres))
+    return jsonify(listed), 200
