@@ -16,7 +16,7 @@ export const Album = () => {
 		const opts = {
 			method: "GET",
 			headers: {
-				Authorization: `Bearer ${ store.spotifyToken}` 
+				Authorization: `Bearer ${store.spotifyToken}` 
 			}
 		}
 		fetch(`https://api.spotify.com/v1/search?q=${userInput}&type=album&market=US&limit=10`, opts)
