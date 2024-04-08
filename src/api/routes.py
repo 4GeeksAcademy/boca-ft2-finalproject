@@ -81,10 +81,18 @@ def handle_test(uid):
 @api.route('/findothers', methods=['POST'])
 def handle_search():
     recieved = request.json
-    search = "%{}%".format(recieved['name'])
-    find_user = User.query.filter(User.first_name.ilike(search) or User.username.ilike(search) or User.last_name.ilike(search)).all()
-    if find_user:
-        list_users = list(map(lambda x: x.serialize(), find_user))
+    search = "%{}%".format(recieved['search'])
+    find_user_first = User.query.filter(User.first_name.ilike(search)).all()
+    find_user_last = User.query.filter(User.last_name.ilike(search)).all()
+    find_user_username = User.query.filter(User.username.ilike(search)).all()
+    if find_user_first:
+        list_users = list(map(lambda x: x.serialize(), find_user_first))
         return jsonify(list_users), 200
+    elif find_user_last:
+        list_users = list(map(lambda x: x.serialize(), find_user_last))
+        return jsonify(list_users), 200
+    elif find_user_username:
+        list_users = list(map(lambda x: x.serialize(), find_user_username))
+        return jsonify(list_users)
     else:
         return jsonify('User not found'), 404
