@@ -16,7 +16,7 @@ export const Home = () => {
             <br />
             <form>
                 <div class="form-group">
-                    <h2 style={{ textAlign: "center", fontVariant: 'small-caps' }}>Log In</h2>
+                    <h2 style={{ textAlign: "center", fontVariant: 'small-caps' }}>Create New Account</h2>
                     <label for="exampleInputEmail1">Email address</label>
                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
                     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
@@ -38,10 +38,10 @@ export const Home = () => {
             <br />
             <form>
                 <div class="form-group">
-                    <h2 style={{ textAlign: "center", fontVariant: 'small-caps' }}>Sign Up!</h2>
-                    <label for="exampleInputEmail1">Email</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    <h2 style={{ textAlign: "center", fontVariant: 'small-caps' }}>Already Registered? Login Here. </h2>
+                    <label for="exampleInputEmail1">User Name</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username" />
+                    <small id="emailHelp" class="form-text text-muted">Welcome Back!</small>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Password</label>
