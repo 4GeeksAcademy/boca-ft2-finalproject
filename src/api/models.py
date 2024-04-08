@@ -17,6 +17,7 @@ class User(db.Model):
     user_comment = db.relationship('Comment', backref='user', lazy=True)
     user_event = db.relationship('Event', backref='user', lazy=True)
     user_top_genre = db.relationship('TrackGenre', backref='user', lazy=True)
+    top_songs = db.relationship('TrackTopSongs', backref='user', lazy=True)
 
 
 
@@ -54,13 +55,14 @@ class Event(db.Model):
 class UserPage(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     uid = db.Column(db.Integer, db.ForeignKey(User.uid))
-    top_songs = db.Column(db.String(250))
+  
     top_artists = db.Column(db.String(250))
     top_genres = db.Column(db.String(250))
     #concerts = db.Column(db.Integer, db.ForeignKey(Event.id)) // Figure out Many-To-Many
     about_me = db.Column(db.String(250))
     prof_pic_url = db.Column(db.String(250))
 
+    
     def serialize(self):
         return {
             "id": self.id,
@@ -73,6 +75,30 @@ class UserPage(db.Model):
             "prof_pic_url": self.prof_pic_url
         }
     
+class TrackTopSongs(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    uid = db.Column(db.Integer, db.ForeignKey(User.uid))
+    song_id = db.Column(db.String(250))
+    count = db.Column(db.Integer, default=0)
+
+    def track_top_songs(song_id, uid):
+            top_songs = TrackTopSongs.query.filter_by(uid=uid, song_id=song_id).first()
+            if top_songs:
+                top_songs.count += 1
+            else: 
+                top_songs = TrackTopSongs(uid=uid, song_id=song_id, count=1)
+                db.session.add(top_songs)
+            db.session.commit()
+
+    def serialize(self): 
+        return {
+            "id": self.id,
+            "uid": self.uid,
+            "song_id": self.genre,
+            "count": self.count
+        }
+
+
 class Playlist(db.Model):
     pid = db.Column(db.Integer, primary_key=True)
     uid = db.Column(db.Integer, db.ForeignKey(User.uid))
