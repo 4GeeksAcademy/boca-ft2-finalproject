@@ -77,3 +77,14 @@ def handle_test(uid):
     genres = TrackGenre.query.filter(TrackGenre.uid!=uid)
     listed = list(map(lambda x: x.serialize(), genres))
     return jsonify(listed), 200
+
+@api.route('/findothers', methods=['POST'])
+def handle_search():
+    recieved = request.json
+    search = "%{}%".format(recieved['name'])
+    find_user = User.query.filter(User.first_name.ilike(search) or User.username.ilike(search) or User.last_name.ilike(search)).all()
+    if find_user:
+        list_users = list(map(lambda x: x.serialize(), find_user))
+        return jsonify(list_users), 200
+    else:
+        return jsonify('User not found'), 404
