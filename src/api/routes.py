@@ -111,7 +111,6 @@ def handle_track_concert():
 @api.route('/tracksong', methods=['POST'])
 def handle_track_song():
     sent_info = request.json
-
     TrackTopSongs.track_top_songs(sent_info['song_id'], sent_info['uid'])
     return jsonify('Tracked Song'), 200
 
@@ -133,3 +132,14 @@ def handle_search():
         return jsonify(list_users)
     else:
         return jsonify('User not found'), 404
+
+@api.route('/trackupcomingconcerts', methods=['POST'])
+def handle_track_concert():
+    recieved = request.json
+    new_event = Event(uid=recieved['uid'], event_id=recieved['event_id'], date=recieved['date'])
+    db.session.add(new_event)
+    db.session.commit()
+    find_event = Event.query.filter_by(event_id=recieved['event_id']).first()
+    serial = find_event.serialize()
+    return jsonify(serial), 200
+
