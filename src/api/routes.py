@@ -52,6 +52,17 @@ def handle_change_password():
         return 'Password Updated', 200
     else: 
         return 'Incorrect Password', 401
+    
+@api.route('/getprofile/<uid>', methods=['GET'])
+def handle_get_profile(uid):
+    get_user = User.query.filter_by(uid=uid).first()
+    if get_user:
+        get_user_page = UserPage.query.filter_by(uid=uid).first()
+        user_serial = get_user.serialize()
+        userpage_serial = get_user_page.serialize()
+        return jsonify(user_serial, userpage_serial), 200
+    else:
+        return jsonify('User does not exist'), 404
 
 #Discover Endpoints
 @api.route('/trackgenre', methods=['POST'])
