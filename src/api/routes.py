@@ -79,7 +79,7 @@ def handle_get_others_top_three(uid):
     return jsonify(listed), 200
 
 @api.route('/findothers', methods=['POST'])
-def handle_search():
+def handle_user_search():
     recieved = request.json
     search = "%{}%".format(recieved['search'])
     find_user_first = User.query.filter(User.first_name.ilike(search)).all()
@@ -113,33 +113,4 @@ def handle_track_song():
     sent_info = request.json
     TrackTopSongs.track_top_songs(sent_info['song_id'], sent_info['uid'])
     return jsonify('Tracked Song'), 200
-
-@api.route('/findothers', methods=['POST'])
-def handle_search():
-    recieved = request.json
-    search = "%{}%".format(recieved['search'])
-    find_user_first = User.query.filter(User.first_name.ilike(search)).all()
-    find_user_last = User.query.filter(User.last_name.ilike(search)).all()
-    find_user_username = User.query.filter(User.username.ilike(search)).all()
-    if find_user_first:
-        list_users = list(map(lambda x: x.serialize(), find_user_first))
-        return jsonify(list_users), 200
-    elif find_user_last:
-        list_users = list(map(lambda x: x.serialize(), find_user_last))
-        return jsonify(list_users), 200
-    elif find_user_username:
-        list_users = list(map(lambda x: x.serialize(), find_user_username))
-        return jsonify(list_users)
-    else:
-        return jsonify('User not found'), 404
-
-@api.route('/trackupcomingconcerts', methods=['POST'])
-def handle_track_concert():
-    recieved = request.json
-    new_event = Event(uid=recieved['uid'], event_id=recieved['event_id'], date=recieved['date'])
-    db.session.add(new_event)
-    db.session.commit()
-    find_event = Event.query.filter_by(event_id=recieved['event_id']).first()
-    serial = find_event.serialize()
-    return jsonify(serial), 200
 
