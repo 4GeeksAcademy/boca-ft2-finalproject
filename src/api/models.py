@@ -35,14 +35,29 @@ class User(db.Model):
             # do not serialize the password, its a security breach
         }
     
+class Event(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    uid = db.Column(db.Integer, db.ForeignKey(User.uid))
+    event_id = db.Column(db.Integer)
+    date = db.Column(db.String(120))
+    #user_associated = db.relationship('UserPage', backref='event', lazy=True) // Figure out Many-To-Many
+    #attended_with = db.Column(db.String(120)) / Invite Feature
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "uid": self.uid,
+            "event_id": self.event_id,
+            "date": self.date
+        }
+    
 class UserPage(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     uid = db.Column(db.Integer, db.ForeignKey(User.uid))
     top_songs = db.Column(db.String(250))
     top_artists = db.Column(db.String(250))
     top_genres = db.Column(db.String(250))
-    attended_concerts = db.Column(db.String(250))
-    upcoming_concerts = db.Column(db.String(250))
+    #concerts = db.Column(db.Integer, db.ForeignKey(Event.id)) // Figure out Many-To-Many
     about_me = db.Column(db.String(250))
     prof_pic_url = db.Column(db.String(250))
 
@@ -53,8 +68,7 @@ class UserPage(db.Model):
             "top_songs": self.top_songs,
             "top_artists": self.top_artists,
             "top_genres": self.top_genres,
-            "attended_concerts": self.attended_concerts,
-            "upcoming_concerts": self.upcoming_concerts,
+            #"concerts": self.concerts,
             "about_me": self.about_me,
             "prof_pic_url": self.prof_pic_url
         }
@@ -76,16 +90,13 @@ class Playlist(db.Model):
 class PlaylistSongs(db.Model):
     psid = db.Column(db.Integer, primary_key=True)
     pid = db.Column(db.Integer, db.ForeignKey(Playlist.pid))
-    song_name = db.Column(db.String(120))
-    song_genre = db.Column(db.String(120))
-    song_id = db.Column(db.Integer)
+    song_id = db.Column(db.String(250))
+    #many-to-many so users can add other users playlists
     
     def serialize(self):
         return {
             "psid": self.psid,
             "pid": self.pid,
-            "song_name": self.song_name,
-            "song_genre": self.song_genre,
             "song_id": self.song_id
         }
 #class Follower(db.Model):
@@ -119,16 +130,6 @@ class Inbox(db.Model):
     sender_id = db.Column(db.Integer, db.ForeignKey(User.uid))
     recieved_id = db.Column(db.Integer, db.ForeignKey(User.uid))
 
-class Event(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    uid = db.Column(db.Integer, db.ForeignKey(User.uid))
-    name = db.Column(db.String(120))
-    artist = db.Column(db.String(120))
-    venue = db.Column(db.String(120))
-    location = db.Column(db.String(120))
-    date = db.Column(db.String(120))
-    img_url = db.Column(db.String(120))
-    attended_with = db.Column(db.String(120))
 
 class TrackGenre(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, TrackGenre
+from api.models import db, User, TrackGenre, UserPage, Event, Playlist, PlaylistSongs
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 
@@ -66,14 +66,14 @@ def handle_get_tracked(uid):
     listed = list(map(lambda x: x.serialize(), find_tracked))
     return jsonify(listed), 200
 
-@api.route('/gettopthree/<uid>', methods=['GET'])
+@api.route('/topthreegenre/<uid>', methods=['GET'])
 def handle_get_top_three(uid):
     current_user_top_three = TrackGenre.query.filter_by(uid=uid).order_by(TrackGenre.count.desc()).limit(3).all()
     listed = list(map(lambda x: x.serialize(), current_user_top_three))
     return jsonify(listed), 200
 
 @api.route('/getothersgenres/<uid>', methods=['GET'])
-def handle_test(uid):
+def handle_get_others_top_three(uid):
     genres = TrackGenre.query.filter(TrackGenre.uid!=uid)
     listed = list(map(lambda x: x.serialize(), genres))
     return jsonify(listed), 200
@@ -96,3 +96,14 @@ def handle_search():
         return jsonify(list_users)
     else:
         return jsonify('User not found'), 404
+    
+@api.route('/trackupcomingconcerts', methods=['POST'])
+def handle_track_concert():
+    recieved = request.json
+    new_event = Event(uid=recieved['uid'], event_id=recieved['event_id'], date=recieved['date'])
+    db.session.add(new_event)
+    db.session.commit()
+    find_event = Event.query.filter_by(event_id=recieved['event_id']).first()
+    serial = find_event.serialize()
+    return jsonify(serial), 200
+    
