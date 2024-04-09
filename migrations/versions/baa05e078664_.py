@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 3c63f60d581e
+Revision ID: baa05e078664
 Revises: 
-Create Date: 2024-04-02 19:42:54.177618
+Create Date: 2024-04-08 20:30:16.344468
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '3c63f60d581e'
+revision = 'baa05e078664'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -34,13 +34,8 @@ def upgrade():
     op.create_table('event',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('uid', sa.Integer(), nullable=True),
-    sa.Column('name', sa.String(length=120), nullable=True),
-    sa.Column('artist', sa.String(length=120), nullable=True),
-    sa.Column('venue', sa.String(length=120), nullable=True),
-    sa.Column('location', sa.String(length=120), nullable=True),
+    sa.Column('event_id', sa.Integer(), nullable=True),
     sa.Column('date', sa.String(length=120), nullable=True),
-    sa.Column('img_url', sa.String(length=120), nullable=True),
-    sa.Column('attended_with', sa.String(length=120), nullable=True),
     sa.ForeignKeyConstraint(['uid'], ['user.uid'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -69,14 +64,27 @@ def upgrade():
     sa.ForeignKeyConstraint(['uid'], ['user.uid'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_table('track_genre',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('uid', sa.Integer(), nullable=True),
+    sa.Column('genre', sa.String(length=250), nullable=True),
+    sa.Column('count', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['uid'], ['user.uid'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('track_top_songs',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('uid', sa.Integer(), nullable=True),
+    sa.Column('song_id', sa.String(length=250), nullable=True),
+    sa.Column('count', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['uid'], ['user.uid'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
     op.create_table('user_page',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('uid', sa.Integer(), nullable=True),
-    sa.Column('top_songs', sa.String(length=250), nullable=True),
     sa.Column('top_artists', sa.String(length=250), nullable=True),
     sa.Column('top_genres', sa.String(length=250), nullable=True),
-    sa.Column('attended_concerts', sa.String(length=250), nullable=True),
-    sa.Column('upcoming_concerts', sa.String(length=250), nullable=True),
     sa.Column('about_me', sa.String(length=250), nullable=True),
     sa.Column('prof_pic_url', sa.String(length=250), nullable=True),
     sa.ForeignKeyConstraint(['uid'], ['user.uid'], ),
@@ -94,9 +102,7 @@ def upgrade():
     op.create_table('playlist_songs',
     sa.Column('psid', sa.Integer(), nullable=False),
     sa.Column('pid', sa.Integer(), nullable=True),
-    sa.Column('song_name', sa.String(length=120), nullable=True),
-    sa.Column('song_genre', sa.String(length=120), nullable=True),
-    sa.Column('song_id', sa.Integer(), nullable=True),
+    sa.Column('song_id', sa.String(length=250), nullable=True),
     sa.ForeignKeyConstraint(['pid'], ['playlist.pid'], ),
     sa.PrimaryKeyConstraint('psid')
     )
@@ -108,6 +114,8 @@ def downgrade():
     op.drop_table('playlist_songs')
     op.drop_table('comment')
     op.drop_table('user_page')
+    op.drop_table('track_top_songs')
+    op.drop_table('track_genre')
     op.drop_table('post')
     op.drop_table('playlist')
     op.drop_table('inbox')

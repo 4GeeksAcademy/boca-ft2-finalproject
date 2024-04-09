@@ -16,6 +16,9 @@ class User(db.Model):
     user_post = db.relationship('Post', backref='user', lazy=True)
     user_comment = db.relationship('Comment', backref='user', lazy=True)
     user_event = db.relationship('Event', backref='user', lazy=True)
+    user_top_genre = db.relationship('TrackGenre', backref='user', lazy=True)
+    top_songs = db.relationship('TrackTopSongs', backref='user', lazy=True)
+    top_songs = db.relationship('TrackTopSongs', backref='user', lazy=True)
 
 
 
@@ -26,6 +29,7 @@ class User(db.Model):
         return {
             "uid": self.uid,
             "email": self.email,
+            "username": self.username,
             "first_name": self.first_name,
             "last_name": self.last_name,
             "postal_code": self.postal_code,
@@ -33,30 +37,44 @@ class User(db.Model):
             # do not serialize the password, its a security breach
         }
     
-class UserPage(db.Model):
+class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     uid = db.Column(db.Integer, db.ForeignKey(User.uid))
-    top_songs = db.Column(db.String(250))
-    top_artists = db.Column(db.String(250))
-    top_genres = db.Column(db.String(250))
-    attended_concerts = db.Column(db.String(250))
-    upcoming_concerts = db.Column(db.String(250))
-    about_me = db.Column(db.String(250))
-    prof_pic_url = db.Column(db.String(250))
+    event_id = db.Column(db.Integer)
+    date = db.Column(db.String(120))
+    #user_associated = db.relationship('UserPage', backref='event', lazy=True) // Figure out Many-To-Many
+    #attended_with = db.Column(db.String(120)) / Invite Feature
 
     def serialize(self):
         return {
             "id": self.id,
             "uid": self.uid,
-            "top_songs": self.top_songs,
+            "event_id": self.event_id,
+            "date": self.date
+        }
+    
+class UserPage(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    uid = db.Column(db.Integer, db.ForeignKey(User.uid))
+  
+    top_artists = db.Column(db.String(250))
+    top_genres = db.Column(db.String(250))
+    #concerts = db.Column(db.Integer, db.ForeignKey(Event.id)) // Figure out Many-To-Many
+    about_me = db.Column(db.String(250))
+    prof_pic_url = db.Column(db.String(250))
+
+    
+    def serialize(self):
+        return {
+            "id": self.id,
+            "uid": self.uid,
             "top_artists": self.top_artists,
             "top_genres": self.top_genres,
-            "attended_concerts": self.attended_concerts,
-            "upcoming_concerts": self.upcoming_concerts,
+            #"concerts": self.concerts,
             "about_me": self.about_me,
             "prof_pic_url": self.prof_pic_url
         }
-    
+
 class Playlist(db.Model):
     pid = db.Column(db.Integer, primary_key=True)
     uid = db.Column(db.Integer, db.ForeignKey(User.uid))
@@ -74,16 +92,13 @@ class Playlist(db.Model):
 class PlaylistSongs(db.Model):
     psid = db.Column(db.Integer, primary_key=True)
     pid = db.Column(db.Integer, db.ForeignKey(Playlist.pid))
-    song_name = db.Column(db.String(120))
-    song_genre = db.Column(db.String(120))
-    song_id = db.Column(db.Integer)
+    song_id = db.Column(db.String(250))
+    #many-to-many so users can add other users playlists
     
     def serialize(self):
         return {
             "psid": self.psid,
             "pid": self.pid,
-            "song_name": self.song_name,
-            "song_genre": self.song_genre,
             "song_id": self.song_id
         }
 #class Follower(db.Model):
@@ -117,13 +132,50 @@ class Inbox(db.Model):
     sender_id = db.Column(db.Integer, db.ForeignKey(User.uid))
     recieved_id = db.Column(db.Integer, db.ForeignKey(User.uid))
 
-class Event(db.Model):
+
+class TrackGenre(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     uid = db.Column(db.Integer, db.ForeignKey(User.uid))
-    name = db.Column(db.String(120))
-    artist = db.Column(db.String(120))
-    venue = db.Column(db.String(120))
-    location = db.Column(db.String(120))
-    date = db.Column(db.String(120))
-    img_url = db.Column(db.String(120))
-    attended_with = db.Column(db.String(120))
+    genre = db.Column(db.String(250))
+    count = db.Column(db.Integer, default=0)
+
+    def track_genre(genre, uid):
+        for genre in genre:
+            genre_obj = TrackGenre.query.filter_by(uid=uid, genre=genre).first()
+            if genre_obj:
+                genre_obj.count += 1
+            else: 
+                genre_obj = TrackGenre(uid=uid, genre=genre, count=1)
+                db.session.add(genre_obj)
+            db.session.commit()
+
+    def serialize(self): 
+        return {
+            "id": self.id,
+            "uid": self.uid,
+            "genre": self.genre,
+            "count": self.count
+        }
+    
+class TrackTopSongs(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    uid = db.Column(db.Integer, db.ForeignKey(User.uid))
+    song_id = db.Column(db.String(250))
+    count = db.Column(db.Integer, default=0)
+
+    def track_top_songs(song_id, uid):
+            top_songs = TrackTopSongs.query.filter_by(uid=uid, song_id=song_id).first()
+            if top_songs:
+                top_songs.count += 1
+            else: 
+                top_songs = TrackTopSongs(uid=uid, song_id=song_id, count=1)
+                db.session.add(top_songs)
+            db.session.commit()
+
+    def serialize(self): 
+        return {
+            "id": self.id,
+            "uid": self.uid,
+            "song_id": self.genre,
+            "count": self.count
+        }
