@@ -23,7 +23,7 @@
   
   .card {
     display: inline-block;
-    width: 270px;
+    width: 200px;
     border-radius: 4px;
     padding: 16px;
     overflow: hidden;
@@ -39,10 +39,11 @@
   .cover {
     position: relative;
     margin-bottom: 18px;
+    margin-left: 9px;
   }
   .cover img {
     display: block;
-    width: 100%;
+    width: 92%;
     box-shadow: 0 8px 20px -4px hsl(0, 0%, 5%);
   }
   .cover.artist img {
@@ -51,10 +52,10 @@
   
   .play-icon {
     position: absolute;
-    bottom: -2px;
-    right: 6px;
-    width: 50px;
-    height: 50px;
+    bottom: 0px;
+    right: 52px;
+    width: 43px;
+    height: 43px;
     border-radius: 50%;
     color: #fafafa;
     background-color: #1db954;
@@ -80,9 +81,10 @@
   
   .card-content {
     font-family: "Montserrat", sans-serif;
-    color: #fafafa;
+    color:black;
+    font-weight:bolder;
   }
-  .card-content h4 {
+  .card-content span {
     margin-bottom: 6px;
   }
   .card-content p {

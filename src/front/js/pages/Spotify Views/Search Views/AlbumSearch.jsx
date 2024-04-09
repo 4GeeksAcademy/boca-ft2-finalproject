@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Navigate, useNavigate, useLocation } from "react-router-dom"
-import "../../pages/Spotify Views/Album.css"
+import "../../Spotify Views/Search Views/AlbumSearch.css"
+import { Searchpage } from "../../../component/Search/SearchBar.jsx";
 
-
-import { Context } from "../../store/appContext";
-export const Album = () => {
+import { Context } from "../../../store/appContext.js";
+export const AlbumSearch = () => {
 
 
 	const { store, actions } = useContext(Context);
@@ -14,7 +14,7 @@ export const Album = () => {
 
 
 	const getAlbumSpotify = () => {
-
+		
 		const opts = {
 			method: "GET",
 			headers: {
@@ -29,7 +29,9 @@ export const Album = () => {
 				setSearchResults(res.albums.items)
 			})
 	}
+	
 	useEffect(() => {
+
 		getAlbumSpotify()
 	}, [store.userSearchBarInput]);
 
@@ -37,26 +39,36 @@ export const Album = () => {
 
 
 		<div className="container">
-
+			<Searchpage />
+		
+		<div className="row">
+			<div className="col-3"></div>
+			<div className="col">
 			{
 				searchResults.map((data, ind) => {
+					
 					return (
-						<div class="card">
-							<div class="cover">
+						<div className="card" onClick={()=>{navigate(`/album/${data.name}`, {state: {albumData: data} })}} key={ind}>
+							
+							<div className="cover">
 								<img src={data.images[0].url} alt="cover" />
-								<div class="play-icon">
-									<i class="fa fa-play"></i>
+								<div className="play-icon">
+									<i className="fa fa-play"></i>
 								</div>
 							</div>
-							<div class="card-content">
-								<h4>{data.name}</h4>
-								<p>Listen to <a hraf="#">Muses</a>'s singles now, including Supermassive black hole</p>
+							<div className="card-content">
+								<span>{data.name}</span>
+								<p>{data.artists[0].name}</p>
 							</div>
 						</div>
 
 					)
 				}
 			)}
+
+			</div>
+		</div>
+			
 				
 		</div>
 	);

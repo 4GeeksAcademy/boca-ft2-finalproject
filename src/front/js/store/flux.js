@@ -3,7 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			userCordinates: null,
 			spotifyToken: null,
-			userSearchBarInput:null,
+			userSearchBarInput:"",
 		},
 		actions: {
 			// Use getActions to call a function within a fuction

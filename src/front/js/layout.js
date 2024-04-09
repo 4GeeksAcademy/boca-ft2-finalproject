@@ -15,17 +15,16 @@ import { Post } from "./pages/Post/Post";
 import { Discover } from "./pages/Discover/Discover";
 import { MyAccount } from "./pages/My Account/MyAccount.js";
 import { Inbox } from "./pages/Inbox/Inbox.js";
-import { Searchpage } from "./pages/Search/SearchPage.jsx";
 //Sub Views
 import { FriendPlaylist } from "./pages/FriendsContent/FriendPlaylist.js";
 import { FriendProfile } from "./pages/FriendsContent/FriendProfile.js"
-import { Album } from "./pages/Spotify Views/Album.js"
-import { Artist } from "./pages/Spotify Views/Artist.js";
-import { Song } from "./pages/Spotify Views/Song.js"
-import { SpotifyPlaylist } from "./pages/Spotify Views/SpotifyPlaylist.js"
+import { AlbumSearch } from "./pages/Spotify Views/Search Views/AlbumSearch.jsx";
+import { ArtistSearch } from "./pages/Spotify Views/Search Views/ArtistSearch.jsx";
+import { SongSearch } from "./pages/Spotify Views/Search Views/SongSearch.jsx";
 import { Events } from "./pages/Seat Geek Views/Events.js"
-
-
+import { ArtistPage } from "./pages/Artist Page/ArtistPage.jsx";
+import { AlbumPage } from "./pages/Album Page/AlbumPage.js";
+import { SongDetailPage } from "./pages/Spotify Views/Song Views/SongDetail.jsx";
 
 //create your first component
 const Layout = () => {
@@ -39,30 +38,32 @@ const Layout = () => {
         <div>
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
-                <SideNav />
+                    {/* <SideNav /> */}
                     <Routes>
                         <Route element={<Landingpage />} path="/" />
                         <Route element={<CreateAccount />} path="/createaccount" />
                         <Route element={<Login />} path="/login" />
                         <Route element={<ResetPassword />} path="/resetpassword" />
                         <Route element={<Home />} path="/home" />
-                        <Route element={<Searchpage />} path="/search" />
+
                         <Route element={<Post />} path="/post" />
                         <Route element={<Discover />} path="/discover" />
                         <Route element={<MyAccount />} path="/myaccount" />
 
                         <Route element={<Inbox />} path="/inbox" />
-                        
-                        <Route element={<Artist />} path="/artist" />
-                        <Route element={<Album />} path="/album" />
-                        <Route element={<Song />} path="/song" />
+                        <Route element={<ArtistSearch />} path="/search/artist" />
+                        <Route element={<AlbumSearch />} path="/search/album" />
+                        <Route element={<SongSearch />} path="/search/song" />
 
-                        <Route element={<Events />} path="/events" />
+                        <Route element={<Events />} path="/search/events" />
 
-                        <Route element={<SpotifyPlaylist />} path="/spotifyplaylist" />
-                        <Route element={<FriendPlaylist />} path="/friendplaylist" />
-                        <Route element={<FriendProfile />} path="/friendprofile" />
-    
+                        <Route element={<ArtistPage />} path="/artist/:ind" />
+                        <Route element={<AlbumPage />} path="/album/:ind" />
+                        <Route element={<SongDetailPage />} path="/song/:ind" />
+
+                        <Route element={<FriendPlaylist />} path="/search/friendplaylist" />
+                        <Route element={<FriendProfile />} path="/search/friendprofile" />
+
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                 </ScrollToTop>

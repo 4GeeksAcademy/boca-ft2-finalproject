@@ -1,0 +1,25 @@
+
+
+
+
+.titlesub {
+
+   mix-blend-mode: difference;
+}
+
+
+.redkorn {
+    background-color: #cccccc;
+    height: 500px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+  }
+  
+ 
+
+ h1.title{
+    color: white;
+    font-size: 4rem;
+ }
