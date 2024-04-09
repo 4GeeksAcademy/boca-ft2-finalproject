@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { Navigate, useNavigate } from "react-router-dom"
 
 import { Context } from "../../store/appContext";
+import SearchCard from "../../component/SearchCard";
+import SearchCard2 from "../../component/SearchCard2";
 export const Search = () => {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate()
@@ -27,6 +29,8 @@ export const Search = () => {
                 <br />
                 <button type="button" class="btn btn-warning" style={{ display: 'block', margin: "auto" }}>ENTER</button>
             </div>
+            <SearchCard />
+            <SearchCard2 />
         </div>
 
 

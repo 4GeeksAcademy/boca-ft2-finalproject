@@ -6,7 +6,7 @@ import injectContext from "./store/appContext";
 //Page Imports
 import { Landingpage } from "./pages/LandingPage/LandingPage";
 import { CreateAccount } from "./pages/Login Page/CreateAccount";
-import { Login } from "./pages/Login Page/Login";
+// import { Login } from "./pages/Login Page/Login";
 import { ResetPassword } from "./pages/Login Page/ResetPassword";
 //Main Components
 import { Home } from "./pages/Home/Home";
@@ -24,6 +24,7 @@ import { Song } from "./pages/Spotify Views/Song.js"
 import { SpotifyPlaylist } from "./pages/Spotify Views/SpotifyPlaylist.js"
 import { Events } from "./pages/Seat Geek Views/Events.js"
 import { Discover } from "./pages/Discover/Discover.js"
+import { Login } from "./pages/Login/Login.js";
 
 
 

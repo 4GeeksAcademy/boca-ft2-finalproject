@@ -52,7 +52,7 @@ export const Navbar = () => {
 				</div>
 
 				<div className="col">
-					<button type="button" className="btn btn-secondary" onClick={() => navigate("/login signup")}>Login/Signup/Reset</button>
+					<button type="button" className="btn btn-secondary" onClick={() => navigate("/login")}>Login/Signup/Reset</button>
 				</div>
 
 
