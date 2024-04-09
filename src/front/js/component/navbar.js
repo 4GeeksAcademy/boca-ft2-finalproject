@@ -36,14 +36,23 @@ export const Navbar = () => {
 					<button type="button" className="btn btn-secondary" onClick={() => navigate("/home")}>Home</button>
 				</div>
 				<div className="col">
-					<button type="button" className="btn btn-secondary" onClick={() => navigate("/search")}>Search Music/Friends</button>
+					<button type="button" className="btn btn-secondary" onClick={() => navigate("/search")}>Search</button>
+				</div>
+				<div className="col">
+					<button type="button" className="btn btn-secondary" onClick={() => navigate("/discover")}>Discover</button>
+				</div>
+				<div className="col">
+					<button type="button" className="btn btn-secondary" onClick={() => navigate("/messages")}>Messages</button>
 				</div>
 				<div className="col">
 					<button type="button" className="btn btn-secondary" onClick={() => navigate("/post")}>Post</button>
 				</div>
+				<div className="col">
+					<button type="button" className="btn btn-secondary" onClick={() => navigate("/profile")}>Profile</button>
+				</div>
 
 				<div className="col">
-					<button type="button" className="btn btn-secondary" onClick={() => navigate("/myaccount")}>My Account</button>
+					<button type="button" className="btn btn-secondary" onClick={() => navigate("/login signup")}>Login/Signup/Reset</button>
 				</div>
 
 

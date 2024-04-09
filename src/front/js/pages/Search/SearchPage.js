@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import { Navigate, useNavigate } from "react-router-dom"
 
 import { Context } from "../../store/appContext";
-import { SearchMusic } from "./SearchMusic";
+import { Search } from "./Search";
 export const Searchpage = () => {
 	const { store, actions } = useContext(Context);
 	const navigate = useNavigate()
 
 
 	return (<>
-		<SearchMusic />
+		<Search />
 		{/* <div className="container">
 			<h2>Search Page</h2>
 			<div className="row p-1"><button type="button" className="btn btn-success" onClick={() => navigate("/album")}>Album</button></div>

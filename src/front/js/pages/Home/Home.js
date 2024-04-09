@@ -40,7 +40,7 @@ export const Home = () => {
 
 
                 </div>
-                <button type="submit" class="btn btn-warning" style={centerStyle}>Sign up!</button>
+                <button type="submit" class="btn btn-warning" style={centerStyle}>Sign up!</button> 
             </form>
             <br />
             <br />

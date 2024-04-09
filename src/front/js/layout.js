@@ -23,6 +23,7 @@ import { Artist } from "./pages/Spotify Views/Artist.js";
 import { Song } from "./pages/Spotify Views/Song.js"
 import { SpotifyPlaylist } from "./pages/Spotify Views/SpotifyPlaylist.js"
 import { Events } from "./pages/Seat Geek Views/Events.js"
+import { Discover } from "./pages/Discover/Discover.js"
 
 
 
@@ -47,7 +48,7 @@ const Layout = () => {
                         <Route element={<Home />} path="/home" />
                         <Route element={<Searchpage />} path="/search" />
                         <Route element={<Post />} path="/post" />
-                        {/* // <Route element={<Discover />} path="/discover" /> */}
+                        <Route element={<Discover />} path="/discover" />
                         <Route element={<MyAccount />} path="/myaccount" />
 
                         <Route element={<Inbox />} path="/inbox" />
