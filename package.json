@@ -35,7 +35,7 @@
 		"@babel/runtime": "^7.16.3",
 		"babel-eslint": "^10.1.0",
 		"babel-loader": "^8.2.3",
-		"babel-plugin-transform-class-properties": "^6.24.1",
+		"babel-plugin-transform-class-properties": "^6.10.2",
 		"bc-console": "0.0.2",
 		"css-loader": "^6.5.1",
 		"dotenv-webpack": "^7.0.3",
@@ -74,9 +74,10 @@
 	},
 	"dependencies": {
 		"prop-types": "^15.6.1",
-		"react": "^16.8.4",
-		"react-dom": "^16.8.4",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
 		"react-polyfills": "0.0.1",
-		"react-router-dom": "^6.3.0"
+		"react-router-dom": "^6.3.0",
+		"react-spotify-web-playback": "^0.14.4"
 	}
 }

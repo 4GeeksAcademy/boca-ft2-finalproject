@@ -11,7 +11,8 @@ export const Discover= () => {
 	return (
 		<div className="container">
 			<h2>Discover Page</h2>
-			<h3>This is discover page</h3>
+			<h3>Song name</h3>
+			<h2>S</h2>
 		</div>
 	);
 };

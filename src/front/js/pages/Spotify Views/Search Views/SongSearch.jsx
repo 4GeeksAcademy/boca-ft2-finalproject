@@ -1,17 +1,19 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { Navigate, useNavigate } from "react-router-dom"
-import { Searchpage } from "../../component/Search/SearchBar.jsx";
-import "../../pages/Spotify Views/Search Views/AlbumSearch.jsx"
-import { Context } from "../../store/appContext";
-import { resetWarningCache } from "prop-types";
-export const Events = () => {
+import { Navigate, useNavigate, useLocation } from "react-router-dom"
+import "../../Spotify Views/Search Views/SongSearch.jsx"
+import { Searchpage } from "../../../component/Search/SearchBar.jsx";
+
+import { Context } from "../../../store/appContext.js";
+export const SongSearch = () => {
+
+
 	const { store, actions } = useContext(Context);
 	const [searchResults, setSearchResults] = useState([]);
 	const navigate = useNavigate();
 
 
-	const getSeekEvents = () => {
+	const getSongSpotify = () => {
 
 		const opts = {
 			method: "GET",
@@ -19,16 +21,17 @@ export const Events = () => {
 				Authorization: `Bearer ${store.spotifyToken}`
 			}
 		}
-		fetch(`https://api.seatgeek.com/2/performers?client_id=NDA2MzQ2Njd8MTcxMTYzODE0OS4xNjkyMzc2&q=${store.userSearchBarInput}&type=band`)
+		fetch(`https://api.spotify.com/v1/search?q=${store.userSearchBarInput}&type=track&market=US&limit=10`, opts)
 			.then(response => {
 				return response.json();
 			})
 			.then(res => {
-				setSearchResults(res.performers);
+				setSearchResults(res.tracks.items);
 			})
 	}
 	useEffect(() => {
-		getSeekEvents()
+		console.log('test')
+		getSongSpotify()
 	}, [store.userSearchBarInput]);
 
 	return (
@@ -44,23 +47,24 @@ export const Events = () => {
 						searchResults.map((data, ind) => {
 
 							return (
-
-								<div className="card" key={ind}>
-									<div className="cover artist">
-										<img src={data.images.huge} alt="cover" />
+								<div className="card" onClick={() => { navigate(`/song/${data.name}`, { state: { songData: data } }) }} key={ind}>
+									<div className="cover">
+										<img src={data.album.images[1].url} alt="cover" />
 										<div className="play-icon">
 											<i className="fa fa-play"></i>
 										</div>
 									</div>
 									<div className="card-content">
 										<span>{data.name}</span>
-										<p>{data.stats.event_count}</p>
+										<p>{data.artists[0].name}</p>
 									</div>
 								</div>
 
 							)
 						}
 						)}
+
+
 
 				</div>
 			</div>

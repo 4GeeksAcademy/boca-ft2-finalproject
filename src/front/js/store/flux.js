@@ -3,19 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			userCordinates: null,
 			spotifyToken: null,
-			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			userSearchBarInput:"",
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -36,6 +24,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			//Function Refreshes On Load
+
+			
+
+			userSearchBarInput:(characters) =>{
+				setStore({userSearchBarInput:characters})
+			},
+
 			spotifyTokenRefresh: () => {
 				const clientID = "5eedb8285f214e62985fddba0f324895"
 				const clientSecret = "0a207a4fb61c487d8b987298b4dd3344"
