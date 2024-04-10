@@ -34,27 +34,5 @@ export const Login = () => {
 				<button type="button" onClick={() => { actions.handleLogIn(usernameInput, passwordInput) }} style={centerStyle} class="btn btn-warning">Submit</button>
 			</form>
 		</div>
-		// <div className="container">
-		// 	<div className="row">
-		// 		<div className="col-5"></div>
-
-		// 		<div className="col-4">
-		// 			<div className="text-center">
-		// 				<h1>Log In</h1>
-		// 				<label htmlFor="usernameInput"></label>
-		// 				<input type="text" placeholder="Username" id="usernameInput" value={usernameInput} onChange={(e) => { setUsernameInput(e.target.value) }}></input>
-		// 				<label htmlFor="passwordInput"></label>
-		// 				<input type="password" placeholder="Password" id="passwordInput" value={passwordInput} onChange={(e) => { setPasswordInput(e.target.value) }}></input>
-		// 				<button className="btn btn-primary" onClick={() => { actions.handleLogIn(usernameInput, passwordInput) }}>Log In</button>
-		// 				<a href="/createaccount">Don't have an account? Sign Up</a>
-		// 			</div>
-		// 			{/* <button type="button" className="btn btn-primary" onClick={() => navigate("/createaccount")}>Create Account</button>
-		// 			<button type="button" className="btn btn-success" onClick={() => navigate("/home")}>Log In</button>
-		// 			<button type="button" className="btn btn-danger" onClick={() => navigate("/resetpassword")}>Forgot Password</button> */}
-
-		// 		</div>
-		// 		<div className="col-4"></div>
-		// 	</div>
-		// </div>
 	);
 };
