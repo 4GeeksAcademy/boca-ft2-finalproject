@@ -111,7 +111,7 @@ export const ArtistPage = () => {
       {
         artistAlbums.map((albumData, ind) => {
           return (
-            <div className="card" style={{ width: "18rem" }} key={ind}>
+            <div className="card artistTable" style={{ width: "18rem" }} key={ind}>
               <img src={albumData.images[1].url} className="card-img-top" alt="..." />
               <div className="card-body">
                 <h5 className="card-title">{albumData.name}</h5>

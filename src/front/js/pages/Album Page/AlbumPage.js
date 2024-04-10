@@ -41,6 +41,8 @@ export const AlbumPage = () => {
 
     return (
         <>
+
+
             <h1>{data.albumData.name}</h1>
             <img src={data.albumData.images[0].url} alt="Artist Picture" width="500" height="600"></img>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide"></link>
@@ -56,6 +58,7 @@ export const AlbumPage = () => {
 
                     </tr>
                 </thead>
+
                 {
                     albumSongs.map((trackData, ind) => {
                         return (
@@ -70,7 +73,7 @@ export const AlbumPage = () => {
                         )
                     })
                 }
-            </table>
+            </table >
         </>
 
     );
