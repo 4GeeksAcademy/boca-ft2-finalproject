@@ -3,7 +3,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			userCordinates: null,
 			spotifyToken: null,
-			userSearchBarInput:"",
+			userSearchBarInput: "",
+			userCode: "",
+			redirectUri: 'https://accounts.spotify.com/authorize?client_id=5eedb8285f214e62985fddba0f324895&response_type=code&redirect_uri=https://friendly-parakeet-699q46x6g6rrc5j9j-3000.app.github.dev/home&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state'
+
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -25,12 +28,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			//Function Refreshes On Load
 
-			
 
-			userSearchBarInput:(characters) =>{
-				setStore({userSearchBarInput:characters})
+
+			userSearchBarInput: (characters) => {
+				setStore({ userSearchBarInput: characters })
 			},
 
+			setUserCode: (code) => {
+				setStore({ userCode: code })
+			},
 			spotifyTokenRefresh: () => {
 				const clientID = "5eedb8285f214e62985fddba0f324895"
 				const clientSecret = "0a207a4fb61c487d8b987298b4dd3344"
@@ -50,6 +56,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ spotifyToken: newToken.access_token })
 					})
 			},
+
+
+
+			
 
 			getMessage: async () => {
 				try {
