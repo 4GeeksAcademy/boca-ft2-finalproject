@@ -7,19 +7,16 @@
    mix-blend-mode: difference;
 }
 
-
-.redkorn {
-    background-color: #cccccc;
-    height: 500px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-  }
-  
+.landbg{
+   width: 100%;
+   height: 1000px;
+   background-size: 100% 100%;
+ }
+ 
  
 
  h1.title{
+    padding-top: 400px;
     color: white;
     font-size: 4rem;
  }
