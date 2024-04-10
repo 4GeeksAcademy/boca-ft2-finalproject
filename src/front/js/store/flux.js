@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			playingSongUri:null,
+			playingSongUri: null,
 			userCordinates: null,
 			spotifyToken: null,
 			spotifyPlayToken: null,
@@ -28,6 +28,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			//Function Refreshes On Load
+
+			userSearchBarInput: (characters) => {
+				setStore({ userSearchBarInput: characters })
+			},
 
 			setPlayingSongUri: (uri) => {
 				setStore({ playingSongUri: uri })
