@@ -31,8 +31,11 @@ export const Login = () => {
 
 
 				</div>
-				<button type="button" onClick={() => { actions.handleLogIn(usernameInput, passwordInput); navigate('/home') }} style={centerStyle} class="btn btn-warning">Submit</button>
+				<a href={store.auth_url} >
+					<button type="button" onClick={() => { actions.handleLogIn(usernameInput, passwordInput); if (store.user !== null) { navigate(`/home`) } }} style={centerStyle} class="btn btn-warning">Submit</button>
+				</a>
 			</form>
+
 		</div>
 	);
 };

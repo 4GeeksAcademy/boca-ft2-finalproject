@@ -3,8 +3,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			userCordinates: null,
 			spotifyToken: null,
+			spotifyPlayToken: null,
 			userSearchBarInput: "",
 			user: null,
+			auth_url: 'https://accounts.spotify.com/authorize?client_id=5eedb8285f214e62985fddba0f324895&response_type=code&redirect_uri=https://probable-winner-699xr9r9gvwxf5pwj-3000.app.github.dev/home&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state'
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -89,7 +91,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						password: passwordInput
 					})
 				}
-				fetch("https://expert-space-palm-tree-699xr9rgjj4xcxw5-3001.app.github.dev/api/login", opts)
+				fetch("https://probable-winner-699xr9r9gvwxf5pwj-3001.app.github.dev/api/login", opts)
 					.then(resp => {
 						if (resp.ok) {
 							return resp.json()
@@ -99,6 +101,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					})
 					.then(data => setStore({ user: data }))
+			},
+			getToken: (code) => {
+				const authOptions = {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded',
+						'Authorization': `Basic NWVlZGI4Mjg1ZjIxNGU2Mjk4NWZkZGJhMGYzMjQ4OTU6MGEyMDdhNGZiNjFjNDg3ZDhiOTg3Mjk4YjRkZDMzNDQ=`//encrypted client key
+					},
+					body: new URLSearchParams({
+						code: code,
+						redirect_uri: 'https://probable-winner-699xr9r9gvwxf5pwj-3000.app.github.dev/home',
+						grant_type: 'authorization_code'
+					})
+				}
+				fetch('https://accounts.spotify.com/api/token', authOptions)
+					.then(response => response.json())
+					.then(data => {
+						setStore({ spotifyPlayToken: data.access_token });
+						sessionStorage.setItem("spotifyPlayToken", data.access_token)
+						// Handle the access token and other data as needed
+					})
+					.catch(error => {
+						console.error('Error:', error);
+						// Handle errors
+					});
 			}
 		}
 	};
