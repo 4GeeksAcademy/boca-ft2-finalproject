@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Navigate, useNavigate } from "react-router-dom"
 import { FriendsListeningTo } from "../../component/HomePageAssets/ExploreComponents/FriendsListeningTo";
-import { SpotifyAuth } from "../../component/spotifyplay.jsx";
 import { Context } from "../../store/appContext";
 import FriendsMusic from "../../component/HomePageAssets/Cards/FriendsMusic";
 import UpcomingEvents from "../../component/HomePageAssets/Cards/UpcomingEvents";
@@ -32,7 +31,6 @@ export const Home = () => {
             <FriendsNearby />
             <Playlist />
             <Concert />
-            <SpotifyAuth />
             <FriendsListeningTo>
 
 

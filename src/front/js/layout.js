@@ -25,21 +25,24 @@ import { Events } from "./pages/Seat Geek Views/Events.js"
 import { ArtistPage } from "./pages/Artist Page/ArtistPage.jsx";
 import { AlbumPage } from "./pages/Album Page/AlbumPage.js";
 import { SongDetailPage } from "./pages/Spotify Views/Song Views/SongDetail.jsx";
-
+import { SpotifyPlayBar } from "./component/spotifyplay.jsx";
 //create your first component
+import { useContext } from "react";
+import { Context } from "./store/appContext";
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
     // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
     const basename = process.env.BASENAME || "";
 
     if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;
+    const { store, actions } = useContext(Context);
+    
 
     return (
         <div>
             <BrowserRouter basename={basename}>
                 <SideNav />
                 <ScrollToTop>
-
                     <Routes>
                         <Route element={<Landingpage />} path="/" />
                         <Route element={<CreateAccount />} path="/createaccount" />
@@ -68,6 +71,7 @@ const Layout = () => {
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                 </ScrollToTop>
+                {store.playingSongUri&&<SpotifyPlayBar />}
             </BrowserRouter>
         </div>
     );
