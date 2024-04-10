@@ -22,7 +22,7 @@ def handle_hello():
 @api.route('/createuser', methods=['POST'])
 def handle_create_user():
     sent_user = request.json
-    new_user = User(email=sent_user['email'], username=sent_user['username'], password=sent_user['password'], first_name=sent_user['first_name'], last_name=sent_user['last_name'], postal_code=sent_user['postal_code'], dob=sent_user['dob'])
+    new_user = User(email=sent_user['email'], username=sent_user['username'], password=sent_user['password'], postal_code=sent_user['postal_code'], dob=sent_user['dob'])
     db.session.add(new_user)
     db.session.commit()
     get_new_user = User.query.filter_by(username=sent_user['username'], password=sent_user['password']).first()
@@ -36,7 +36,7 @@ def handle_create_user():
 #protected
 def handle_get_user():
     sent_info = request.json
-    get_user = User.query.filter_by(username=sent_info['username'], password=sent_info['password'])
+    get_user = User.query.filter_by(username=sent_info['username'], password=sent_info['password']).first()
     if get_user:
         return_user = get_user.serialize()
         return jsonify(return_user), 200
