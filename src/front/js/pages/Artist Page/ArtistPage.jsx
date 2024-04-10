@@ -69,7 +69,14 @@ export const ArtistPage = () => {
     getArtistInfoSpotify()
   }, []);
 
-
+  const handleGetArtistEvents = () => {
+    const opts = {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }
+  }
 
   return (
     <>

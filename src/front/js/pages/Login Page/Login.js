@@ -7,10 +7,13 @@ export const Login = () => {
 	const { store, actions } = useContext(Context);
 	const [usernameInput, setUsernameInput] = useState("")
 	const [passwordInput, setPasswordInput] = useState("")
+	const [token, setToken] = useState(null)
 	const navigate = useNavigate()
 	const centerStyle = {
 		margin: '0 auto', textAlign: 'center', display: 'block', // This makes the label behave like a block-level element
 	}
+	useEffect(() => { setToken(sessionStorage.getItem("token")) }, [store.user])
+	useEffect(() => { if (token) { navigate(`/home`) } }, [token])
 
 	return (
 		<div className="container red-background" style={{ margin: '0 auto', }}>
@@ -19,7 +22,7 @@ export const Login = () => {
 					<div style={{ marginRight: '10px' }}>
 
 						<label for="exampleInputEmail1" style={centerStyle}>User Name</label>
-						<input onChange={(e) => { setUsernameInput(e.target.value) }} value={usernameInput} type="email" class="form-control w-80" style={centerStyle} id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username" />
+						<input onChange={(e) => { setUsernameInput(e.target.value) }} value={usernameInput} type="text" class="form-control w-80" style={centerStyle} id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username" />
 						<small id="emailHelp" class="form-text text-muted" style={centerStyle}>Welcome Back!</small>
 					</div>
 					<div>
@@ -31,8 +34,9 @@ export const Login = () => {
 
 
 				</div>
-				<button type="button" onClick={() => { actions.handleLogIn(usernameInput, passwordInput); navigate('/home') }} style={centerStyle} class="btn btn-warning">Submit</button>
+				<button type="button" onClick={() => { actions.handleLogIn(usernameInput, passwordInput) }} style={centerStyle} class="btn btn-warning">Submit</button>
 			</form>
+
 		</div>
 	);
 };
