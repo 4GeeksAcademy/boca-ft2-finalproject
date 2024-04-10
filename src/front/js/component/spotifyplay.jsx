@@ -15,6 +15,7 @@ export const SpotifyAuth = () => {
             <SpotifyPlayer
                 token={store.spotifyPlayToken}
                 uris={[`spotify:album:2up3OPMp9Tb4dAKM2erWXQ`]}
+                play={true}
             />;
         </div>
     </div>

@@ -100,6 +100,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							alert("Incorrect Username or Password")
 						}
 					})
+					.then(data => sessionStorage.setItem("token", data.access_token))
 					.then(data => setStore({ user: data }))
 			},
 			getToken: (code) => {
