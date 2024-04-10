@@ -1,0 +1,17 @@
+h1 {
+    color: red;
+    text-align: center;
+    font-family: "Audiowide", sans-serif;
+    /* padding: 1% 0 */
+}
+
+img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 40%;
+        padding: 70px 0
+    }
+    
+
+
