@@ -7,8 +7,6 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     username = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
-    first_name = db.Column(db.String(120), nullable=False)
-    last_name = db.Column(db.String(120), nullable=False)
     postal_code = db.Column(db.String(120), nullable=False)
     dob = db.Column(db.String(120), nullable=False)
     user_info = db.relationship('UserPage', backref='user', lazy=True)
@@ -30,8 +28,6 @@ class User(db.Model):
             "uid": self.uid,
             "email": self.email,
             "username": self.username,
-            "first_name": self.first_name,
-            "last_name": self.last_name,
             "postal_code": self.postal_code,
             "dob": self.dob
             # do not serialize the password, its a security breach
@@ -56,23 +52,26 @@ class Event(db.Model):
 class UserPage(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     uid = db.Column(db.Integer, db.ForeignKey(User.uid))
-  
+    first_name = db.Column(db.String(250))
+    last_name = db.Column(db.String(250))
+    about_me = db.Column(db.String(250))
+    prof_pic_url = db.Column(db.String(250))
     top_artists = db.Column(db.String(250))
     top_genres = db.Column(db.String(250))
     #concerts = db.Column(db.Integer, db.ForeignKey(Event.id)) // Figure out Many-To-Many
-    about_me = db.Column(db.String(250))
-    prof_pic_url = db.Column(db.String(250))
 
     
     def serialize(self):
         return {
             "id": self.id,
             "uid": self.uid,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "about_me": self.about_me,
+            "prof_pic_url": self.prof_pic_url,
             "top_artists": self.top_artists,
             "top_genres": self.top_genres,
             #"concerts": self.concerts,
-            "about_me": self.about_me,
-            "prof_pic_url": self.prof_pic_url
         }
 
 class Playlist(db.Model):
