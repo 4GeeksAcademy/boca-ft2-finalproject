@@ -12,6 +12,7 @@ export const ArtistPage = () => {
   const [artistTopSongs, setArtistTopSongs] = useState([]);
   const [artistAlbums, setArtistAlbums] = useState([]);
   const [artistEvents, setArtistEvents] = useState([]);
+  const [hasEvents, setHasEvents] = useState(false)
   const navigate = useNavigate();
 
   //Fetches for diffrent data
@@ -36,6 +37,7 @@ export const ArtistPage = () => {
 
   }
   const getArtistEvents = () => {
+
     fetch(`https://api.seatgeek.com/2/events?client_id=NDA2MzQ2Njd8MTcxMTYzODE0OS4xNjkyMzc2&q=${data.artistData.name}&geoip=true`)
       .then(response => {
         return response.json();
@@ -44,6 +46,7 @@ export const ArtistPage = () => {
         setArtistEvents([res]);
       })
   }
+
 
   const getArtistInfoSpotify = () => {
     const opts = {
@@ -110,20 +113,21 @@ export const ArtistPage = () => {
       }
       <h1>Test albums</h1>
       {
-        artistEvents.map((eventData, ind) => {
-          console.log(eventData.events[0].short_title)
+        artistEvents[0] && artistEvents[0].events && artistEvents[0].events.length ? artistEvents.map((eventData, ind) => {
+          var date = new Date(eventData.events[0].datetime_local);
+
           return (
 
             <div className="card" style={{ width: "18rem" }} key={ind}>
               <img src="{}" className="card-img-top" alt="..." />
               <div className="card-body">
-                <h5 className="card-title">test</h5>
-                <p className="card-text">test</p>
+                <h5 className="card-title">{eventData.events[0].venue.city}</h5>
+                <p className="card-text">Date:{date.toDateString()} @ {date.toLocaleTimeString('en-US')}</p>
                 {/* <button href="#" className="btn btn-primary" onClick={()=>{navigate(`/album/${albumData.name}`, {state: {albumData: albumData} })}}>Go somewhere</button> */}
               </div>
             </div>
           )
-        })
+        }) : <div><p>No Events</p></div>
       }
     </>
 
