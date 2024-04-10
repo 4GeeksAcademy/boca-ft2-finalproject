@@ -7,8 +7,11 @@ import x from '../../../img/backgroundRed.jpg'
 import { Context } from "../../store/appContext";
 export const Landingpage = () => {
 	const { store, actions } = useContext(Context);
+	const [token, setToken] = useState(null)
 	const navigate = useNavigate()
 
+	useEffect(() => { setToken(sessionStorage.getItem("token")) }, [store.user])
+	useEffect(() => { if (token) { navigate(`/home`) } }, [token])
 
 	return (
 		<div className="container-fluid">
