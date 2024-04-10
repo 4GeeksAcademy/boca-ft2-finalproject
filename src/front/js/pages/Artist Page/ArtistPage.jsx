@@ -44,12 +44,12 @@ export const ArtistPage = () => {
 
   }
   const getArtistEvents = () => {
-    fetch(`https://api.seatgeek.com/2/events?performers.slug=${data.artistData.name}`)
+    fetch(`https://api.seatgeek.com/2/events?client_id=NDA2MzQ2Njd8MTcxMTYzODE0OS4xNjkyMzc2&q=${data.artistData.name}&geoip=true`)
       .then(response => {
         return response.json();
       })
       .then(res => {
-        setArtistEvents(res);
+        setArtistEvents([res]);
       })
   }
 
@@ -68,15 +68,6 @@ export const ArtistPage = () => {
   useEffect(() => {
     getArtistInfoSpotify()
   }, []);
-
-  const handleGetArtistEvents = () => {
-    const opts = {
-      method: 'GET',
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }
-  }
 
   return (
     <>
@@ -133,18 +124,20 @@ export const ArtistPage = () => {
       }
       <h1>Test albums</h1>
       {
-        // artistEvents.map((eventData, ind) => {
-        //   return (
-        //     <div className="card" style={{width: "18rem"}} key={ind}>
-        //       <img src="{}" className="card-img-top" alt="..."/>
-        //         <div className="card-body">
-        //           <h5 className="card-title">Test</h5>
-        //           <p className="card-text">test</p>
-        //           {/* <button href="#" className="btn btn-primary" onClick={()=>{navigate(`/album/${albumData.name}`, {state: {albumData: albumData} })}}>Go somewhere</button> */}
-        //         </div>
-        //     </div>
-        //   )
-        // })
+        artistEvents.map((eventData, ind) => {
+          console.log(eventData.events[0].short_title)
+          return (
+
+            <div className="card" style={{ width: "18rem" }} key={ind}>
+              <img src="{}" className="card-img-top" alt="..." />
+              <div className="card-body">
+                <h5 className="card-title">test</h5>
+                <p className="card-text">test</p>
+                {/* <button href="#" className="btn btn-primary" onClick={()=>{navigate(`/album/${albumData.name}`, {state: {albumData: albumData} })}}>Go somewhere</button> */}
+              </div>
+            </div>
+          )
+        })
       }
     </>
 
