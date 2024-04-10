@@ -3,7 +3,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			userCordinates: null,
 			spotifyToken: null,
-			userSearchBarInput:"",
+			userSearchBarInput: "",
+			user: null,
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -25,10 +26,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			//Function Refreshes On Load
 
-			
 
-			userSearchBarInput:(characters) =>{
-				setStore({userSearchBarInput:characters})
+
+			userSearchBarInput: (characters) => {
+				setStore({ userSearchBarInput: characters })
 			},
 
 			spotifyTokenRefresh: () => {
@@ -76,6 +77,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+			handleLogIn: (usernameInput, passwordInput) => {
+				const opts = {
+					method: 'POST',
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						username: usernameInput,
+						password: passwordInput
+					})
+				}
+				fetch("https://expert-space-palm-tree-699xr9rgjj4xcxw5-3001.app.github.dev/api/login", opts)
+					.then(resp => {
+						if (resp.ok) {
+							return resp.json()
+						}
+						else {
+							alert("Incorrect Username or Password")
+						}
+					})
+					.then(data => setStore({ user: data }))
 			}
 		}
 	};
