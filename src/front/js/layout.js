@@ -37,8 +37,9 @@ const Layout = () => {
     return (
         <div>
             <BrowserRouter basename={basename}>
+                <SideNav />
                 <ScrollToTop>
-                    {/* <SideNav /> */}
+
                     <Routes>
                         <Route element={<Landingpage />} path="/" />
                         <Route element={<CreateAccount />} path="/createaccount" />

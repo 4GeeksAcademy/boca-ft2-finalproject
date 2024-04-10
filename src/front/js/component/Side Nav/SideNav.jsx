@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Navigate, useNavigate } from "react-router-dom"
 import "../../component/Side Nav/SideNav.css"
 import { useLocation } from "react-router-dom";
-
+import logo from "../../../img/RRlogo.png"
 
 
 import { Context } from "../../store/appContext";
@@ -13,14 +13,17 @@ export const SideNav = () => {
     const location = useLocation();
 
     return (
-        <div className="container" style={{display:location.pathname == "/"?"none":"block"}}>
+        <div className="container" style={{ display: location.pathname == "/" ? "none" : "block" }}>
             <div className="row">
                 <div className="col-2">
                     <div className="sidebar">
-                        <div className="logo-wrapper">
 
-                        </div>
                         <ul className="sidebar-menu">
+                            <li>
+
+                                <img src={logo} style={{ height: "auto", width: "150px", marginRight: '-100%' }} alt="" />
+
+                            </li>
                             <li>
                                 <a href="#" className={location.pathname == '/home' ? `nav-link active` : 'nav-link'} onClick={() => navigate("/home")}  >
                                     <span className="icon">

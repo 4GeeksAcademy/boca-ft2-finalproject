@@ -7,8 +7,9 @@
   }
   
   .sidebar {
-    width: 245px;
-    background-color: #ffffff;
+    width: 10%;
+    background-color: #8f8b8b9a;
+    /* mix-blend-mode:normal; */
     padding-top: 35px;
     position: fixed;
     height: 100vh;
