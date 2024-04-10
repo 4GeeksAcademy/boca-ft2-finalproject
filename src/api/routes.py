@@ -5,6 +5,10 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, TrackGenre, UserPage, Event, Playlist, PlaylistSongs, TrackTopSongs
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
+
 
 api = Blueprint('api', __name__)
 
@@ -33,15 +37,19 @@ def handle_create_user():
         return 'UNKNOWN ERROR', 400
     
 @api.route('/login', methods=['POST'])
-#protected
-def handle_get_user():
-    sent_info = request.json
-    get_user = User.query.filter_by(username=sent_info['username'], password=sent_info['password']).first()
-    if get_user:
-        return_user = get_user.serialize()
-        return jsonify(return_user), 200
-    else:
-        return 'USER NOT FOUND PLEASE SIGN UP', 403
+def handle_get_token():
+    sent_info = request.json 
+    username = sent_info['username']
+    password = sent_info['password']
+    exists = User.query.filter_by(username=username, password=password).first()
+    if exists:
+        if sent_info['password'] == exists.password:
+            access_token = create_access_token(identity=username)
+            return jsonify(access_token=access_token), 200
+        else: 
+            return jsonify({"msg": "Username or Password is incorrect."}), 401
+    else: 
+        return jsonify({"msg": "User does not exist, please sign up."}), 401
 
 @api.route('/changepassword', methods=['PUT'])
 def handle_change_password():

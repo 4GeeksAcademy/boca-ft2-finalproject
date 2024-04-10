@@ -35,14 +35,14 @@ export const ArtistPage = () => {
       })
 
   }
-  const getArtistEvents = () =>{
+  const getArtistEvents = () => {
     fetch(`https://api.seatgeek.com/2/events?performers.slug=${data.artistData.name}`)
-			.then(response => {
-				return response.json();
-			})
-			.then(res => {
-				setArtistEvents(res);
-			})
+      .then(response => {
+        return response.json();
+      })
+      .then(res => {
+        setArtistEvents(res);
+      })
   }
 
   const getArtistInfoSpotify = () => {
@@ -55,13 +55,20 @@ export const ArtistPage = () => {
     getArtistTopTracks(opts)
     getArtistAlbum(opts)
     getArtistEvents()
-   
+
   }
   useEffect(() => {
     getArtistInfoSpotify()
   }, []);
 
-
+  const handleGetArtistEvents = () => {
+    const opts = {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }
+  }
 
   return (
     <>
@@ -81,17 +88,17 @@ export const ArtistPage = () => {
         </thead>
         {
           artistTopSongs.map((trackData, ind) => {
-            return ( 
+            return (
               <tbody key={ind}>
                 <tr>
                   <th scope="row">{ind + 1}</th>
                   <td>{trackData.name}</td>
                   <td>{trackData.album.artists[0].name}</td>
                   <td>{(trackData.duration_ms / 1000) / 60}</td>
-                  <button className="btn btn-success" onClick={()=>{navigate(`/song/${trackData.name}`, {state: {songData: trackData} })}}></button>
+                  <button className="btn btn-success" onClick={() => { navigate(`/song/${trackData.name}`, { state: { songData: trackData } }) }}></button>
                 </tr>
               </tbody>
-            )  
+            )
           })
         }
       </table>
@@ -99,13 +106,13 @@ export const ArtistPage = () => {
       {
         artistAlbums.map((albumData, ind) => {
           return (
-            <div className="card" style={{width: "18rem"}} key={ind}>
-              <img src={albumData.images[1].url} className="card-img-top" alt="..."/>
-                <div className="card-body">
-                  <h5 className="card-title">{albumData.name}</h5>
-                  <p className="card-text">{albumData.artists[0].name}</p>
-                  <button href="#" className="btn btn-primary" onClick={()=>{navigate(`/album/${albumData.name}`, {state: {albumData: albumData} })}}>Go somewhere</button>
-                </div>
+            <div className="card" style={{ width: "18rem" }} key={ind}>
+              <img src={albumData.images[1].url} className="card-img-top" alt="..." />
+              <div className="card-body">
+                <h5 className="card-title">{albumData.name}</h5>
+                <p className="card-text">{albumData.artists[0].name}</p>
+                <button href="#" className="btn btn-primary" onClick={() => { navigate(`/album/${albumData.name}`, { state: { albumData: albumData } }) }}>Go somewhere</button>
+              </div>
             </div>
           )
         })
