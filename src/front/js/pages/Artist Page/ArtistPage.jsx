@@ -80,6 +80,7 @@ export const ArtistPage = () => {
 
   return (
     <>
+    <div>
       <h1>{data.artistData.name}</h1>
       <img src={`${data.artistData.images[0].url}`} alt="Artist Picture" width="500" height="600"></img>
        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide"></link>
@@ -93,8 +94,8 @@ export const ArtistPage = () => {
             <th scope="col">Duration</th>
             <th scope="col">#</th>
 
-          </tr>21hybu2s
-          \q
+          </tr>
+        
         </thead>
         {
           artistTopSongs.map((trackData, ind) => {
@@ -112,6 +113,9 @@ export const ArtistPage = () => {
           })
         }
       </table>
+      </div>
+
+      
       <h1>{data.artistData.name} albums</h1>
       {
         artistAlbums.map((albumData, ind) => {
