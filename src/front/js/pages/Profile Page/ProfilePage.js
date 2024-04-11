@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import './ProfilePage.css'
+
 //create your first component
 export const ProfilePage = () => {
 
+    
+
+    
     const [genres, setGenres] = useState(["metal", "groove", "funk", "children's toons"]);
     const [topSongs, setTopSongs] = useState([
         { title: "Happy Day", artist: "Jesus" },
