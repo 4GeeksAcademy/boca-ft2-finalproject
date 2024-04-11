@@ -7,7 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			spotifyPlayToken: null,
 			userSearchBarInput: "",
 			user: null,
-			auth_url: 'https://accounts.spotify.com/authorize?client_id=5eedb8285f214e62985fddba0f324895&response_type=code&redirect_uri=https://probable-winner-699xr9r9gvwxf5pwj-3000.app.github.dev/home&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state'
+			auth_url: `https://accounts.spotify.com/authorize?client_id=5eedb8285f214e62985fddba0f324895&response_type=code&redirect_uri=${process.env.REDIRECT_URL}&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state`,
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -32,8 +32,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			userSearchBarInput: (characters) => {
 				setStore({ userSearchBarInput: characters })
 			},
+	
 
 			setPlayingSongUri: (uri) => {
+
 				setStore({ playingSongUri: uri })
 			},
 
@@ -84,6 +86,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ demo: demo });
 			},
 			handleLogIn: (usernameInput, passwordInput) => {
+
 				const opts = {
 					method: 'POST',
 					headers: {
@@ -94,7 +97,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						password: passwordInput
 					})
 				}
-				fetch("https://probable-winner-699xr9r9gvwxf5pwj-3001.app.github.dev/api/login", opts)
+				fetch(process.env.BACKEND_URL + '/login', opts)
 					.then(resp => {
 						if (resp.ok) {
 							return resp.json()
@@ -115,7 +118,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 					body: new URLSearchParams({
 						code: code,
-						redirect_uri: 'https://probable-winner-699xr9r9gvwxf5pwj-3000.app.github.dev/home',
+						redirect_uri: process.env.REDIRECT_URL,
 						grant_type: 'authorization_code'
 					})
 				}
