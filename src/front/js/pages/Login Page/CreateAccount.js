@@ -73,7 +73,10 @@ export const CreateAccount = () => {
 
 
 					</div>
-					<button type="submit" onClick={() => { handleSignUp() }} class="btn btn-warning" style={centerStyle}>Sign up!</button>
+					<button type="button" onClick={(e) => {
+						e.preventDefault();
+						handleSignUp()
+					}} class="btn btn-warning" style={centerStyle}>Sign up!</button>
 				</form>
 				<br />
 				<br />

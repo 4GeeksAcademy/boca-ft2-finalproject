@@ -26,14 +26,14 @@ export const Home = () => {
 
         <div className="container">
             <a href={store.auth_url}>Connect Spotify</a>
-            {/* <FriendsMusic /> */}
-            {/* <UpcomingEvents /> */}
-            {/* <OtherMusicLovers /> */}
-            {/* <PeerEvents /> */}
-            {/* <PotentialFriends /> */}
-            {/* <FriendsNearby />
+            <FriendsMusic /> 
+          <UpcomingEvents />
+           <OtherMusicLovers />
+       <PeerEvents />
+          <PotentialFriends />
+            <FriendsNearby />
             <Playlist />
-            <Concert /> */}
+            <Concert />
 
             <FriendsListeningTo>
 

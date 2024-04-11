@@ -13,5 +13,10 @@ body {
     height: 80vh;
     width: 100%;
     background-position: center;
-    background-repeat: no-repeat
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+
+
+
 }

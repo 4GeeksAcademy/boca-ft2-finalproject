@@ -137,13 +137,18 @@ export const ArtistPage = () => {
           </table>
         </div>
       </div >
-
-
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
 
 
 
       <h1>{data.artistData.name} albums</h1>
-      <div style={{ background: "black", backgroundSize: 'cover', display: 'ruby', justifyContent: 'center' }}>
+      <div style={{ background: "black ", backgroundSize: 'cover', display: 'ruby', justifyContent: 'center' }}>
         {
           artistAlbums.map((albumData, ind) => {
             return (
