@@ -1,7 +1,14 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect, useContext } from "react";
+import { Context } from "../../store/appContext";
 //create your first component
 export const FriendProfile = () => {
+
+    const { store, actions } = useContext(Context)
+
+
+
+
+
 
     const [genres, setGenres] = useState(["metal", "groove", "funk", "children's toons"]);
     const [topSongs, setTopSongs] = useState([
@@ -20,7 +27,18 @@ export const FriendProfile = () => {
         { name: "Kinda fun event", date: "140205" },
         { name: "Very fun event", date: "240622" }
     ])
+    const [userPageData, setUserPage] = useState([])
 
+    useEffect(() => {
+        fetch((process.env.BACKEND_URL + `/getprofile/2`), {
+            method: 'GET',
+            header: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then(res => res.json())
+            .then(data => setUserPage(data))
+    }, []);
 
     return (
         <div className="text-center">
@@ -38,7 +56,7 @@ export const FriendProfile = () => {
                     <div className="col-md-8 text-start">
                         <div className="card-body">
                             <div className="d-flex">
-                                <h5 className="card-title">User name</h5>
+                                <h5 className="card-title">{}</h5>
                             </div>
                             <p className="card-text">Location</p>
                             <p className="card-text"><small className="text-body-secondary">Top Genres</small></p>

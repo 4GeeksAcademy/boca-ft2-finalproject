@@ -26,6 +26,7 @@ import { ArtistPage } from "./pages/Artist Page/ArtistPage.jsx";
 import { AlbumPage } from "./pages/Album Page/AlbumPage.js";
 import { SongDetailPage } from "./pages/Spotify Views/Song Views/SongDetail.jsx";
 import { SpotifyPlayBar } from "./component/spotifyplay.jsx";
+import { UserSearch } from "./pages/Spotify Views/Search Views/UserSearch.jsx";
 //create your first component
 import { useContext } from "react";
 import { Context } from "./store/appContext";
@@ -48,7 +49,7 @@ const Layout = () => {
                         <Route element={<CreateAccount />} path="/createaccount" />
                         <Route element={<Login />} path="/login" />
                         <Route element={<ResetPassword />} path=
-                        "/resetpassword" />
+                            "/resetpassword" />
                         <Route element={<Home />} path="/home" />
 
                         <Route element={<Post />} path="/post" />
@@ -59,6 +60,8 @@ const Layout = () => {
                         <Route element={<ArtistSearch />} path="/search/artist" />
                         <Route element={<AlbumSearch />} path="/search/album" />
                         <Route element={<SongSearch />} path="/search/song" />
+                        <Route element={<UserSearch />} path="/search/user" />
+
 
                         <Route element={<Events />} path="/search/events" />
 

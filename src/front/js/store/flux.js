@@ -76,13 +76,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						"artist_id": artistId
 					})
 				}
-
-
-
-
-
 				).then(res => res.json())
 					.then(data => console.log(data))
+					
 
 				fetch((process.env.BACKEND_URL + '/tracksong'), {
 					method: 'POST',
