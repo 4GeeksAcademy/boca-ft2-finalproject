@@ -82,7 +82,7 @@ box-sizing: border-box;`
                     <div id="top-track-list text-center">
                         {topSongs.map(song => <div className="mx-auto my-2 shadow" style={{ borderRadius: "10px", border: "1px solid ", background: gradient, width: "80vw" }}>
                             <img src="https://e7.pngegg.com/pngimages/383/640/png-clipart-infant-child-jesus-baby-child-baby-thumbnail.png" style={{ maxHeight: "48px" }} />
-                            {song.title} by {song.artist} <span><i className="far fa-play-circle"></i></span>
+                             {song.title} by {song.artist} <span><i className="far fa-play-circle"></i></span>
                         </div>)}
                     </div>
                 </div>

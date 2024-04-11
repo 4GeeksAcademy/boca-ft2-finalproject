@@ -78,7 +78,7 @@ export const ArtistPage = () => {
           <h1>{data.artistData.name}</h1>
           <img src={`${data.artistData.images[0].url}`} alt="Artist Picture" width="500" height="600"></img>
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide"></link>
-          <div style={{ display: 'grid', justifyContent: 'center' }}>
+          <div style={{ display: 'grid', justifyContent: 'center' }}> {/*  bingo! */}
 
             <table className="table">
               <thead>
