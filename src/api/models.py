@@ -157,7 +157,7 @@ class TrackTopSongs(db.Model):
         return {
             "id": self.id,
             "uid": self.uid,
-            "song_id": self.genre,
+            "song_id": self.song_id,
             "count": self.count
         }
 class TrackTopArtists(db.Model):
@@ -174,3 +174,11 @@ class TrackTopArtists(db.Model):
                 top_artists = TrackTopArtists(uid=uid, artist_id=artist_id, count=1)
                 db.session.add(top_artists)
             db.session.commit()
+
+    def serialize(self): 
+        return {
+            "id": self.id,
+            "uid": self.uid,
+            "artist_id": self.artist_id,
+            "count": self.count
+        }
