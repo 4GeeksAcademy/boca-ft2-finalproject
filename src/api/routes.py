@@ -66,7 +66,15 @@ def handle_get_profile(uid):
     get_user = User.query.filter_by(uid=uid).first()
     if get_user:
         user_serial = get_user.serialize()
-        return jsonify(user_serial), 200
+        top_artists = TrackTopArtists.query.filter_by(uid=uid).order_by(TrackTopArtists.count.desc()).limit(3).all()
+        top_genres = TrackGenre.query.filter_by(uid=uid).order_by(TrackGenre.count.desc()).limit(3).all()
+        top_songs = TrackTopSongs.query.filter_by(uid=uid).order_by(TrackTopSongs.count.desc()).limit(3).all()
+        list_artists = list(map(lambda x: x.serialize(), top_artists))
+        list_genres = list(map(lambda x: x.serialize(), top_genres))
+        list_songs = list(map(lambda x: x.serialize(), top_songs))
+        events = Event.query.filter_by(uid=uid)
+        list_events = list(map(lambda x: x.serialize(), events))
+        return jsonify(user = user_serial, artists = list_artists, genres = list_genres, songs = list_songs, events = list_events), 200
     else:
         return jsonify('User does not exist'), 404
 
