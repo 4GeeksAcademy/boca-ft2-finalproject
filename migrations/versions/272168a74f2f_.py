@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: baa05e078664
+Revision ID: 272168a74f2f
 Revises: 
-Create Date: 2024-04-08 20:30:16.344468
+Create Date: 2024-04-11 15:38:58.091304
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'baa05e078664'
+revision = '272168a74f2f'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,8 +23,6 @@ def upgrade():
     sa.Column('email', sa.String(length=120), nullable=False),
     sa.Column('username', sa.String(length=120), nullable=False),
     sa.Column('password', sa.String(length=80), nullable=False),
-    sa.Column('first_name', sa.String(length=120), nullable=False),
-    sa.Column('last_name', sa.String(length=120), nullable=False),
     sa.Column('postal_code', sa.String(length=120), nullable=False),
     sa.Column('dob', sa.String(length=120), nullable=False),
     sa.PrimaryKeyConstraint('uid'),
@@ -83,10 +81,12 @@ def upgrade():
     op.create_table('user_page',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('uid', sa.Integer(), nullable=True),
-    sa.Column('top_artists', sa.String(length=250), nullable=True),
-    sa.Column('top_genres', sa.String(length=250), nullable=True),
+    sa.Column('first_name', sa.String(length=250), nullable=True),
+    sa.Column('last_name', sa.String(length=250), nullable=True),
     sa.Column('about_me', sa.String(length=250), nullable=True),
     sa.Column('prof_pic_url', sa.String(length=250), nullable=True),
+    sa.Column('top_artists', sa.String(length=250), nullable=True),
+    sa.Column('top_genres', sa.String(length=250), nullable=True),
     sa.ForeignKeyConstraint(['uid'], ['user.uid'], ),
     sa.PrimaryKeyConstraint('id')
     )

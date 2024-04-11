@@ -85,7 +85,7 @@ export const ArtistPage = () => {
         date: eventData.datetime_local
       })
     }
-    fetch(process.env.BACKEND_URL + "api/trackupcomingconcerts", opts)
+    fetch(process.env.BACKEND_URL + "/trackupcomingconcerts", opts)
       .then(resp => resp.json())
       .then(data => data)
   }

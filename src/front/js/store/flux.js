@@ -34,7 +34,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				}
 				if (token) {
-					fetch(process.env.BACKEND_URL + "api/getuser", opts)
+					fetch(process.env.BACKEND_URL + "/getuser", opts)
 						.then(resp => resp.json())
 						.then(data => setStore({ user: data }))
 				}
@@ -66,6 +66,37 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					})
 
+				fetch((process.env.BACKEND_URL + '/trackartist'), {
+					method: 'POST',
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						"uid": store.user.uid,
+						"artist_id": artistId
+					})
+				}
+
+
+
+
+
+				).then(res => res.json())
+					.then(data => console.log(data))
+
+				fetch((process.env.BACKEND_URL + '/tracksong'), {
+					method: 'POST',
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						"uid": store.user.uid,
+						"song_id": songID
+					})
+
+				})
+					.then(res => res.json())
+					.then(data => console.log(data))
 			},
 
 
@@ -75,11 +106,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ userSearchBarInput: characters })
 			},
 
-
-			setPlayingSongUri: (uri) => {
-
-				setStore({ playingSongUri: uri })
-			},
 
 			spotifyTokenRefresh: () => {
 				const clientID = "5eedb8285f214e62985fddba0f324895"
@@ -139,7 +165,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						password: passwordInput
 					})
 				}
-				fetch(process.env.BACKEND_URL + 'api/login', opts)
+				fetch(process.env.BACKEND_URL + '/login', opts)
 					.then(resp => {
 						if (resp.ok) {
 							return resp.json()

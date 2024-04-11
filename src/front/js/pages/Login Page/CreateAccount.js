@@ -29,7 +29,7 @@ export const CreateAccount = () => {
 				dob: dobInput
 			})
 		}
-		fetch("https://probable-winner-699xr9r9gvwxf5pwj-3001.app.github.dev/api/createuser", opts)
+		fetch(process.env.BACKEND_URL + '/createuser', opts)
 			.then(resp => { if (resp.ok) resp.json })
 	}
 
