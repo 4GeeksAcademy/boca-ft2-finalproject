@@ -1,47 +1,29 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { Navigate, useNavigate } from "react-router-dom"
+import { Navigate, useNavigate } from "react-router-dom";
+import { Context } from "../../store/appContext";
 import "../../pages/LandingPage/LandingPage.css"
 import x from '../../../img/backgroundRed.jpg'
 
-import { Context } from "../../store/appContext";
 export const Landingpage = () => {
 	const { store, actions } = useContext(Context);
-	const [token, setToken] = useState(null)
 	const navigate = useNavigate()
 
+	const [token, setToken] = useState(null)
 	useEffect(() => { setToken(sessionStorage.getItem("token")) }, [store.user])
 	useEffect(() => { if (token) { navigate(`/home`) } }, [token])
 
 	return (
-		<div className="container-fluid">
-			<div className="row" >
-				<div className="col landbg" style={{ backgroundImage: `url(${x})` }}>
-					<h1 className="title">Music <span className="titlesub">Without Limits!</span></h1>
-					<p className="subtitle"> something about our amazing app....</p>
-					<div className="div">
-					<button type="button" className="btn btn-primary" onClick={() => navigate("/createaccount")}>Create Account</button>
-					<button type="button" className="btn btn-success" onClick={() => navigate("/login")}>Log In</button>
-					</div>
-				</div>
+		<section className="container_redkorn" style={{ backgroundImage: `url(${x})`, width: "100vw" }}>
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide"></link>
+			<h1 class="title">Music <span class="titlesub">Without Limits!</span></h1>
+			<h3 class="subtitle"> RHYTHM REALM Your Sonic-Sanctuary a musical rendezvous where like-minded souls converge!
+			</h3>
 
+			<div className="div">
+				<button type="button" className="btn btn-warning" onClick={() => navigate("/createaccount")} style={{ marginRight: "10px" }}>Sign Up</button>
+				<button type="button" className="btn btn-warning" onClick={() => navigate("/login")} style={{ marginLeft: "10px" }}>Sign In</button>
 			</div>
-
-			{/* <button type="button" className="btn btn-danger" onClick={() => navigate("/createaccount")}>Sign up!</button>
-			<h3>or</h3>
-			<button type="button" className="btn btn-success" onClick={() => navigate("/login")}>Log In</button> */}
-
-
-			{/* <div className="row">
-				<div className="col-5"></div>
-
-				<div className="col-4">
-					<h2>Landing Page</h2>
-					<button type="button" className="btn btn-primary" onClick={() => navigate("/createaccount")}>Create Account</button>
-					<button type="button" className="btn btn-success" onClick={() => navigate("/login")}>Log In</button>
-				</div>
-				<div className="col-4"></div>
-			</div> */}
-		</div>
+		</section>
 	);
 };
