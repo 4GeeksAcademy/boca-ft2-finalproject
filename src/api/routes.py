@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, TrackGenre, UserPage, Event, Playlist, PlaylistSongs, TrackTopSongs
+from api.models import db, User, TrackGenre, UserPage, Event, Playlist, PlaylistSongs, TrackTopSongs,TrackTopArtists
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token
@@ -133,3 +133,16 @@ def handle_track_song():
     TrackTopSongs.track_top_songs(sent_info['song_id'], sent_info['uid'])
     return jsonify('Tracked Song'), 200
 
+@api.route('/getuser', methods=['GET'])
+@jwt_required()
+def handle_get_user():
+    current_user = get_jwt_identity()
+    get_user = User.query.filter_by(username=current_user).first()
+    serial = get_user.serialize()
+    return jsonify(serial), 200
+
+@api.route('/trackartist', methods=['POST'])
+def handle_artit_song():
+    sent_info = request.json
+    TrackTopArtists.track_top_artists(sent_info['artist_id'], sent_info['uid'])
+    return jsonify('Tracked Artist'), 200

@@ -25,6 +25,79 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ userCordinates: res.results[0].geometry.location })
 					})
 			},
+			getUserInfo: () => {
+				var token = sessionStorage.getItem('token')
+				const opts = {
+					method: 'GET',
+					headers: {
+						"Authorization": `Bearer ${token}`
+					}
+				}
+				if (token) {
+					fetch(process.env.BACKEND_URL + "/getuser", opts)
+						.then(resp => resp.json())
+						.then(data => setStore({ user: data }))
+				}
+			},
+			setPlayingSongUri: (uri, artistId, songID) => {
+				const store = getStore()
+
+				setStore({ playingSongUri: uri })
+				fetch((`https://api.spotify.com/v1/artists/${artistId}`), {
+					headers: {
+						'Authorization': `Bearer ${store.spotifyToken}`
+					}
+				})
+					.then(res => res.json())
+					.then(data => {
+						console.log(data)
+						fetch((process.env.BACKEND_URL + '/trackgenre'), {
+							method: 'POST',
+							headers: {
+								"Content-Type": "application/json"
+							},
+							body: JSON.stringify({
+								"uid": store.user.uid,
+								"genre": data.genres
+							})
+						})
+							.then(res => res.json())
+							.then(data => console.log(data))
+
+					})
+
+				fetch((process.env.BACKEND_URL + '/trackartist'), {
+					method: 'POST',
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						"uid": store.user.uid,
+						"artist_id": artistId
+					})
+				}
+
+
+
+
+
+				).then(res => res.json())
+					.then(data => console.log(data))
+
+				fetch((process.env.BACKEND_URL + '/tracksong'), {
+					method: 'POST',
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						"uid": store.user.uid,
+						"song_id": songID
+					})
+
+				})
+					.then(res => res.json())
+					.then(data => console.log(data))
+			},
 
 
 			//Function Refreshes On Load
@@ -32,12 +105,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			userSearchBarInput: (characters) => {
 				setStore({ userSearchBarInput: characters })
 			},
-	
 
-			setPlayingSongUri: (uri) => {
-
-				setStore({ playingSongUri: uri })
-			},
 
 			spotifyTokenRefresh: () => {
 				const clientID = "5eedb8285f214e62985fddba0f324895"

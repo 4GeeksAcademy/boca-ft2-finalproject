@@ -32,7 +32,7 @@ export const CreateAccount = () => {
 				dob: dobInput
 			})
 		}
-		fetch("https://expert-space-palm-tree-699xr9rgjj4xcxw5-3001.app.github.dev/api/createuser", opts)
+		fetch(process.env.BACKEND_URL + '/createuser', opts)
 			.then(resp => { if (resp.ok) resp.json })
 	}
 
