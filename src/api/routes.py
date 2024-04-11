@@ -74,7 +74,9 @@ def handle_get_profile(uid):
         list_songs = list(map(lambda x: x.serialize(), top_songs))
         events = Event.query.filter_by(uid=uid)
         list_events = list(map(lambda x: x.serialize(), events))
-        return jsonify(user = user_serial, artists = list_artists, genres = list_genres, songs = list_songs, events = list_events), 200
+        playlists = Playlist.query.filter_by(uid=uid)
+        list_playlists = list(map(lambda x: x.serialize(), playlists))
+        return jsonify(user = user_serial, artists = list_artists, genres = list_genres, songs = list_songs, events = list_events, playlists = list_playlists), 200
     else:
         return jsonify('User does not exist'), 404
 
