@@ -5,6 +5,7 @@ import "../../Spotify Views/Search Views/AlbumSearch.css"
 import { Searchpage } from "../../../component/Search/SearchBar.jsx";
 
 import { Context } from "../../../store/appContext.js";
+import { array } from "prop-types";
 export const UserSearch = () => {
 
 
@@ -13,7 +14,11 @@ export const UserSearch = () => {
     const navigate = useNavigate();
 
 
-    const getAlbumSpotify = () => {
+    const searchUser = () => {
+        if (store.userSearchBarInput == "" || store.userSearchBarInput == " " || store.userSearchBarInput.length == 0) {
+            setSearchResults("")
+            return null
+        }
         fetch((process.env.BACKEND_URL + '/findothers'), {
             method: 'POST',
             headers: {
@@ -25,12 +30,18 @@ export const UserSearch = () => {
 
         })
             .then(res => res.json())
-            .then(data => searchResults(data))
+            .then(data => {
+                if (typeof data != "array") {
+                    setSearchResults(data)
+                } else {
+                    setSearchResults(data)
+                }
+            })
     }
 
     useEffect(() => {
 
-        getAlbumSpotify()
+        searchUser()
     }, [store.userSearchBarInput]);
 
     return (
@@ -42,27 +53,26 @@ export const UserSearch = () => {
             <div className="row">
                 <div className="col-3"></div>
                 <div className="col">
-                    {
-                        searchResults.map((data, ind) => {
 
-                            return (
-                                <div className="card" onClick={() => { navigate(`/album/${data.name}`, { state: { albumData: data } }) }} key={ind}>
+                    {typeof searchResults == "string" ? <div className="div text-dark">{searchResults}</div> : searchResults.map((data, ind) => {
 
-                                    <div className="cover">
-                                        {/* <img src={data.images[0].url} alt="cover" /> */}
-                                        <div className="play-icon">
-                                            <i className="fa fa-play"></i>
-                                        </div>
-                                    </div>
-                                    <div className="card-content">
-                                        <span>{data[0].username}</span>
+                        return (
+                            <div className="card" onClick={() => { navigate(`/album/${data.name}`, { state: { albumData: data } }) }} key={ind}>
+
+                                <div className="cover">
+                                    {/* <img src={data.images[0].url} alt="cover" /> */}
+                                    <div className="play-icon">
+                                        <i className="fa fa-play"></i>
                                     </div>
                                 </div>
+                                <div className="card-content">
+                                    <span>{data.username}</span>
+                                </div>
+                            </div>
 
-                            )
-                        }
-                        )}
-
+                        )
+                    }
+                    )}
                 </div>
             </div>
 
