@@ -13,7 +13,7 @@ export const SideNav = () => {
     const location = useLocation();
     const token = sessionStorage.getItem('token')
     return (
-        <div className="container">
+        <div className="container" style={{display:token?"block":"none"}}>
             <div className="row">
                 <div className="col-2">
                     <div className="sidebar">

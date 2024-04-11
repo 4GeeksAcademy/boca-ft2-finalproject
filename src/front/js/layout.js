@@ -17,7 +17,7 @@ import { MyAccount } from "./pages/My Account/MyAccount.js";
 import { Inbox } from "./pages/Inbox/Inbox.js";
 //Sub Views
 import { FriendPlaylist } from "./pages/FriendsContent/FriendPlaylist.js";
-import { FriendProfile } from "./pages/FriendsContent/FriendProfile.js"
+import { FriendProfile } from "./pages/FriendsContent/FriendProfile.js";
 import { AlbumSearch } from "./pages/Spotify Views/Search Views/AlbumSearch.jsx";
 import { ArtistSearch } from "./pages/Spotify Views/Search Views/ArtistSearch.jsx";
 import { SongSearch } from "./pages/Spotify Views/Search Views/SongSearch.jsx";
@@ -36,7 +36,7 @@ const Layout = () => {
 
     if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;
     const { store, actions } = useContext(Context);
-    
+
 
     return (
         <div>
@@ -66,12 +66,12 @@ const Layout = () => {
                         <Route element={<SongDetailPage />} path="/song/:ind" />
 
                         <Route element={<FriendPlaylist />} path="/search/friendplaylist" />
-                        <Route element={<FriendProfile />} path="/search/friendprofile" />
+                        <Route element={<FriendProfile />} path="/friendprofile" />
 
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                 </ScrollToTop>
-                {store.playingSongUri&&<SpotifyPlayBar />}
+                {store.playingSongUri && <SpotifyPlayBar />}
             </BrowserRouter>
         </div>
     );
