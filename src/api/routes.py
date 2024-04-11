@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, TrackGenre, UserPage, Event, Playlist, PlaylistSongs, TrackTopSongs,TrackTopArtists
+from api.models import db, User, TrackGenre, Event, Playlist, PlaylistSongs, TrackTopSongs,TrackTopArtists
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token
@@ -65,10 +65,16 @@ def handle_change_password():
 def handle_get_profile(uid):
     get_user = User.query.filter_by(uid=uid).first()
     if get_user:
-        get_user_page = UserPage.query.filter_by(uid=uid).first()
         user_serial = get_user.serialize()
-        userpage_serial = get_user_page.serialize()
-        return jsonify(user_serial, userpage_serial), 200
+        top_artists = TrackTopArtists.query.filter_by(uid=uid).order_by(TrackTopArtists.count.desc()).limit(3).all()
+        top_genres = TrackGenre.query.filter_by(uid=uid).order_by(TrackGenre.count.desc()).limit(3).all()
+        top_songs = TrackTopSongs.query.filter_by(uid=uid).order_by(TrackTopSongs.count.desc()).limit(3).all()
+        list_artists = list(map(lambda x: x.serialize(), top_artists))
+        list_genres = list(map(lambda x: x.serialize(), top_genres))
+        list_songs = list(map(lambda x: x.serialize(), top_songs))
+        events = Event.query.filter_by(uid=uid)
+        list_events = list(map(lambda x: x.serialize(), events))
+        return jsonify(user = user_serial, artists = list_artists, genres = list_genres, songs = list_songs, events = list_events), 200
     else:
         return jsonify('User does not exist'), 404
 

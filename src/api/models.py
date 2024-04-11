@@ -9,14 +9,17 @@ class User(db.Model):
     password = db.Column(db.String(80), unique=False, nullable=False)
     postal_code = db.Column(db.String(120), nullable=False)
     dob = db.Column(db.String(120), nullable=False)
-    user_info = db.relationship('UserPage', backref='user', lazy=True)
+    first_name = db.Column(db.String(120))
+    last_name = db.Column(db.String(120))
+    about_me = db.Column(db.String(120))
+    prof_pic_url = db.Column(db.String(250))
     user_playlist = db.relationship('Playlist', backref='user', lazy=True)
     user_post = db.relationship('Post', backref='user', lazy=True)
     user_comment = db.relationship('Comment', backref='user', lazy=True)
     user_event = db.relationship('Event', backref='user', lazy=True)
     user_top_genre = db.relationship('TrackGenre', backref='user', lazy=True)
     top_songs = db.relationship('TrackTopSongs', backref='user', lazy=True)
-    top_songs = db.relationship('TrackTopSongs', backref='user', lazy=True)
+    top_artists = db.relationship('TrackTopArtists', backref='user', lazy=True)
 
 
 
@@ -29,7 +32,11 @@ class User(db.Model):
             "email": self.email,
             "username": self.username,
             "postal_code": self.postal_code,
-            "dob": self.dob
+            "dob": self.dob,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "about_me": self.about_me,
+            "prof_pic_url": self.prof_pic_url
             # do not serialize the password, its a security breach
         }
     
@@ -47,31 +54,6 @@ class Event(db.Model):
             "uid": self.uid,
             "event_id": self.event_id,
             "date": self.date
-        }
-    
-class UserPage(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    uid = db.Column(db.Integer, db.ForeignKey(User.uid))
-    first_name = db.Column(db.String(250))
-    last_name = db.Column(db.String(250))
-    about_me = db.Column(db.String(250))
-    prof_pic_url = db.Column(db.String(250))
-    top_artists = db.Column(db.String(250))
-    top_genres = db.Column(db.String(250))
-    #concerts = db.Column(db.Integer, db.ForeignKey(Event.id)) // Figure out Many-To-Many
-
-    
-    def serialize(self):
-        return {
-            "id": self.id,
-            "uid": self.uid,
-            "first_name": self.first_name,
-            "last_name": self.last_name,
-            "about_me": self.about_me,
-            "prof_pic_url": self.prof_pic_url,
-            "top_artists": self.top_artists,
-            "top_genres": self.top_genres,
-            #"concerts": self.concerts,
         }
 
 class Playlist(db.Model):
@@ -175,7 +157,7 @@ class TrackTopSongs(db.Model):
         return {
             "id": self.id,
             "uid": self.uid,
-            "song_id": self.genre,
+            "song_id": self.song_id,
             "count": self.count
         }
 class TrackTopArtists(db.Model):
@@ -192,3 +174,11 @@ class TrackTopArtists(db.Model):
                 top_artists = TrackTopArtists(uid=uid, artist_id=artist_id, count=1)
                 db.session.add(top_artists)
             db.session.commit()
+
+    def serialize(self): 
+        return {
+            "id": self.id,
+            "uid": self.uid,
+            "artist_id": self.artist_id,
+            "count": self.count
+        }

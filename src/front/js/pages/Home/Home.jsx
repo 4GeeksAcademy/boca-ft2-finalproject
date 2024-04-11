@@ -5,7 +5,7 @@ import { FriendsListeningTo } from "../../component/HomePageAssets/ExploreCompon
 import { Context } from "../../store/appContext";
 import FriendsMusic from "../../component/HomePageAssets/Cards/FriendsMusic";
 import UpcomingEvents from "../../component/HomePageAssets/Cards/UpcomingEvents";
-import OtherMusicLovers from "../../component/HomePageAssets/Cards/OtherMusicLovers";
+import Recomendations from "../../component/HomePageAssets/Cards/recomendations.jsx";
 import PeerEvents from "../../component/HomePageAssets/Cards/PeerEvents";
 import PotentialFriends from "../../component/HomePageAssets/Cards/PotentialFriends";
 import FriendsNearby from "../../component/HomePageAssets/Cards/FriendsNearby";
