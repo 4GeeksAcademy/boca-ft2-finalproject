@@ -133,3 +133,10 @@ def handle_track_song():
     TrackTopSongs.track_top_songs(sent_info['song_id'], sent_info['uid'])
     return jsonify('Tracked Song'), 200
 
+@api.route('/getuser', methods=['GET'])
+@jwt_required()
+def handle_get_user():
+    current_user = get_jwt_identity()
+    get_user = User.query.filter_by(username=current_user).first()
+    serial = get_user.serialize()
+    return jsonify(serial), 200

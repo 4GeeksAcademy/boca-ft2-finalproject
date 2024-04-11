@@ -29,7 +29,7 @@ export const CreateAccount = () => {
 				dob: dobInput
 			})
 		}
-		fetch("https://expert-space-palm-tree-699xr9rgjj4xcxw5-3001.app.github.dev/api/createuser", opts)
+		fetch("https://probable-winner-699xr9r9gvwxf5pwj-3001.app.github.dev/api/createuser", opts)
 			.then(resp => { if (resp.ok) resp.json })
 	}
 
@@ -67,13 +67,13 @@ export const CreateAccount = () => {
 
 
 				</div>
-				<button type="submit" onClick={() => { handleSignUp() }} class="btn btn-warning" style={centerStyle}>Sign up!</button>
+				<button type="button" onClick={() => { handleSignUp() }} class="btn btn-warning" style={centerStyle}>Sign up!</button>
 			</form>
 			<br />
 			<br />
 			<br />
 			<Link to={'/login'}>
-				<h3 style={{ textAlign: "center", fontVariant: 'small-caps' }}>Already Registered? Click Here to Log In.</h3>
+				<h3 style={{ textAlign: "center", fontVariant: 'small-caps', color: 'black' }}>Already Registered? Click Here to Log In.</h3>
 			</Link>
 		</div>
 	);
