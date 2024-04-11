@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Navigate, useNavigate } from "react-router-dom"
 import { FriendsListeningTo } from "../../component/HomePageAssets/ExploreComponents/FriendsListeningTo";
-
 import { Context } from "../../store/appContext";
 import FriendsMusic from "../../component/HomePageAssets/Cards/FriendsMusic";
 import UpcomingEvents from "../../component/HomePageAssets/Cards/UpcomingEvents";
@@ -18,11 +17,15 @@ import Concert from "../../component/HomePageAssets/Cards/Concert";
 export const Home = () => {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate()
-
+    useEffect(() => {
+        const code = new URLSearchParams(window.location.search).get('code');
+        actions.getToken(code);
+    }, [])
 
     return (
 
         <div className="container">
+            <a href={store.auth_url}>Connect Spotify</a>
             {/* <FriendsMusic /> */}
             {/* <UpcomingEvents /> */}
             {/* <OtherMusicLovers /> */}

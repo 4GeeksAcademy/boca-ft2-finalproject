@@ -1,9 +1,13 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			playingSongUri: null,
 			userCordinates: null,
 			spotifyToken: null,
-			userSearchBarInput:"",
+			spotifyPlayToken: null,
+			userSearchBarInput: "",
+			user: null,
+			auth_url: `https://accounts.spotify.com/authorize?client_id=5eedb8285f214e62985fddba0f324895&response_type=code&redirect_uri=${process.env.REDIRECT_URL}&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state`,
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -25,10 +29,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			//Function Refreshes On Load
 
-			
+			userSearchBarInput: (characters) => {
+				setStore({ userSearchBarInput: characters })
+			},
+	
 
-			userSearchBarInput:(characters) =>{
-				setStore({userSearchBarInput:characters})
+			setPlayingSongUri: (uri) => {
+
+				setStore({ playingSongUri: uri })
 			},
 
 			spotifyTokenRefresh: () => {
@@ -76,6 +84,55 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+			handleLogIn: (usernameInput, passwordInput) => {
+
+				const opts = {
+					method: 'POST',
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						username: usernameInput,
+						password: passwordInput
+					})
+				}
+				fetch(process.env.BACKEND_URL + '/login', opts)
+					.then(resp => {
+						if (resp.ok) {
+							return resp.json()
+						}
+						else {
+							alert("Incorrect Username or Password")
+						}
+					})
+					.then(data => sessionStorage.setItem("token", data.access_token))
+					.then(data => setStore({ user: data }))
+			},
+			getToken: (code) => {
+				const authOptions = {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded',
+						'Authorization': `Basic NWVlZGI4Mjg1ZjIxNGU2Mjk4NWZkZGJhMGYzMjQ4OTU6MGEyMDdhNGZiNjFjNDg3ZDhiOTg3Mjk4YjRkZDMzNDQ=`//encrypted client key
+					},
+					body: new URLSearchParams({
+						code: code,
+						redirect_uri: process.env.REDIRECT_URL,
+						grant_type: 'authorization_code'
+					})
+				}
+				fetch('https://accounts.spotify.com/api/token', authOptions)
+					.then(response => response.json())
+					.then(data => {
+						setStore({ spotifyPlayToken: data.access_token });
+						sessionStorage.setItem("spotifyPlayToken", data.access_token)
+						// Handle the access token and other data as needed
+					})
+					.catch(error => {
+						console.error('Error:', error);
+						// Handle errors
+					});
 			}
 		}
 	};

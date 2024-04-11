@@ -11,9 +11,9 @@ export const SideNav = () => {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate()
     const location = useLocation();
-
+    const token = sessionStorage.getItem('token')
     return (
-        <div className="container" style={{ display: location.pathname == "/" ? "none" : "block" }}>
+        <div className="container" style={{display:token?"block":"none"}}>
             <div className="row">
                 <div className="col-2">
                     <div className="sidebar">
@@ -79,6 +79,7 @@ export const SideNav = () => {
                         Notifications
                     </a>
                 </li> */}
+
                             <li>
                                 <a href="#" className={location.pathname == '/post' ? `nav-link active` : 'nav-link'} onClick={() => navigate("/post")} >
                                     <span className="icon">
@@ -90,6 +91,14 @@ export const SideNav = () => {
                                     </span>
                                     Post
                                 </a>
+                            </li>
+                            <li>
+                                <button href="#" className="btn btn-danger" onClick={() => sessionStorage.clear('token')} >
+                                    <span className="icon">
+                
+                                    </span>
+                                    Logout
+                                </button>
                             </li>
                             <li>
                                 <a href="#" className={location.pathname == '/myaccount' ? `nav-link active` : 'nav-link'} onClick={() => navigate("/myaccount")} >
