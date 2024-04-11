@@ -8,7 +8,7 @@ export const SpotifyPlayBar = () => {
     const navigate = useNavigate()
 
 
-    return (<div className="div">
+    return (<div className="div fixed-bottom">
         <div className="col-4">
         </div>
         <div className="div">
