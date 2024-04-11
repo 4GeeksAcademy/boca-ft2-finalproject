@@ -1,0 +1,12 @@
+.nav button {
+    color : white;
+}
+
+.card { 
+    color: black;
+}
+
+.card a {
+    background-color: brown;
+    border-color: white;
+}

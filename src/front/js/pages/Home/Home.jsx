@@ -11,6 +11,9 @@ import PotentialFriends from "../../component/HomePageAssets/Cards/PotentialFrie
 import FriendsNearby from "../../component/HomePageAssets/Cards/FriendsNearby";
 import Playlist from "../../component/HomePageAssets/Cards/Playlist";
 import Concert from "../../component/HomePageAssets/Cards/Concert";
+
+
+
 export const Home = () => {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate()
@@ -26,12 +29,14 @@ export const Home = () => {
             {/* <FriendsMusic /> */}
             {/* <UpcomingEvents /> */}
             {/* <OtherMusicLovers /> */}
-            <PeerEvents />
+            {/* <PeerEvents /> */}
             {/* <PotentialFriends /> */}
-            <FriendsNearby />
+            {/* <FriendsNearby />
             <Playlist />
-            <Concert />
+            <Concert /> */}
+
             <FriendsListeningTo>
+
 
 
                 <div className="card" style="width: 18rem;">
