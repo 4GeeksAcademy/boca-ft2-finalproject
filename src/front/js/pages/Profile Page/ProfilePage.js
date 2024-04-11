@@ -126,15 +126,32 @@ box-sizing: border-box;`
                 <div className="tab-pane fade" id="artists" role="tabpanel" aria-labelledby="artists-tab" tabIndex="0">
                     <h4>Favorite Artists:</h4>
                     <div className="d-flex">
-                        {faveArtists.map(artist => (<div class="card border-0" style={{ width: "16rem" }}>
-                            <img src="https://media.gettyimages.com/id/1337160870/photo/new-york-new-york-miss-piggy-performs-onstage-during-elsie-fest-2021-broadways-outdoor-music.jpg?s=612x612&w=0&k=20&c=VOMZOdOmA1XwHbTEuA1Gag5U7566Fut1lPAUlDKAFhg=" class="card-img-top" style={{ borderRadius: "50%" }} />
-                            <div class="card-body">
-                                <h5 class="card-title">{artist.name}</h5>
-                                <a href="#" class="btn btn-primary">Visit Artist</a>
+                        {faveArtists.map((artist, ind) => (
+                            <div
+                                className="card"
+                                // onClick={() => { 
+                                //     navigate(`/artist/${artist.name}`, { state: { albumData: data } }) 
+                                //     }} 
+                                key={ind}>
+
+                                <div className="cover">
+                                    <img src="..." alt="cover" />
+                                    <div className="play-icon">
+                                        <i className="fa fa-play"></i>
+                                    </div>
+                                </div>
+                                <div className="card-content">
+                                    <span>{artist.name}</span>
+                                    <p>some other data</p>
+                                </div>
                             </div>
-                        </div>))}
+                        ))}
                     </div>
                 </div>
+
+
+
+
 
                 <div className="tab-pane fade" id="albums" role="tabpanel" aria-labelledby="albums-tab" tabIndex="0">
                     <h4>Favorite Albums</h4>
