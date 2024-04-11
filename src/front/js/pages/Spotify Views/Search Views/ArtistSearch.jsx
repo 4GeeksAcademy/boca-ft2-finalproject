@@ -47,7 +47,7 @@ export const ArtistSearch = () => {
 
 								<div className="card" onClick={() => { navigate(`/artist/${data.name}`, { state: { artistData: data } }) }} key={ind}>
 									<div className="cover artist">
-										<img src={data.images[1].url} alt="cover" />
+										<img src={data.images[1].url} className="xyz" alt="cover" />
 										<div className="play-icon">
 											<i className="fa fa-play"></i>
 										</div>
