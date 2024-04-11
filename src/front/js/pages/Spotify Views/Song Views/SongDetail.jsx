@@ -16,7 +16,7 @@ export const SongDetailPage = () => {
     //Fetches for diffrent data
 
 
-
+    
     const getSongSpotify = () => {
         const opts = {
             method: "GET",
@@ -66,11 +66,9 @@ export const SongDetailPage = () => {
                                     <td>{trackData.name}</td>
                                     <td>{trackData.artists[0].name}</td>
                                     <td>{(trackData.duration_ms / 1000) / 60}</td>
-                                    <td className="btn btn-success" onClick={()=>setSongPlaying(trackData.id)}></td>
+                                    <td className="btn btn-success" onClick={()=>actions.setPlayingSongUri(trackData.uri)}></td>
                                     
                                 </tr>
-                            
-                                <iframe style={{borderRadius:"12px",display: songPlaying ? "block":"none"}} src={`https://open.spotify.com/embed/track/${songPlaying}?utm_source=generator&theme=0`} width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                             </tbody>
                         )
                     })

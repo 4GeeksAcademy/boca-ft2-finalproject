@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Navigate, useNavigate } from "react-router-dom"
 import SpotifyPlayer from 'react-spotify-web-playback';
 import { Context } from "../store/appContext";
-export const SpotifyAuth = () => {
+export const SpotifyPlayBar = () => {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate()
 
@@ -14,7 +14,7 @@ export const SpotifyAuth = () => {
         <div className="div">
             <SpotifyPlayer
                 token={store.spotifyPlayToken}
-                uris={[`spotify:album:2up3OPMp9Tb4dAKM2erWXQ`]}
+                uris={[store.playingSongUri]}
                 play={true}
             />;
         </div>

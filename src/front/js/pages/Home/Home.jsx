@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Navigate, useNavigate } from "react-router-dom"
 import { FriendsListeningTo } from "../../component/HomePageAssets/ExploreComponents/FriendsListeningTo";
-import { SpotifyAuth } from "../../component/spotifyplay.jsx";
 import { Context } from "../../store/appContext";
 import FriendsMusic from "../../component/HomePageAssets/Cards/FriendsMusic";
 import UpcomingEvents from "../../component/HomePageAssets/Cards/UpcomingEvents";
@@ -12,6 +11,9 @@ import PotentialFriends from "../../component/HomePageAssets/Cards/PotentialFrie
 import FriendsNearby from "../../component/HomePageAssets/Cards/FriendsNearby";
 import Playlist from "../../component/HomePageAssets/Cards/Playlist";
 import Concert from "../../component/HomePageAssets/Cards/Concert";
+
+
+
 export const Home = () => {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate()
@@ -27,13 +29,14 @@ export const Home = () => {
             {/* <FriendsMusic /> */}
             {/* <UpcomingEvents /> */}
             {/* <OtherMusicLovers /> */}
-            <PeerEvents />
+            {/* <PeerEvents /> */}
             {/* <PotentialFriends /> */}
-            <FriendsNearby />
+            {/* <FriendsNearby />
             <Playlist />
-            <Concert />
-            <SpotifyAuth />
+            <Concert /> */}
+
             <FriendsListeningTo>
+
 
 
                 <div className="card" style="width: 18rem;">
