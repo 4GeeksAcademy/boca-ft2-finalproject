@@ -47,7 +47,8 @@ const Layout = () => {
                         <Route element={<Landingpage />} path="/" />
                         <Route element={<CreateAccount />} path="/createaccount" />
                         <Route element={<Login />} path="/login" />
-                        <Route element={<ResetPassword />} path="/resetpassword" />
+                        <Route element={<ResetPassword />} path=
+                        "/resetpassword" />
                         <Route element={<Home />} path="/home" />
 
                         <Route element={<Post />} path="/post" />

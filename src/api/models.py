@@ -178,3 +178,17 @@ class TrackTopSongs(db.Model):
             "song_id": self.genre,
             "count": self.count
         }
+class TrackTopArtists(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    uid = db.Column(db.Integer, db.ForeignKey(User.uid))
+    artist_id = db.Column(db.String(250))
+    count = db.Column(db.Integer, default=0)
+
+    def track_top_artists(artist_id, uid):
+            top_artists = TrackTopArtists.query.filter_by(uid=uid, artist_id=artist_id).first()
+            if top_artists:
+                top_artists.count += 1
+            else: 
+                top_artists = TrackTopArtists(uid=uid, artist_id=artist_id, count=1)
+                db.session.add(top_artists)
+            db.session.commit()
