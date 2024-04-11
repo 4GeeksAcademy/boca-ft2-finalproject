@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Navigate, useNavigate } from "react-router-dom"
 import { Searchpage } from "../../../component/Search/SearchBar.jsx";
-import"../../Spotify Views/Search Views/ArtistSearch.css"
+import "../../Spotify Views/Search Views/ArtistSearch.css"
 import { Context } from "../../../store/appContext.js";
 import { resetWarningCache } from "prop-types";
 export const ArtistSearch = () => {
@@ -42,14 +42,13 @@ export const ArtistSearch = () => {
 				<div className="col">
 					{
 						searchResults.map((data, ind) => {
-
 							return (
 
-								<div className="card" onClick={() => { navigate(`/artist/${data.name}`, { state: { artistData: data } }) }} key={ind}>
+								<div className="card" onClick={() => { navigate(`/artist/${data.name}`, { state: { artistData: data } }) }}  key={ind}>
 									<div className="cover artist">
 										<img src={data.images[1].url} alt="cover" />
 										<div className="play-icon">
-											<i className="fa fa-play"></i>
+											<i className="fa fa-play" onClick={() => actions.setPlayingSongUri(data.uri)}></i>
 										</div>
 									</div>
 									<div className="card-content">

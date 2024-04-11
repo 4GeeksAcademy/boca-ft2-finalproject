@@ -14,7 +14,7 @@ export const SpotifyPlayBar = () => {
         <div className="div">
             <SpotifyPlayer
                 token={store.spotifyPlayToken}
-                uris={[`spotify:album:2up3OPMp9Tb4dAKM2erWXQ`]}
+                uris={[store.playingSongUri]}
                 play={true}
             />;
         </div>
