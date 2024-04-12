@@ -70,7 +70,7 @@ const Layout = () => {
                         <Route element={<SongDetailPage />} path="/song/:ind" />
 
                         <Route element={<FriendPlaylist />} path="/search/friendplaylist" />
-                        <Route element={<FriendProfile />} path="/friendprofile" />
+                        <Route element={<FriendProfile />} path="/profile/:ind" />
 
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>

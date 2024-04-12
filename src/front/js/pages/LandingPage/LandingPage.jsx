@@ -22,7 +22,7 @@ export const Landingpage = () => {
 
 			<div className="div">
 				<button type="button" className="btn btn-warning" onClick={() => navigate("/createaccount")} style={{ marginRight: "10px" }}>Sign Up</button>
-				<button type="button" className="btn btn-warning" onClick={() => navigate("/login")} style={{ marginLeft: "10px" }}>Sign In</button>
+				<a type="button" className="btn btn-warning" onClick={() => navigate("/login")} style={{ marginLeft: "10px" }}>Sign In</a>
 			</div>
 		</section>
 	);
