@@ -4,8 +4,8 @@ import { Navigate, useNavigate } from "react-router-dom"
 import { FriendsListeningTo } from "../../component/HomePageAssets/ExploreComponents/FriendsListeningTo";
 import { Context } from "../../store/appContext";
 import FriendsMusic from "../../component/HomePageAssets/Cards/FriendsMusic";
-import UpcomingEvents from "../../component/HomePageAssets/Cards/UpcomingEvents";
-import Recomendations from "../../component/HomePageAssets/Cards/recomendations.jsx";
+import UpcomingEvents from "../../component/HomePageAssets/Cards/UpcomingEvents.jsx";
+import Recomendations from "../../component/HomePageAssets/Cards/Recomendations/recomendations";
 import PeerEvents from "../../component/HomePageAssets/Cards/PeerEvents";
 import PotentialFriends from "../../component/HomePageAssets/Cards/PotentialFriends";
 import FriendsNearby from "../../component/HomePageAssets/Cards/FriendsNearby";
@@ -26,13 +26,13 @@ export const Home = () => {
 
         <div className="container">
             <a href={store.auth_url}>Connect Spotify</a>
-            <FriendsMusic /> 
-          <UpcomingEvents />
-           <OtherMusicLovers />
-       <PeerEvents />
-          <PotentialFriends />
-            <FriendsNearby />
-            <Playlist />
+            {/* <FriendsMusic /> */}
+            <UpcomingEvents />
+            <Recomendations />
+            {/* <PeerEvents /> */}
+            {/* <PotentialFriends /> */}
+            {/* <FriendsNearby /> */}
+            {/* <Playlist /> */}
             <Concert />
 
             <FriendsListeningTo>

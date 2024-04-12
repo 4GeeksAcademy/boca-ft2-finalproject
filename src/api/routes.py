@@ -45,7 +45,8 @@ def handle_get_token():
     if exists:
         if sent_info['password'] == exists.password:
             access_token = create_access_token(identity=username)
-            return jsonify(access_token=access_token), 200
+            logged_in_as = exists.serialize()
+            return jsonify(access_token=access_token, user=logged_in_as), 200
         else: 
             return jsonify({"msg": "Username or Password is incorrect."}), 401
     else: 
@@ -127,12 +128,16 @@ def handle_user_search():
 @api.route('/trackupcomingconcerts', methods=['POST'])
 def handle_track_concert():
     recieved = request.json
-    new_event = Event(uid=recieved['uid'], event_id=recieved['event_id'], date=recieved['date'])
-    db.session.add(new_event)
-    db.session.commit()
-    find_event = Event.query.filter_by(event_id=recieved['event_id']).first()
-    serial = find_event.serialize()
-    return jsonify(serial), 200
+    does_exist = Event.query.filter_by(event_id=recieved['event_id']).first()
+    if does_exist:
+        return jsonify(msg="Event already exists.")
+    else:
+        new_event = Event(uid=recieved['uid'], event_id=recieved['event_id'], date=recieved['date'])
+        db.session.add(new_event)
+        db.session.commit()
+        find_event = Event.query.filter_by(event_id=recieved['event_id']).first()
+        serial = find_event.serialize()
+        return jsonify(serial), 200
     
 #Profile Page
 @api.route('/tracksong', methods=['POST'])
