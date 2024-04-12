@@ -91,17 +91,23 @@ faveartists {
 
 
       /* Card styles */
-
+.blurbg {
+  backdrop-filter: blur(15px)!important;
+  background-color:  rgba(255, 255, 255, 0.05)!important;
+  
+}
   .card {
     display: inline-block;
     width: 200px;
     border-radius: 4px;
     padding: 16px;
     overflow: hidden;
-    background-color:  white;
+    backdrop-filter: blur(15px);
+    background-color:  rgba(139, 139, 139, 0.341);
     transition: background-color 0.4s;
     cursor: pointer;
     margin-bottom: 2rem;
+    color:white;
   }
   .card:hover {
     background-color: #e4e1e1;
@@ -158,6 +164,19 @@ faveartists {
   .card-content span {
     margin-bottom: 6px;
   }
+
+  .song-card { 
+
+  }
+
+  .song-card:hover { 
+    background-color: #71717141;
+    backdrop-filter: blur(45px);
+    border-radius: 5px;
+    border: 1px solid black;
+    mix-blend-mode:luminosity;
+    }
+
   .card-content p {
     overflow: hidden;
     display: -webkit-box;
