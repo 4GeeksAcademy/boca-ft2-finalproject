@@ -4,9 +4,9 @@ import './ProfilePage.css'
 //create your first component
 export const ProfilePage = () => {
 
-    
 
-    
+
+
     const [genres, setGenres] = useState(["metal", "groove", "funk", "children's toons"]);
     const [topSongs, setTopSongs] = useState([
         { title: "Happy Day", artist: "Jesus" },
@@ -39,13 +39,13 @@ box-sizing: border-box;`
         <div className="text-center" style={{ color: 'white' }}>
 
             <div className="card mx-auto mb-3" style={
-                { maxWidth: "80vw", height: "auto", backdropFilter: "blur(5px)", width: "50vw", backgroundColor: "#ffffff0f" }
+                { maxWidth: "80vw", height: "auto", backdropFilter: "blur(5px)", width: "30vw", backgroundColor: "#ffffff0f" }
             }>
-                <div className="row g-0" style={{ width: "100vw" }}>
+                <div className="row g-0" style={{ width: "40vw" }}>
                     <div className="col-md-4">
-                        <img src="https://thumbs.dreamstime.com/b/kermit-frog-muppets-22242614.jpg" className="img-fluid rounded-circle mt-4" style={{
-                            width: "200px",
-                            height: "200px"
+                        <img src="https://thumbs.dreamstime.com/b/kermit-frog-muppets-22242614.jpg" className="img-fluid mt-4" style={{
+                            width: "auto",
+                            height: "300px"
                         }} />
                     </div>
                     <div className="col-md-8 text-start" style={{ color: 'white' }}>
@@ -84,9 +84,10 @@ box-sizing: border-box;`
                 <div className="tab-pane fade show active" id="top-tracks" role="tabpanel" aria-labelledby="top-tracks-tab" tabIndex="0">
                     <h4>Top Tracks This Month:</h4>
                     <div id="top-track-list text-center">
-                        {topSongs.map(song => <div className="mx-auto my-2 shadow" style={{ borderRadius: "10px", border: "1px solid ", background: gradient, width: "80vw" }}>
-                            <img src="https://e7.pngegg.com/pngimages/383/640/png-clipart-infant-child-jesus-baby-child-baby-thumbnail.png" style={{ maxHeight: "48px" }} />
-                            {song.title} by {song.artist} <span><i className="far fa-play-circle"></i></span>
+                        {topSongs.map(song => <div className="mx-auto my-2 shadow song-card" style={{ width: "80vw", textAlign: 'left' }}>
+
+                            {/* <img src="https://e7.pngegg.com/pngimages/383/640/png-clipart-infant-child-jesus-baby-child-baby-thumbnail.png" style={{ maxHeight: "48px" }} /> */}
+                            <span style={{ fontWeight: "900", fontVariant: "small-caps" }} >&nbsp; {song.title.toLowerCase()}</span>   <span><i className="far fa-play-circle"></i></span> <br /> <span style={{ color: '#ebebeb' }} >&nbsp;     {song.artist}</span>
                         </div>)}
                     </div>
                 </div>
@@ -126,33 +127,52 @@ box-sizing: border-box;`
                 <div className="tab-pane fade" id="artists" role="tabpanel" aria-labelledby="artists-tab" tabIndex="0">
                     <h4>Favorite Artists:</h4>
                     <div className="d-flex">
-                        {faveArtists.map(artist => (<div class="card border-0" style={{ width: "16rem" }}>
-                            <img src="https://media.gettyimages.com/id/1337160870/photo/new-york-new-york-miss-piggy-performs-onstage-during-elsie-fest-2021-broadways-outdoor-music.jpg?s=612x612&w=0&k=20&c=VOMZOdOmA1XwHbTEuA1Gag5U7566Fut1lPAUlDKAFhg=" class="card-img-top" style={{ borderRadius: "50%" }} />
-                            <div class="card-body">
-                                <h5 class="card-title">{artist.name}</h5>
-                                <a href="#" class="btn btn-primary">Visit Artist</a>
+                        {faveArtists.map((artist, ind) => (
+                            <div
+                                className="card"
+                                // onClick={() => { 
+                                //     navigate(`/artist/${artist.name}`, { state: { albumData: data } }) 
+                                //     }} 
+                                key={ind}>
+
+                                <div className="cover">
+                                    <img src="..." alt="cover" />
+                                    <div className="play-icon">
+                                        <i className="fa fa-play"></i>
+                                    </div>
+                                </div>
+                                <div className="card-content">
+                                    <span>{artist.name}</span>
+                                    <p>some other data</p>
+                                </div>
                             </div>
-                        </div>))}
+                        ))}
                     </div>
                 </div>
+
+
+
+
 
                 <div className="tab-pane fade" id="albums" role="tabpanel" aria-labelledby="albums-tab" tabIndex="0">
                     <h4>Favorite Albums</h4>
                     <div className="d-flex">
-                        {faveArtists.map(artist => (<div class="card border-0 " style={{ width: "16rem" }}>
-                            <img src="https://media.gettyimages.com/id/1337160870/photo/new-york-new-york-miss-piggy-performs-onstage-during-elsie-fest-2021-broadways-outdoor-music.jpg?s=612x612&w=0&k=20&c=VOMZOdOmA1XwHbTEuA1Gag5U7566Fut1lPAUlDKAFhg=" class="card-img-top" style={{ borderRadius: "50%" }} />
-                            <div class="card-body">
+                        {faveArtists.map(artist => (<div className="card  border-0 blurbg" style={{ width: "16rem" }}>
+                            <div className="cover">
+                                <img src="https://media.gettyimages.com/id/1337160870/photo/new-york-new-york-miss-piggy-performs-onstage-during-elsie-fest-2021-broadways-outdoor-music.jpg?s=612x612&w=0&k=20&c=VOMZOdOmA1XwHbTEuA1Gag5U7566Fut1lPAUlDKAFhg=" class="card-img-top" style={{ borderRadius: "0%" }} />
+                            </div>
+                            <div class="card-content" style={{ color: 'white' }}>
                                 <h5 class="card-title">{artist.name}</h5>
-                                <a href="#" class="btn btn-primary">See Album</a>
+                                <a href="#" class="btn btn-primary"  >See Album</a>
                             </div>
                         </div>))}
                     </div>
                 </div>
 
-                <div className="tab-pane fade" id="playlist" role="tabpanel" aria-labelledby="playlist-tab" tabIndex="0">
-                    <h4>User Playlists</h4>
-                    <div class="card d-flex" style={{ width: "30rem" }}>
-                        <div className="row g-0">
+                <div className="tab-pane fade" style={{ display: 'inline-block', justifyContent: 'center', color: 'white' }} id="playlist" role="tabpanel" aria-labelledby="playlist-tab" tabIndex="0"  >
+                    <h4 style={{ color: 'white' }}>User Playlists</h4>
+                    <div class="card d-flex blurbg" style={{ width: "30rem" }}>
+                        <div className="row g-0 cover">
                             <div className="col">
                                 <img src="https://media.gettyimages.com/id/1337160870/photo/new-york-new-york-miss-piggy-performs-onstage-during-elsie-fest-2021-broadways-outdoor-music.jpg?s=612x612&w=0&k=20&c=VOMZOdOmA1XwHbTEuA1Gag5U7566Fut1lPAUlDKAFhg=" class="card-img-top" alt="..." />
                             </div>
@@ -160,7 +180,7 @@ box-sizing: border-box;`
                                 <img src="https://media.gettyimages.com/id/1337160870/photo/new-york-new-york-miss-piggy-performs-onstage-during-elsie-fest-2021-broadways-outdoor-music.jpg?s=612x612&w=0&k=20&c=VOMZOdOmA1XwHbTEuA1Gag5U7566Fut1lPAUlDKAFhg=" class="card-img-top" alt="..." />
                             </div>
                         </div>
-                        <div className="row g-0">
+                        <div className="row g-0 cover">
                             <div className="col">
                                 <img src="https://media.gettyimages.com/id/1337160870/photo/new-york-new-york-miss-piggy-performs-onstage-during-elsie-fest-2021-broadways-outdoor-music.jpg?s=612x612&w=0&k=20&c=VOMZOdOmA1XwHbTEuA1Gag5U7566Fut1lPAUlDKAFhg=" class="card-img-top" alt="..." />
                             </div>
@@ -168,7 +188,7 @@ box-sizing: border-box;`
                                 <img src="https://media.gettyimages.com/id/1337160870/photo/new-york-new-york-miss-piggy-performs-onstage-during-elsie-fest-2021-broadways-outdoor-music.jpg?s=612x612&w=0&k=20&c=VOMZOdOmA1XwHbTEuA1Gag5U7566Fut1lPAUlDKAFhg=" class="card-img-top" alt="..." />
                             </div>
                         </div>
-                        <div class="card-body">
+                        <div class="card-content" style={{ color: 'white' }}>
                             <h5 class="card-title">Summer Playlist</h5>
                         </div>
                         <div class="card-footer">

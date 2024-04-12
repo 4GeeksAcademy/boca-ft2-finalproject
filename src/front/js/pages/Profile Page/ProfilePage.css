@@ -10,3 +10,180 @@
     background-color: brown;
     border-color: white;
 }
+
+faveartists {
+
+        display: inline-block;
+        width: 200px;
+        border-radius: 4px;
+        padding: 16px;
+        overflow: hidden;
+        background-color:  white;
+        transition: background-color 0.4s;
+        cursor: pointer;
+        margin-bottom: 2rem;
+      }
+      .card:hover {
+        background-color: #e4e1e1;
+      }
+      
+      .cover {
+        position: relative;
+        margin-bottom: 18px;
+        margin-left: 9px;
+      }
+      .cover img {
+        display: block;
+        width: 92%;
+        box-shadow: 0 8px 20px -4px hsl(0, 0%, 5%);
+      }
+      .cover.artist img {
+        border-radius: 50%;
+      }
+      
+      .play-icon {
+        position: absolute;
+        bottom: 0px;
+        right: 52px;
+        width: 43px;
+        height: 43px;
+        border-radius: 50%;
+        color: #fafafa;
+        background-color: #1db954;
+        box-shadow: 0 4px 16px -4px #121212;
+        opacity: 0;
+        transition: 0.4s, transform 0.1s;
+      }
+      .play-icon:hover {
+        transform: scale(1.1);
+      }
+      .card:hover .play-icon {
+        bottom: 6px;
+        opacity: 1;
+      }
+      
+      .fa-play {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        left: 52%;
+        top: 50%;
+        font-size: 1rem;
+      }
+      
+      .card-content {
+        font-family: "Montserrat", sans-serif;
+        color:black;
+        font-weight:bolder;
+      }
+      .card-content span {
+        margin-bottom: 6px;
+      }
+      .card-content p {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        height: 2.5em;
+        font-size: 14px;
+        color: hsl(0, 0%, 70%);
+      }
+
+
+
+      /* Card styles */
+.blurbg {
+  backdrop-filter: blur(15px)!important;
+  background-color:  rgba(255, 255, 255, 0.05)!important;
+  
+}
+  .card {
+    display: inline-block;
+    width: 200px;
+    border-radius: 4px;
+    padding: 16px;
+    overflow: hidden;
+    backdrop-filter: blur(15px);
+    background-color:  rgba(139, 139, 139, 0.341);
+    transition: background-color 0.4s;
+    cursor: pointer;
+    margin-bottom: 2rem;
+    color:white;
+  }
+  .card:hover {
+    background-color: #e4e1e1;
+  }
+  
+  .cover {
+    position: relative;
+    margin-bottom: 18px;
+    margin-left: 9px;
+  }
+  .cover img {
+    display: block;
+    width: 92%;
+    box-shadow: 0 8px 20px -4px hsl(0, 0%, 5%);
+  }
+  .cover.artist img {
+    border-radius: 50%;
+  }
+  
+  .play-icon {
+    position: absolute;
+    bottom: 0px;
+    right: 52px;
+    width: 43px;
+    height: 43px;
+    border-radius: 50%;
+    color: #fafafa;
+    background-color: #1db954;
+    box-shadow: 0 4px 16px -4px #121212;
+    opacity: 0;
+    transition: 0.4s, transform 0.1s;
+  }
+  .play-icon:hover {
+    transform: scale(1.1);
+  }
+  .card:hover .play-icon {
+    bottom: 6px;
+    opacity: 1;
+  }
+  
+  .fa-play {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 52%;
+    top: 50%;
+    font-size: 1rem;
+  }
+  
+  .card-content {
+    font-family: "Montserrat", sans-serif;
+    color:black;
+    font-weight:bolder;
+  }
+  .card-content span {
+    margin-bottom: 6px;
+  }
+
+  .song-card { 
+
+  }
+
+  .song-card:hover { 
+    background-color: #71717141;
+    backdrop-filter: blur(45px);
+    border-radius: 5px;
+    border: 1px solid black;
+    mix-blend-mode:luminosity;
+    }
+
+  .card-content p {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    height: 2.5em;
+    font-size: 14px;
+    color: hsl(0, 0%, 70%);
+  }
+  

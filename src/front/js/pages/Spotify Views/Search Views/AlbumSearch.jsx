@@ -14,7 +14,7 @@ export const AlbumSearch = () => {
 
 
 	const getAlbumSpotify = () => {
-		
+
 		const opts = {
 			method: "GET",
 			headers: {
@@ -29,7 +29,7 @@ export const AlbumSearch = () => {
 				setSearchResults(res.albums.items)
 			})
 	}
-	
+
 	useEffect(() => {
 
 		getAlbumSpotify()
@@ -40,36 +40,32 @@ export const AlbumSearch = () => {
 
 		<div className="container">
 			<Searchpage />
-		
-		<div className="row">
-			<div className="col-3"></div>
-			<div className="col">
-			{
-				searchResults.map((data, ind) => {
-					
-					return (
-						<div className="card" onClick={()=>{navigate(`/album/${data.name}`, {state: {albumData: data} })}} key={ind}>
-							
-							<div className="cover">
-								<img src={data.images[0].url} alt="cover" />
-								<div className="play-icon">
-									<i className="fa fa-play"></i>
+
+			<div className="row">
+				<div className="col-3"></div>
+				<div className="col">
+					{
+						searchResults.map((data, ind) => {
+
+							return (
+								<div className="card" onClick={() => { navigate(`/album/${data.name}`, { state: { albumData: data } }) }} key={ind}>
+
+									<div className="cover">
+										<img src={data.images[0].url} alt="cover" />
+										<div className="play-icon">
+											<i className="fa fa-play"></i>
+										</div>
+									</div>
+									<div className="card-content">
+										<span>{data.name}</span>
+										<p>{data.artists[0].name}</p>
+									</div>
 								</div>
-							</div>
-							<div className="card-content">
-								<span>{data.name}</span>
-								<p>{data.artists[0].name}</p>
-							</div>
-						</div>
-
-					)
-				}
-			)}
-
+							)
+						}
+						)}
+				</div>
 			</div>
-		</div>
-			
-				
 		</div>
 	);
 };

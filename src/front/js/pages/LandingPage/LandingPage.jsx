@@ -14,7 +14,7 @@ export const Landingpage = () => {
 	useEffect(() => { if (token) { navigate(`/home`) } }, [token])
 
 	return (
-		<section className="container_redkorn" style={{ backgroundImage: `url(${x})`, width: "100vw" }}>
+		<section className="container_redkorn landingpage" style={{ backgroundImage: `url(${x})`, width: "100vw" }}>
 			<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide"></link>
 			<h1 class="title">Music <span class="titlesub">Without Limits!</span></h1>
 			<h3 class="subtitle"> RHYTHM REALM Your Sonic-Sanctuary a musical rendezvous where like-minded souls converge!
