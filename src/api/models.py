@@ -20,6 +20,7 @@ class User(db.Model):
     user_top_genre = db.relationship('TrackGenre', backref='user', lazy=True)
     top_songs = db.relationship('TrackTopSongs', backref='user', lazy=True)
     top_artists = db.relationship('TrackTopArtists', backref='user', lazy=True)
+    friends = db.relationship('Friends', backref='user', lazy=True)
 
 
 
@@ -82,10 +83,39 @@ class PlaylistSongs(db.Model):
             "pid": self.pid,
             "song_id": self.song_id
         }
-#class Follower(db.Model):
-#    id = db.Column(db.Integer, primary_key=True)
-#    uid = db.Column(db.Integer, db.ForeignKey(User.uid))
-#    follower_id = db.Column(db.Integer, db.ForeignKey(User.uid))
+class Friends(db.Model):
+   id = db.Column(db.Integer, primary_key=True)
+   uid = db.Column(db.Integer,db.ForeignKey(User.uid))
+   friend_id = db.Column(db.Integer)
+   request_status = db.Column(db.String(200))
+
+   def accept_request(request_id,request_status):
+       selected_friendship = Friends.query.get(request_id)
+       print (selected_friendship)
+       selected_friendship.request_status = request_status
+    #    relationship=selected_friendship.serialized()
+    #    print(relationship)
+       db.session.commit()
+           
+
+
+   def friend_request(friend_id, uid, request_status):
+        pending_friendship_existing = Friends.query.filter_by(uid=uid, friend_id=friend_id).first()
+        if  pending_friendship_existing:
+            return None
+        else: 
+            add_pending_friendship= Friends(uid=uid,  friend_id=friend_id, request_status=request_status)
+            db.session.add(add_pending_friendship)
+            db.session.commit()
+           
+   def serialize(self):
+        return {
+            "id": self.id,
+            "uid": self.uid,
+            "friend_id": self.friend_id,
+            "request_status":self.request_status
+        }
+
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)

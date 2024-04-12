@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, TrackGenre, Event, Playlist, PlaylistSongs, TrackTopSongs,TrackTopArtists
+from api.models import db, User, TrackGenre, Event, Playlist, PlaylistSongs, TrackTopSongs,TrackTopArtists,Friends
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token
@@ -152,3 +152,26 @@ def handle_artit_song():
     sent_info = request.json
     TrackTopArtists.track_top_artists(sent_info['artist_id'], sent_info['uid'])
     return jsonify('Tracked Artist'), 200
+
+
+
+
+@api.route('send/friendrequest', methods=['POST'])
+def send_friend_request():
+    sent_info = request.json
+    Friends.friend_request(sent_info['uid'], sent_info['friend_id'],sent_info['request_status'])
+    return jsonify('Request Sent'), 200
+#
+@api.route('pending/friendrequest/<uid>', methods=['GET'])
+def look_at_friend_request(uid):
+    check_request = Friends.query.filter_by(friend_id=uid).all()
+    serial = list(map(lambda x: x.serialize(), check_request))
+    return jsonify(serial), 200
+
+
+# also unfollow by sending not friends
+@api.route('/accept/friendrequest', methods=['POST']) 
+def accept_friend_request():
+    sent_info = request.json
+    Friends.accept_request(sent_info['id'],sent_info['request_status'])
+    return jsonify('Now friends'), 200

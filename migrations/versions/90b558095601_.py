@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 1da88009b3bb
+Revision ID: 90b558095601
 Revises: 
-Create Date: 2024-04-12 14:59:31.907479
+Create Date: 2024-04-12 18:36:54.317231
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '1da88009b3bb'
+revision = '90b558095601'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -38,6 +38,14 @@ def upgrade():
     sa.Column('uid', sa.Integer(), nullable=True),
     sa.Column('event_id', sa.Integer(), nullable=True),
     sa.Column('date', sa.String(length=120), nullable=True),
+    sa.ForeignKeyConstraint(['uid'], ['user.uid'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('friends',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('uid', sa.Integer(), nullable=True),
+    sa.Column('friend_id', sa.Integer(), nullable=True),
+    sa.Column('request_status', sa.String(length=200), nullable=True),
     sa.ForeignKeyConstraint(['uid'], ['user.uid'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -119,6 +127,7 @@ def downgrade():
     op.drop_table('post')
     op.drop_table('playlist')
     op.drop_table('inbox')
+    op.drop_table('friends')
     op.drop_table('event')
     op.drop_table('user')
     # ### end Alembic commands ###
