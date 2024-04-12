@@ -1,12 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
+
+
 .container.bg-black {
     width: 100%; /* Set the width to 100% */
 }
  
 body {
-   
+   font-family: "Open Sans", sans-serif!important;
     background-image: linear-gradient(to right bottom, #800000, #6b000e, #550514, #3e0a15, #270b11, #1e080d, #130407, #000000, #000000, #000000, #000000, #000000);
     background-size: cover;
     color:white;
