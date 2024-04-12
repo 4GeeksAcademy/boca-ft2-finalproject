@@ -22,6 +22,7 @@ export const ProfilePage = () => {
     const [events, setEvents] = useState([
         { name: "Fun event", date: "140923" },
         { name: "Kinda fun event", date: "140205" },
+        { name: "Very fun event", date: "240622" },
         { name: "Very fun event", date: "240622" }
     ])
 
@@ -63,7 +64,7 @@ box-sizing: border-box;`
                 </div>
             </div>
 
-            <nav className="mx-auto" style={{ maxWidth: "80vw" }}>
+            <nav className="mx-auto" style={{ maxWidth: "80vw", display: 'flex', justifyContent: 'center' }}>
                 <div className="nav nav-tabs" id="nav-tab" role="tablist">
                     <button className="nav-link active" id="top-tracks-tab" data-bs-toggle="tab" data-bs-target="#top-tracks" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Top Tracks</button>
 
@@ -78,17 +79,34 @@ box-sizing: border-box;`
             </nav>
 
             <div className="tab-content mx-auto" id="nav-tabContent" style={
-                { maxWidth: "80vw" }
+                { maxWidth: "800vw" }
             }>
 
                 <div className="tab-pane fade show active" id="top-tracks" role="tabpanel" aria-labelledby="top-tracks-tab" tabIndex="0">
                     <h4>Top Tracks This Month:</h4>
                     <div id="top-track-list text-center">
-                        {topSongs.map(song => <div className="mx-auto my-2 shadow song-card" style={{ width: "80vw", textAlign: 'left' }}>
+                        <table className="table table-dark blurbg">
+                            <thead>
+                                <tr>
+                                    <td>Song Name</td>
+                                    <td>Artist</td>
+                                    <td>Album</td>
+                                    <td>Duration</td>
+                                    <td>Play</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {topSongs.map(song => <tr className="mx-auto my-2 shadow song-card" style={{ width: "80vw", textAlign: 'left' }}>
 
-                            {/* <img src="https://e7.pngegg.com/pngimages/383/640/png-clipart-infant-child-jesus-baby-child-baby-thumbnail.png" style={{ maxHeight: "48px" }} /> */}
-                            <span style={{ fontWeight: "900", fontVariant: "small-caps" }} >&nbsp; {song.title.toLowerCase()}</span>   <span><i className="far fa-play-circle"></i></span> <br /> <span style={{ color: '#ebebeb' }} >&nbsp;     {song.artist}</span>
-                        </div>)}
+                                    {/* <img src="https://e7.pngegg.com/pngimages/383/640/png-clipart-infant-child-jesus-baby-child-baby-thumbnail.png" style={{ maxHeight: "48px" }} /> */}
+                                    <td className="blurbg songtablerow" style={{ fontWeight: "900", fontVariant: "small-caps" }} >&nbsp; {song.title.toLowerCase()}</td>
+                                    <td className="blurbg songtablerow" style={{ color: '#ebebeb' }} >&nbsp;     {song.artist}</td>
+                                    <td className="blurbg songtablerow">The Album</td>
+                                    <td className="blurbg songtablerow">3:00</td>
+                                    <td className="blurbg songtablerow"><i className="far fa-play-circle"></i></td>
+                                </tr>)}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 

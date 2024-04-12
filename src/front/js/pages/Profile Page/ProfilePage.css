@@ -11,21 +11,7 @@
     border-color: white;
 }
 
-faveartists {
 
-        display: inline-block;
-        width: 200px;
-        border-radius: 4px;
-        padding: 16px;
-        overflow: hidden;
-        background-color:  white;
-        transition: background-color 0.4s;
-        cursor: pointer;
-        margin-bottom: 2rem;
-      }
-      .card:hover {
-        background-color: #e4e1e1;
-      }
       
       .cover {
         position: relative;
@@ -94,8 +80,14 @@ faveartists {
 .blurbg {
   backdrop-filter: blur(15px)!important;
   background-color:  rgba(255, 255, 255, 0.05)!important;
+  border: none!important;
   
 }
+.songtablerow  {
+  width:25%;
+  text-align: center;
+}
+
   .card {
     display: inline-block;
     width: 200px;
