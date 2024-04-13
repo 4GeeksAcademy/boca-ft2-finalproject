@@ -93,7 +93,7 @@ export const SideNav = () => {
                                 </a>
                             </li>
                             <li>
-                                <button href="#" className="btn btn-danger" onClick={() => sessionStorage.clear('token')} >
+                                <button href="#" className="btn btn-danger" onClick={() => {sessionStorage.clear('token'), navigate(`/`)}} >
                                     <span className="icon">
                 
                                     </span>
@@ -101,7 +101,7 @@ export const SideNav = () => {
                                 </button>
                             </li>
                             <li>
-                                <a href="#" className={location.pathname == '/myaccount' ? `nav-link active` : 'nav-link'} onClick={() => navigate("/myaccount")} >
+                                <a href="#" className={location.pathname == '/profile/myaccount' ? `nav-link active` : 'nav-link'} onClick={() =>{ navigate(`/profile/myaccount`)}} >
                                     <img className="icon rounded-circle" src="https://avatars.githubusercontent.com/u/1743919?v=4" alt="Profile icon" />
                                     Profile
                                 </a>

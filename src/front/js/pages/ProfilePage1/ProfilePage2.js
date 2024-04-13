@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../../store/appContext";
 import { useLocation } from "react-router-dom";
 
-export const FriendProfile = () => {
+export const ProfilePage1 = () => {
     const { store, actions } = useContext(Context);
     let location = useLocation();
     const data = location.state;
@@ -72,7 +72,7 @@ export const FriendProfile = () => {
 
     if (loading) {
         return (
-            <div className="spinner-border" style={{width: "3rem",height: "3rem"}} role="status">
+            <div className="spinner-border" style={{ width: "3rem", height: "3rem" }} role="status">
                 <span className="visually-hidden">Loading...</span>
             </div>
         )

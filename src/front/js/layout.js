@@ -13,11 +13,10 @@ import { Home } from "./pages/Home/Home.jsx";
 import { SideNav } from "./component/Side Nav/SideNav.jsx";
 import { Post } from "./pages/Post/Post";
 import { Discover } from "./pages/Discover/Discover";
-import { MyAccount } from "./pages/My Account/MyAccount.js";
 import { Inbox } from "./pages/Inbox/Inbox.js";
+
 //Sub Views
-import { FriendPlaylist } from "./pages/FriendsContent/FriendPlaylist.js";
-import { FriendProfile } from "./pages/FriendsContent/FriendProfile.js";
+
 import { AlbumSearch } from "./pages/Spotify Views/Search Views/AlbumSearch.jsx";
 import { ArtistSearch } from "./pages/Spotify Views/Search Views/ArtistSearch.jsx";
 import { SongSearch } from "./pages/Spotify Views/Search Views/SongSearch.jsx";
@@ -27,6 +26,7 @@ import { AlbumPage } from "./pages/Album Page/AlbumPage.js";
 import { SongDetailPage } from "./pages/Spotify Views/Song Views/SongDetail.jsx";
 import { SpotifyPlayBar } from "./component/spotifyplay.jsx";
 import { UserSearch } from "./pages/Spotify Views/Search Views/UserSearch.jsx";
+import ProfilePage from "./pages/Profile Page/ProfilePage.js";
 //create your first component
 import { useContext } from "react";
 import { Context } from "./store/appContext";
@@ -54,7 +54,6 @@ const Layout = () => {
 
                         <Route element={<Post />} path="/post" />
                         <Route element={<Discover />} path="/discover" />
-                        <Route element={<MyAccount />} path="/myaccount" />
 
                         <Route element={<Inbox />} path="/inbox" />
                         <Route element={<ArtistSearch />} path="/search/artist" />
@@ -69,8 +68,8 @@ const Layout = () => {
                         <Route element={<AlbumPage />} path="/album/:ind" />
                         <Route element={<SongDetailPage />} path="/song/:ind" />
 
-                        <Route element={<FriendPlaylist />} path="/search/friendplaylist" />
-                        <Route element={<FriendProfile />} path="/profile/:ind" />
+                    
+                        <Route element={<ProfilePage />} path="/profile/:ind" />
 
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
