@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../../store/appContext";
 import { useLocation } from "react-router-dom";
 
-export const FriendProfile = () => {
+export const ProfilePage1 = () => {
     const { store, actions } = useContext(Context);
     let location = useLocation();
     const data = location.state;
