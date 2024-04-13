@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, TrackGenre, Event, Playlist, PlaylistSongs, TrackTopSongs,TrackTopArtists,Friends
+from api.models import db, User, TrackGenre, Event, Playlist, TrackTopSongs,TrackTopArtists,Friends,SongsInPlaylist
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token
@@ -175,3 +175,23 @@ def accept_friend_request():
     sent_info = request.json
     Friends.accept_request(sent_info['id'],sent_info['request_status'])
     return jsonify('Now friends'), 200
+
+#RETURNS USER PLAYLIST FOR ONE FETCH PURPOSE
+@api.route('/new/playlist', methods=['POST']) 
+def make_new_playlist():
+    sent_info = request.json
+    Playlist.make_new_playlist(sent_info['playlist_name'],sent_info['uid'])
+    if sent_info['song_id']:
+        SongsInPlaylist.new_song_to_playlist(sent_info['playlist_id'],sent_info['song_id'])
+
+    all_user_playlist=Playlist.query.filter_by(uid=sent_info['uid']).all()
+    serial = list(map(lambda x: x.serialize(), all_user_playlist))    
+    
+    return jsonify(serial), 200
+
+@api.route('/addsong/playlist', methods=['POST']) 
+def add_new_song():
+    sent_info = request.json
+    SongsInPlaylist.new_song_to_playlist(sent_info['playlist_id'],sent_info['song_id'])
+    return "song added", 200
+

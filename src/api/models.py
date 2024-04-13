@@ -56,33 +56,63 @@ class Event(db.Model):
             "event_id": self.event_id,
             "date": self.date
         }
+    
+
+
+
 
 class Playlist(db.Model):
-    pid = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     uid = db.Column(db.Integer, db.ForeignKey(User.uid))
     playlist_name = db.Column(db.String(120), nullable=False)
-    top_three = db.Column(db.String(120), nullable=True)
+    song_id=db.relationship('SongsInPlaylist', backref='playlist', lazy=True)
 
     def serialize(self):
         return {
-            "pid": self.pid,
+            "id": self.id,
             "uid": self.uid,
             "playlist_name": self.playlist_name,
-            "top_three": self.top_three
         }
 
-class PlaylistSongs(db.Model):
-    psid = db.Column(db.Integer, primary_key=True)
-    pid = db.Column(db.Integer, db.ForeignKey(Playlist.pid))
-    song_id = db.Column(db.String(250))
-    #many-to-many so users can add other users playlists
+    def make_new_playlist(playlist_name,uid):
+        adding_new_playlist = Playlist(uid=uid, playlist_name=playlist_name)
+        db.session.add(adding_new_playlist)
+        db.session.commit()
     
+    
+    def delete_playlist(id):
+        delete_playlist = Playlist.query.get(id)
+        db.session.delete(delete_playlist)
+        db.session.commit()
+    
+    
+
+
+class SongsInPlaylist(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    playlist_id = db.Column(db.Integer,db.ForeignKey(Playlist.id))
+    song_id = db.Column(db.String(250))
+
     def serialize(self):
-        return {
-            "psid": self.psid,
-            "pid": self.pid,
-            "song_id": self.song_id
+        return{
+            "id":self.id,
+            "playlist_id":self.playlist_id,
+            "song_id":self.song_id
         }
+
+    def new_song_to_playlist(playlist_id,song_id):
+        adding_new_song = SongsInPlaylist(playlist_id=playlist_id, song_id=song_id)
+        db.session.add(adding_new_song)
+        db.session.commit()
+    
+    
+    def delete_song_from_playlist(id):
+        delete_song = SongsInPlaylist.query.get(id)
+        db.session.delete(delete_song)
+        db.session.commit()
+    
+    
+
 class Friends(db.Model):
    id = db.Column(db.Integer, primary_key=True)
    uid = db.Column(db.Integer,db.ForeignKey(User.uid))
@@ -91,7 +121,6 @@ class Friends(db.Model):
 
    def accept_request(request_id,request_status):
        selected_friendship = Friends.query.get(request_id)
-       print (selected_friendship)
        selected_friendship.request_status = request_status
     #    relationship=selected_friendship.serialized()
     #    print(relationship)
