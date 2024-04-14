@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+
 .landbg{
     width: 100%;
     height: 1000px;
@@ -25,7 +27,10 @@
    mix-blend-mode: difference;
  }
  
- 
+ .audiofont { 
+  font-family: "Audiowide", sans-serif!important;
+ }
+
  .container_redkorn {
    background-image: url("../../../img/trumpets.jpg");
    background-position: center;
