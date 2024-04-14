@@ -23,7 +23,7 @@ export const Landingpage = () => {
 				</h3>
 				<div style={{ display: 'flex', justifyContent: 'center' }}>
 
-					<p style={{ width: '70%' }}>Welcome to RhythmRealm, where gritty meets groovy and all musical genres unite! Dive into a world of music discovery, playlist creation, and concert connections. Embrace the grunge, rock on, and explore everything from jazz and classical to rap and heavy metal. Connect, discover, and create playlists that reflect your unique taste. Join us and embrace the full spectrum of music!</p>
+					<p style={{ width: '70%' }}>Welcome to RhythmRealm, where gritty meets groovy, and all musical genres unite! Dive into a world of music discovery, playlist creation, and concert connections. Explore everything from jazz and classical to rap and heavy metal. Connect, discover, and create playlists that reflect your unique taste. Join us and embrace the full spectrum of music. As always - ROCK ON!</p>
 				</div>
 
 			</div>
