@@ -31,7 +31,7 @@ export const Searchpage = () => {
 							<button type="button" className={`btn btn-outline-dark button-rounded ${location.pathname == '/search/song' && 'active'}`} onClick={() => navigate("/search/song")}>Songs</button>
 							<button type="button" className={`btn btn-outline-dark button-rounded ${location.pathname == '/search/album' && 'active'}`} onClick={() => navigate("/search/album")}>Album</button>
 							<button type="button" className="btn btn-outline-dark button-rounded">Playlist</button>
-							<button type="button" className={`btn btn-outline-dark button-rounded ${location.pathname == '/search/user' && 'active'}`} onClick={() => navigate("/search/user")}>Album</button>
+							<button type="button" className={`btn btn-outline-dark button-rounded ${location.pathname == '/search/user' && 'active'}`} onClick={() => navigate("/search/user")}>Music Lovers</button>
 						</div>
 
 					</div>
