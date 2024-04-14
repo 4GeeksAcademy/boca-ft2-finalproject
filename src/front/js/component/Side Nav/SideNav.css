@@ -1,14 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
 :root {
     --ig-separator: 219, 219, 219;
   }
   
   body {
-    font-family: Roboto, serif;
+    
+    color: red;
+    text-align: center;
+    font-family: "Audiowide", sans-serif;
   }
   
   .sidebar {
     width: 10%;
-    background-color: #8f8b8b9a;
+    /* background-color: #8f8b8b9a; */
     /* mix-blend-mode:normal; */
     padding-top: 35px;
     position: fixed;
@@ -16,23 +20,24 @@
     top: 0;
     left: 0;
     z-index: 999;
-    border-right: 1px solid rgb(var(--ig-separator));
+    /* border-right: 1px solid rgb(var(--ig-separator)); */
     display: flex;
     flex-direction: column;
+    font-family:  "Audiowide", sans-serif;
   }
   
-  .logo-wrapper {
+  /* .logo-wrapper {
     width: 100%;
     padding: 5px 25px;
     margin-bottom: 20px;
-  }
+  } */
   
-  .logo-wrapper img {
+  /* .logo-wrapper img {
     width: 105px;
-  }
+  } */
   
   .sidebar-menu {
-    font-size: 1rem;
+    /* font-size: 3rem; */
     list-style-type: none;
     padding: 0 12px 20px 8px;
     margin: 0;
@@ -46,36 +51,39 @@
     margin-bottom: 40px;
   }
   
-  .sidebar-menu li {
+  .sidebar-menu li :not(.logo) {
     /*margin-bottom: 10px;*/
+    text-orientation: sideways-right; 
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
   }
   
-  .sidebar-menu li a.nav-link {
+  .sidebar-menu li a.nav-link { /* This is the class that is being used in the SideNav.js file FONTCOLOR*/
     border-radius: 10px;
     padding: 16px 15px;
-    color: #333333;
+    color: #fffbfb;
     text-decoration: none;
     display: flex;
     align-items: center;
   }
   
-  .sidebar-menu li a.nav-link.active {
+  /* .sidebar-menu li a.nav-link.active {
     font-weight: bold;
     transform: scale(1.08);
     background-color: #e4e1e1;
     margin: 9px;
-  }
+  } */
   
-  .sidebar-menu li a.nav-link.active img.icon {
+  /* .sidebar-menu li a.nav-link.active img.icon {
     color: 2px solid black;
-  }
+  } */
   
-  .sidebar-menu li a.nav-link .icon {
+  /* .sidebar-menu li a.nav-link .icon {
     margin-right: 15px;
     width: 24px;
     height: 24px;
     transition: all 0.2s ease-in-out;
-  }
+  } */
   
   .sidebar-menu li a.nav-link:hover {
     background-color: #f5f5f5;
@@ -85,7 +93,7 @@
     transform: scale(1.08);
   }
   
-  .rounded-circle {
+  /* .rounded-circle {
     border-radius: 100%;
-  }
+  } */
   

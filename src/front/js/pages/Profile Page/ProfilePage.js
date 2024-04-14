@@ -179,7 +179,7 @@ export const ProfilePage = () => {
                         </div>
                         <div class="upcoming-events mx-3" style={{ border: "0.5px solid lightgray", width: "45vw" }}>
                             <p className="text-start">Upcoming Events</p>
-                            <div>
+                            <div className="d-flex">
                                 {events.filter(event => event.date > "240410").map(event => (<div class="card border-light m-2 shadow" style={{ maxWidth: "14rem" }}>
                                     <div class="card-header">{event.date}</div>
                                     <div class="card-body">
