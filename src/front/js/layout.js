@@ -68,7 +68,7 @@ const Layout = () => {
                         <Route element={<AlbumPage />} path="/album/:ind" />
                         <Route element={<SongDetailPage />} path="/song/:ind" />
 
-                    
+
                         <Route element={<ProfilePage />} path="/profile/:ind" />
 
                         <Route element={<h1>Not found!</h1>} />

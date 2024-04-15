@@ -19,8 +19,8 @@ export default function Concert() {
     const getEventInfo = () => {
         if (userInfo.event_id) {
             fetch(`https://api.seatgeek.com/2/events/${userInfo.events[0].event_id}?client_id=NDA2MzQ2Njd8MTcxMTYzODE0OS4xNjkyMzc2`)
-            .then(resp => resp.json())
-            .then(data => setEventInfo(data))
+                .then(resp => resp.json())
+                .then(data => setEventInfo(data))
         }
     }
 
