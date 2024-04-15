@@ -36,12 +36,7 @@ export const SideNav = () => {
                                     DISCOVER
                                 </a>
                             </li>
-
-
-
-
-
-                            <li>
+                           <li>
                                 <a href="#" className={location.pathname.includes('search') ? `nav-link active` : 'nav-link'} onClick={() => navigate("/search/artist")} >
 
                                     SEARCH
