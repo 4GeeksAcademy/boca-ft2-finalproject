@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 
 
-const PlaylistDropdown = () => {
+const PlaylistDropdown = (props) => {
 
     const [playlists, setPlaylists] = useState([
         { uid: 1, title: "Fun playlist", songs: [] },
@@ -13,7 +13,16 @@ const PlaylistDropdown = () => {
     const [searchTitle, setSearchTitle] = useState("");
 
     const addPlaylist = () => {
-        setPlaylists([...playlists, { uid: playlists.length + 1, title: searchTitle }]);
+        fetch(process.env.BACKEND_URL + "/new/playlist", {
+            method: 'POST',
+            body: JSON.stringify({
+                playlist_name: searchTitle, uid: props.user_id, song_id: props.song_id
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then()
         setSearchTitle("");
     }
 

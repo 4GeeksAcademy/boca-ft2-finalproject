@@ -56,10 +56,6 @@ class Event(db.Model):
             "event_id": self.event_id,
             "date": self.date
         }
-    
-
-
-
 
 class Playlist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -79,15 +75,12 @@ class Playlist(db.Model):
         db.session.add(adding_new_playlist)
         db.session.commit()
     
-    
     def delete_playlist(id):
         delete_playlist = Playlist.query.get(id)
         db.session.delete(delete_playlist)
         db.session.commit()
     
     
-
-
 class SongsInPlaylist(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     playlist_id = db.Column(db.Integer,db.ForeignKey(Playlist.id))
