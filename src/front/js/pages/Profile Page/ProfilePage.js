@@ -85,7 +85,11 @@ export const ProfilePage = () => {
         )
     }
 
+    const sendFollowRequest = ()=>{
+        
 
+    }
+    
     return (
         <div className="text-center" style={{ color: 'white' }}>
 
@@ -110,7 +114,7 @@ export const ProfilePage = () => {
                                 {genres.map(genre => (<><br /> <span className="badge rounded-pill text-bg-danger">{genre.genre}</span></>))}
                             </div>
                             <div>
-                                <button className="btn btn-primary">Follow</button>
+                                <button className="btn btn-primary" onClick={()=>{}}>Follow</button>
                             </div>
                         </div>
                     </div>
