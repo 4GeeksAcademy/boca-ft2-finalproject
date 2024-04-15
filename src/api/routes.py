@@ -189,22 +189,39 @@ def accept_friend_request():
     Friends.accept_request(sent_info['id'],sent_info['request_status'])
     return jsonify('Now friends'), 200
 
+#fetches all playlists for current user
+@api.route('/get/playlists/<int:uid>', methods=['GET']) 
+def get_playlist(uid):
+    all_user_playlist=Playlist.query.filter_by(uid=uid).all()
+    serial = list(map(lambda x: x.serialize(), all_user_playlist))    
+    #returns all playlists for current user  
+    return jsonify(serial), 200
+
 #RETURNS USER PLAYLIST FOR ONE FETCH PURPOSE
 @api.route('/new/playlist', methods=['POST']) 
 def make_new_playlist():
     sent_info = request.json
-    Playlist.make_new_playlist(sent_info['playlist_name'],sent_info['uid'])
+    new_playlist = Playlist(uid=sent_info['uid'], playlist_name=sent_info['playlist_name'])
+    db.session.add(new_playlist)
+    db.session.commit()
+
+    get_new_playlist=Playlist.query.filter_by(playlist_name=sent_info['playlist_name']).first()
+
     if sent_info['song_id']:
-        SongsInPlaylist.new_song_to_playlist(sent_info['playlist_id'],sent_info['song_id'])
+        SongsInPlaylist.new_song_to_playlist(get_new_playlist.id, sent_info['song_id'], sent_info['song_title'])
 
     all_user_playlist=Playlist.query.filter_by(uid=sent_info['uid']).all()
     serial = list(map(lambda x: x.serialize(), all_user_playlist))    
-    
+    #returns all playlists for current user  
     return jsonify(serial), 200
 
 @api.route('/addsong/playlist', methods=['POST']) 
 def add_new_song():
     sent_info = request.json
-    SongsInPlaylist.new_song_to_playlist(sent_info['playlist_id'],sent_info['song_id'])
-    return "song added", 200
+    SongsInPlaylist.new_song_to_playlist(sent_info['playlist_id'], sent_info['song_id'], sent_info['song_title'])
+    
+    all_user_playlist=Playlist.query.filter_by(uid=sent_info['uid']).all()
+    serial = list(map(lambda x: x.serialize(), all_user_playlist))    
+    #returns all playlists for current user  
+    return jsonify(serial), 200
 

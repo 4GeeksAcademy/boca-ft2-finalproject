@@ -10,13 +10,12 @@ export const SongDetailPage = () => {
     let location = useLocation();
     const data = location.state
     const { store, actions } = useContext(Context);
+
     const [song, setSong] = useState([]);
     const [songPlaying, setSongPlaying] = useState('')
     const navigate = useNavigate();
 
     //Fetches for diffrent data
-
-
 
     const getSongSpotify = () => {
         const opts = {
@@ -69,7 +68,11 @@ export const SongDetailPage = () => {
                                     <td>{(trackData.duration_ms / 1000) / 60}</td>
                                     <div>
                                         <td className="btn btn-success" onClick={() => actions.setPlayingSongUri(trackData.uri, trackData.artists[0].id, trackData.id)}></td>
-                                        <PlaylistDropdown />
+                                        <PlaylistDropdown
+                                            song_id={trackData.id}
+                                            user_id={sessionStorage.getItem('uid')}
+                                            song_title={trackData.name}
+                                        />
                                     </div>
 
                                 </tr>
@@ -78,8 +81,6 @@ export const SongDetailPage = () => {
                     })
                 }
             </table>
-
         </>
-
     );
 };
