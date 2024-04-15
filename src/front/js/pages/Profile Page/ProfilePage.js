@@ -86,7 +86,19 @@ export const ProfilePage = () => {
     }
 
     const sendFollowRequest = () => {
+        fetch((process.env.BACKEND_URL + '/send/friendrequest'), {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "uid": store.user.uid,
+                "song_id": songID
+            })
 
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
 
     }
 
