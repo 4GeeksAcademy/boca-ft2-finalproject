@@ -197,30 +197,9 @@ export const ProfilePage = () => {
 
                             </tbody>
                         </table>
-                        <table className="table table-dark blurbg">
-                            <thead>
-                                <tr>
-                                    <td>Username</td>
-                                    <td>Zipcode</td>
-                                    <td>Link to Profile</td>
-                                    <td> box </td>
-                                    <td> box </td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {/* {topSongs.map(song => <tr className="mx-auto my-2 shadow song-card" style={{ width: "80vw", textAlign: 'left' }}> */}
 
-                                {/* <img src="https://e7.pngegg.com/pngimages/383/640/png-clipart-infant-child-jesus-baby-child-baby-thumbnail.png" style={{ maxHeight: "48px" }} /> */}
-                                <td className="blurbg songtablerow" style={{ fontWeight: "900", fontVariant: "small-caps" }} >&nbsp; {username.toLowerCase()}</td>
-                                <td className="blurbg songtablerow" style={{ color: '#ebebeb' }} >{song.artists[0].name}</td>
-                                <td className="blurbg songtablerow">Zipcode</td>
-                                <td className="blurbg songtablerow">Link to Profile</td>
-                                <td className="blurbg songtablerow"> box </td>
-                                <td className="blurbg songtablerow"> box</td>
-                                <td className="blurbg songtablerow"><i className="far fa-play-circle"></i></td>
 
-                            </tbody>
-                        </table>
+
                     </div>
                 </div>
 
