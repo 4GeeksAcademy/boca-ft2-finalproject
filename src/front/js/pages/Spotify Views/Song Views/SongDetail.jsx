@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Navigate, useNavigate, useLocation } from "react-router-dom"
 import { Context } from "../../../store/appContext";
 import SpotifyPlayer from 'react-spotify-web-playback';
+import PlaylistDropdown from "../../../component/AddToPlaylist/PlaylistDropdown";
 
 export const SongDetailPage = () => {
 
@@ -66,7 +67,10 @@ export const SongDetailPage = () => {
                                     <td>{trackData.name}</td>
                                     <td>{trackData.artists[0].name}</td>
                                     <td>{(trackData.duration_ms / 1000) / 60}</td>
-                                    <td className="btn btn-success" onClick={() => actions.setPlayingSongUri(trackData.uri, trackData.artists[0].id, trackData.id)}></td>
+                                    <div>
+                                        <td className="btn btn-success" onClick={() => actions.setPlayingSongUri(trackData.uri, trackData.artists[0].id, trackData.id)}></td>
+                                        <PlaylistDropdown />
+                                    </div>
 
                                 </tr>
                             </tbody>
