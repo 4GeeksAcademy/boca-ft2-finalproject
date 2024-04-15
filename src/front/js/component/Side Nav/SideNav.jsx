@@ -21,7 +21,7 @@ export const SideNav = () => {
                         <ul className="sidebar-menu">
                             <li className="logo" style={{ transform: 'rotate(-180deg)' }}>
 
-                                <img src={logo} style={{ height: "auto", width: "170px", marginRight: '15%', padding: '0px' }} onClick={() => navigate('/')} alt="" />
+                                <img src={logo} style={{ height: "auto", width: "170px", marginRight: '55px', marginLeft: '0px', padding: '0px' }} onClick={() => navigate('/')} alt="" />
                                 {/* <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide"></link> */}
 
                             </li>
