@@ -78,7 +78,7 @@ export const SideNav = () => {
                                 </a>
                             </li>
                             <li>
-                                <a href="#" className="nav-link" style={{ color: 'red' }} onClick={() => sessionStorage.clear('token')} >
+                                <a href="#" className="nav-link" style={{ color: 'red' }} onClick={() => { sessionStorage.clear('token'); navigate('/') }} >
 
                                     LOGOUT
                                 </a>
