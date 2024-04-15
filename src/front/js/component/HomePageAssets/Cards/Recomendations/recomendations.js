@@ -25,15 +25,17 @@ export default function Recomendations() {
     useEffect(() => { if (userInfo) { getRecomendations() } }, [userInfo])
 
     const getRecomendations = () => {
-        const opts = {
-            method: 'GET',
-            headers: {
-                "Authorization": `Bearer ${store.spotifyToken}`
-            },
+        if (userInfo.artists.length != 0) {
+            const opts = {
+                method: 'GET',
+                headers: {
+                    "Authorization": `Bearer ${store.spotifyToken}`
+                },
+            }
+            fetch(`https://api.spotify.com/v1/recommendations?market=US&seed_artists=${userInfo.artists[0].artist_id}&limit=3`, opts)
+                .then(resp => resp.json())
+                .then(data => setRecomendations(data))
         }
-        fetch(`https://api.spotify.com/v1/recommendations?market=US&seed_artists=${userInfo.artists[0].artist_id}&limit=3`, opts)
-            .then(resp => resp.json())
-            .then(data => setRecomendations(data))
     }
 
     return (

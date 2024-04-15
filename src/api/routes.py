@@ -69,7 +69,7 @@ def handle_get_profile(uid):
         user_serial = get_user.serialize()
         top_artists = TrackTopArtists.query.filter_by(uid=uid).order_by(TrackTopArtists.count.desc()).limit(3).all()
         top_genres = TrackGenre.query.filter_by(uid=uid).order_by(TrackGenre.count.desc()).limit(3).all()
-        top_songs = TrackTopSongs.query.filter_by(uid=uid).order_by(TrackTopSongs.count.desc()).limit(3).all()
+        top_songs = TrackTopSongs.query.filter_by(uid=uid).order_by(TrackTopSongs.count.desc()).limit(3).all()    
         list_artists = list(map(lambda x: x.serialize(), top_artists))
         list_genres = list(map(lambda x: x.serialize(), top_genres))
         list_songs = list(map(lambda x: x.serialize(), top_songs))
