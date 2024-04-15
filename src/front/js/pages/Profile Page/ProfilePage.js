@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { Context } from "../../store/appContext";
 import { useLocation } from "react-router-dom";
 import './ProfilePage.css'
@@ -8,6 +9,7 @@ export const ProfilePage = () => {
     const { store, actions } = useContext(Context);
     let location = useLocation();
     const data = location.state;
+    const navigate = useNavigate()
 
     const [loading, setLoading] = useState(true);
     const [genres, setGenres] = useState([]);
@@ -15,6 +17,9 @@ export const ProfilePage = () => {
     const [faveArtists, setFaveArtists] = useState([]);
     const [events, setEvents] = useState([]);
     const [userPageData, setUserPage] = useState(null);
+    const [friends, setFriends] = useState([]);
+    const [currentUserFriend,setCurrentUserFriend] = useState(false);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -24,8 +29,9 @@ export const ProfilePage = () => {
                 } else {
                     var response = await fetch(process.env.BACKEND_URL + `/getprofile/${data.userData.uid}`);
                 }
-
                 const responseData = await response.json();
+
+
 
                 // Fetch events data
                 const eventsData = await Promise.all(responseData.events.map(async (element) => {
@@ -62,12 +68,14 @@ export const ProfilePage = () => {
                     return songResponse.json();
                 }));
 
+                setFriends(responseData.friends)
                 setEvents(eventsData);
                 setFaveArtists(artistsData);
                 setGenres(responseData.genres);
                 setUserPage(responseData.user);
                 setTopSongs(songsData);
                 setLoading(false);
+
             } catch (error) {
                 console.error('Fetch error:', error);
                 // Optionally, handle the error by updating the UI to inform the user
@@ -75,7 +83,14 @@ export const ProfilePage = () => {
         };
 
         fetchData();
-    }, [,store.spotifyToken]);
+    }, [, store.spotifyToken]);
+
+    useEffect(() => {
+        var testarray = friends.filter(relationship => relationship.friend_id == sessionStorage.getItem('uid') && relationship.request_status == 'friend')
+        if (testarray.length){
+            setCurrentUserFriend(true)
+        }
+    }, [friends])
 
     if (loading) {
         return (
@@ -89,7 +104,7 @@ export const ProfilePage = () => {
         fetch((process.env.BACKEND_URL + '/send/friendrequest'), {
             method: 'POST',
             headers: {
-            "Content-Type": "application/json"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 "uid": store.user.uid,
@@ -118,15 +133,15 @@ export const ProfilePage = () => {
                     <div className="col-md-8 text-start" style={{ color: 'white' }}>
                         <div className="card-body">
                             <div className="d-flex">
-                                <h5 className="card-title">Kermit D. Frogg</h5>
+                                <h5 className="card-title">{userPageData.first_name}&nbsp;{userPageData.last_name}</h5>
                             </div>
-                            <p className="card-text">Lilly Pond Lane</p>
+                            <p className="card-text">{userPageData.username}</p>
                             <p className="card-text"><small className="text-body-secondary">Top Genres</small></p>
                             <div>
                                 {genres.map(genre => (<><br /> <span className="badge rounded-pill text-bg-danger">{genre.genre}</span></>))}
                             </div>
                             <div>
-                                <button className="btn btn-primary" onClick={() => { }}>Follow</button>
+                                {currentUserFriend ? <button className="btn btn-success" onClick={() => { }}>Following</button> : <button className="btn btn-primary" onClick={() => { }}>Follow</button>}
                             </div>
                         </div>
                     </div>
