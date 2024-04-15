@@ -162,7 +162,11 @@ def handle_artit_song():
     TrackTopArtists.track_top_artists(sent_info['artist_id'], sent_info['uid'])
     return jsonify('Tracked Artist'), 200
 
-
+@api.route('getfriends/<uid>', methods=['GET'])
+def get_friend(uid):
+    get_friends=Friends.query.filter_by(uid = uid,request_status="friend").all()
+    list_users = list(map(lambda x: x.serialize(), get_friends))
+    return jsonify(list_users), 200
 
 
 @api.route('send/friendrequest', methods=['POST'])
