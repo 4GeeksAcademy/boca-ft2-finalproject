@@ -45,7 +45,8 @@ def handle_get_token():
     if exists:
         if sent_info['password'] == exists.password:
             access_token = create_access_token(identity=username)
-            return jsonify(access_token=access_token), 200
+            logged_in_as = exists.serialize()
+            return jsonify(access_token=access_token, user=logged_in_as), 200
         else: 
             return jsonify({"msg": "Username or Password is incorrect."}), 401
     else: 
@@ -68,13 +69,15 @@ def handle_get_profile(uid):
         user_serial = get_user.serialize()
         top_artists = TrackTopArtists.query.filter_by(uid=uid).order_by(TrackTopArtists.count.desc()).limit(3).all()
         top_genres = TrackGenre.query.filter_by(uid=uid).order_by(TrackGenre.count.desc()).limit(3).all()
-        top_songs = TrackTopSongs.query.filter_by(uid=uid).order_by(TrackTopSongs.count.desc()).limit(3).all()
+        top_songs = TrackTopSongs.query.filter_by(uid=uid).order_by(TrackTopSongs.count.desc()).limit(3).all()    
         list_artists = list(map(lambda x: x.serialize(), top_artists))
         list_genres = list(map(lambda x: x.serialize(), top_genres))
         list_songs = list(map(lambda x: x.serialize(), top_songs))
         events = Event.query.filter_by(uid=uid)
         list_events = list(map(lambda x: x.serialize(), events))
-        return jsonify(user = user_serial, artists = list_artists, genres = list_genres, songs = list_songs, events = list_events), 200
+        playlists = Playlist.query.filter_by(uid=uid)
+        list_playlists = list(map(lambda x: x.serialize(), playlists))
+        return jsonify(user = user_serial, artists = list_artists, genres = list_genres, songs = list_songs, events = list_events, playlists = list_playlists), 200
     else:
         return jsonify('User does not exist'), 404
 
@@ -125,12 +128,16 @@ def handle_user_search():
 @api.route('/trackupcomingconcerts', methods=['POST'])
 def handle_track_concert():
     recieved = request.json
-    new_event = Event(uid=recieved['uid'], event_id=recieved['event_id'], date=recieved['date'])
-    db.session.add(new_event)
-    db.session.commit()
-    find_event = Event.query.filter_by(event_id=recieved['event_id']).first()
-    serial = find_event.serialize()
-    return jsonify(serial), 200
+    does_exist = Event.query.filter_by(event_id=recieved['event_id']).first()
+    if does_exist:
+        return jsonify(msg="Event already exists.")
+    else:
+        new_event = Event(uid=recieved['uid'], event_id=recieved['event_id'], date=recieved['date'])
+        db.session.add(new_event)
+        db.session.commit()
+        find_event = Event.query.filter_by(event_id=recieved['event_id']).first()
+        serial = find_event.serialize()
+        return jsonify(serial), 200
     
 #Profile Page
 @api.route('/tracksong', methods=['POST'])
