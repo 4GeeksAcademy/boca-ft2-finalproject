@@ -75,7 +75,7 @@ export const ProfilePage = () => {
         };
 
         fetchData();
-    }, [, store.spotifyToken]);
+    }, [,store.spotifyToken]);
 
     if (loading) {
         return (
@@ -89,7 +89,7 @@ export const ProfilePage = () => {
         fetch((process.env.BACKEND_URL + '/send/friendrequest'), {
             method: 'POST',
             headers: {
-                "Content-Type": "application/json"
+            "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 "uid": store.user.uid,
@@ -171,8 +171,8 @@ export const ProfilePage = () => {
                                 {topSongs.map(song => <tr className="mx-auto my-2 shadow song-card" style={{ width: "80vw", textAlign: 'left' }}>
 
                                     {/* <img src="https://e7.pngegg.com/pngimages/383/640/png-clipart-infant-child-jesus-baby-child-baby-thumbnail.png" style={{ maxHeight: "48px" }} /> */}
-                                    <td className="blurbg songtablerow" style={{ fontWeight: "900", fontVariant: "small-caps" }} >&nbsp; {song.name.toLowerCase()}</td>
-                                    <td className="blurbg songtablerow" style={{ color: '#ebebeb' }} >{song.artists[0].name}</td>
+                                    {/* <td className="blurbg songtablerow" style={{ fontWeight: "900", fontVariant: "small-caps" }} >&nbsp; {song.name.toLowerCase()}</td> */}
+                                    {/* <td className="blurbg songtablerow" style={{ color: '#ebebeb' }} >{song.artists[0].name}</td> */}
                                     <td className="blurbg songtablerow">The Album</td>
                                     <td className="blurbg songtablerow">3:00</td>
                                     <td className="blurbg songtablerow"><i className="far fa-play-circle"></i></td>
