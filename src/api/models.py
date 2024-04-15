@@ -68,6 +68,7 @@ class Playlist(db.Model):
             "id": self.id,
             "uid": self.uid,
             "playlist_name": self.playlist_name,
+            "songs": [song.serialize() for song in self.song_id]
         }
 
     def make_new_playlist(playlist_name,uid):
@@ -85,16 +86,18 @@ class SongsInPlaylist(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     playlist_id = db.Column(db.Integer,db.ForeignKey(Playlist.id))
     song_id = db.Column(db.String(250))
+    song_title = db.Column(db.String(250))
 
     def serialize(self):
         return{
-            "id":self.id,
-            "playlist_id":self.playlist_id,
-            "song_id":self.song_id
+            "id": self.id,
+            "playlist_id": self.playlist_id,
+            "song_id": self.song_id,
+            "song_title": self.song_title 
         }
 
-    def new_song_to_playlist(playlist_id,song_id):
-        adding_new_song = SongsInPlaylist(playlist_id=playlist_id, song_id=song_id)
+    def new_song_to_playlist(playlist_id, song_id, song_title):
+        adding_new_song = SongsInPlaylist(playlist_id=playlist_id, song_id=song_id, song_title=song_title)
         db.session.add(adding_new_song)
         db.session.commit()
     
