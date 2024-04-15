@@ -204,3 +204,9 @@ def add_new_song():
     SongsInPlaylist.new_song_to_playlist(sent_info['playlist_id'],sent_info['song_id'])
     return "song added", 200
 
+@api.route('/findothersnearby/<uid>', methods=['GET'])
+def handle_find_nearby(uid):
+    sent_user = User.query.filter_by(uid=uid).first()
+    all_users_nearby = User.query.filter_by(postal_code=sent_user.postal_code)
+    list_nearby = list(map(lambda x: x.serialize(), all_users_nearby))
+    return jsonify(nearby=list_nearby), 200
