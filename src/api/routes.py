@@ -29,7 +29,9 @@ def handle_create_user():
     new_user = User(email=sent_user['email'], username=sent_user['username'], password=sent_user['password'], postal_code=sent_user['postal_code'], dob=sent_user['dob'])
     db.session.add(new_user)
     db.session.commit()
+    
     get_new_user = User.query.filter_by(username=sent_user['username'], password=sent_user['password']).first()
+
     if get_new_user:
         to_send = get_new_user.serialize()
         return jsonify(to_send), 200
