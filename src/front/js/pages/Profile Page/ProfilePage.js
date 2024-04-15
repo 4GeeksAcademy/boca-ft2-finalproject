@@ -109,6 +109,9 @@ export const ProfilePage = () => {
                             <div>
                                 {genres.map(genre => (<><br /> <span className="badge rounded-pill text-bg-danger">{genre.genre}</span></>))}
                             </div>
+                            <div>
+                                <button className="btn btn-primary">Follow</button>
+                            </div>
                         </div>
                     </div>
                 </div>
