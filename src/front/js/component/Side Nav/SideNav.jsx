@@ -32,11 +32,11 @@ export const SideNav = () => {
                                 </a>
                             </li> */}
                             <li>
-                                <a href="#" className="nav-link active" onClick={() => navigate("/home")}>
+                                <a href="#" className={location.pathname.includes('home') ? `nav-link active` : 'nav-link'} onClick={() => navigate("/home")}>
                                     DISCOVER
                                 </a>
                             </li>
-                           <li>
+                            <li>
                                 <a href="#" className={location.pathname.includes('search') ? `nav-link active` : 'nav-link'} onClick={() => navigate("/search/artist")} >
 
                                     SEARCH
@@ -73,7 +73,7 @@ export const SideNav = () => {
                                 </a>
                             </li>
                             <li>
-                                <a href="#" className="nav-link" style={{ color: 'red' }} onClick={() => sessionStorage.clear('token')} >
+                                <a href="#" className="nav-link" style={{ color: 'white' }} onClick={() => sessionStorage.clear('token')} >
 
                                     LOGOUT
                                 </a>
