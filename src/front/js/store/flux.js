@@ -98,6 +98,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			//Function Refreshes On Load
 
+			setUser: (data) => {
+				setStore({ user: data })
+			},
+
 			userSearchBarInput: (characters) => {
 				setStore({ userSearchBarInput: characters })
 			},
@@ -170,9 +174,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							alert("Incorrect Username or Password")
 						}
 					})
-					.then(data => {sessionStorage.setItem("token", data.access_token)
-					setStore({ user: data })
-				})
+					.then(data => { sessionStorage.setItem("token", data.access_token); sessionStorage.setItem("uid", data.user.uid); setStore({ user: data.user }) })
 			},
 			getToken: (code) => {
 				const authOptions = {

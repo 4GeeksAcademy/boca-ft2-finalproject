@@ -79,10 +79,10 @@ export const SideNav = () => {
                                 </a>
                             </li>
                             <li>
-                                <a href="#" className={location.pathname == '/profile/myaccount' ? `nav-link active` : 'nav-link'} onClick={() => navigate("/profile/myaccount")} >
+                                <a href="#" className={location.pathname == '/profile/myaccount' ? `nav-link active` : 'nav-link'} onClick={() => { navigate(`/profile/myaccount`) }} >
+                                    {/* <img className="icon rounded-circle" src="https://avatars.githubusercontent.com/u/1743919?v=4" alt="Profile icon" /> */}
                                     PROFILE
                                 </a>
-                                {/* <img className="icon rounded-circle" style={{ padding: '0' }} src="https://avatars.githubusercontent.com/u/1743919?v=4" alt="Profile icon" /> */}
                             </li>
                         </ul>
 

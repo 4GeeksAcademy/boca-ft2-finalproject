@@ -8,7 +8,7 @@ export const SpotifyPlayBar = () => {
     const navigate = useNavigate()
 
 
-    return (<div className="div fixed-bottom">
+    return (<div className="div">
         <div className="col-4">
         </div>
         <div className="div">
@@ -16,7 +16,7 @@ export const SpotifyPlayBar = () => {
                 token={store.spotifyPlayToken}
                 uris={[store.playingSongUri]}
                 play={true}
-            />;
+            />
         </div>
     </div>
     );
