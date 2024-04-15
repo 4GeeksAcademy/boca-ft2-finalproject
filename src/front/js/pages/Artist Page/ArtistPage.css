@@ -20,7 +20,16 @@ table {
             margin-right: auto;
             display: block;
             width: fit-content;
-        }
+            color: white
+            }
+
+tr th { 
+                color:white
+            }
+
+tr td {
+                color:white
+            }
 
     
 

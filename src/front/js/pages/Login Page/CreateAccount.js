@@ -1,22 +1,19 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { Navigate, useNavigate } from "react-router-dom"
-
 import { Context } from "../../store/appContext";
 import x from '../../../img/SignUp.jpg';
 
-
 export const CreateAccount = () => {
 	const { store, actions } = useContext(Context);
-	const [emailInput, setEmailInput] = useState("")
-	const [usernameInput, setUsernameInput] = useState("")
-	const [passwordInput, setPasswordInput] = useState("")
-	const [dobInput, setDobInput] = useState("")
-	const [zipcodeInput, setZipCodeInput] = useState("")
-	const navigate = useNavigate()
+	const [emailInput, setEmailInput] = useState("");
+	const [usernameInput, setUsernameInput] = useState("");
+	const [passwordInput, setPasswordInput] = useState("");
+	const [dobInput, setDobInput] = useState("");
+	const [zipcodeInput, setZipCodeInput] = useState("");
+	const [showWelcomeMessage, setShowWelcomeMessage] = useState(false);
 	const centerStyle = {
 		margin: '0 auto', textAlign: 'center', display: 'block', // This makes the label behave like a block-level element
-	}
+	};
 
 	const handleSignUp = () => {
 		const opts = {
@@ -31,10 +28,14 @@ export const CreateAccount = () => {
 				postal_code: zipcodeInput,
 				dob: dobInput
 			})
-		}
+		};
 		fetch(process.env.BACKEND_URL + '/createuser', opts)
-			.then(resp => { if (resp.ok) resp.json })
-	}
+			.then(resp => {
+				if (resp.ok) {
+					resp.json().then(() => setShowWelcomeMessage(true));
+				}
+			});
+	};
 
 	return (
 		<section className="container_redkorn signup" style={{ backgroundImage: `url(${x})`, width: "100vw" }}>
@@ -43,6 +44,9 @@ export const CreateAccount = () => {
 				<br />
 
 				<h1 style={{ textAlign: "center", fontVariant: 'small-caps' }}>Create New Account</h1>
+				{showWelcomeMessage && (
+					<p style={{ textAlign: "center" }}>Welcome to the RhythmRealm. You're officially tuned in now!</p>
+				)}
 				<form style={{ margin: '0 auto', }}>
 					<div class="form-group">
 						<br />
@@ -75,7 +79,7 @@ export const CreateAccount = () => {
 					</div>
 					<button type="button" onClick={(e) => {
 						e.preventDefault();
-						handleSignUp()
+						handleSignUp();
 					}} class="btn btn-warning" style={centerStyle}>Sign up!</button>
 				</form>
 				<br />
@@ -88,3 +92,6 @@ export const CreateAccount = () => {
 		</section>
 	);
 };
+
+
+
