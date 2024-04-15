@@ -143,6 +143,8 @@ export const ProfilePage = () => {
 
                     <button className="nav-link" id="playlist-tab" data-bs-toggle="tab" data-bs-target="#playlist" type="button" role="tab" aria-controls="playlist" aria-selected="false">User Playlist</button>
 
+                    <button className="nav-link" id="friendlist-tab" data-bs-toggle="tab" data-bs-target="#friendlist" type="button" role="tab" aria-controls="friendlist" aria-selected="false">Friendlist</button>
+
                     {location.pathname == '/profile/myaccount' && (<button className="nav-link" id="albums-tab" data-bs-toggle="tab" data-bs-target="#albums" type="button" role="tab" aria-controls="albums" aria-selected="false">Friend Request</button>)}
                 </div>
             </nav>
@@ -174,6 +176,61 @@ export const ProfilePage = () => {
                                     <td className="blurbg songtablerow">3:00</td>
                                     <td className="blurbg songtablerow"><i className="far fa-play-circle"></i></td>
                                 </tr>)}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div className="tab-pane fade show active" id="friendrequest" role="tabpanel" aria-labelledby="top-tracks-tab" tabIndex="0">
+                    <h4>Friend Request:</h4>
+                    <div id="Friend Request text-center">
+                        <table className="table table-dark blurbg">
+                            <thead>
+                                <tr>
+                                    <td>Username</td>
+                                    <td>Zipcode</td>
+                                    <td>Link to Profile</td>
+                                    <td> box </td>
+                                    <td> box </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {/* {topSongs.map(song => <tr className="mx-auto my-2 shadow song-card" style={{ width: "80vw", textAlign: 'left' }}> */}
+
+                                {/* <img src="https://e7.pngegg.com/pngimages/383/640/png-clipart-infant-child-jesus-baby-child-baby-thumbnail.png" style={{ maxHeight: "48px" }} /> */}
+                                <td className="blurbg songtablerow" style={{ fontWeight: "900", fontVariant: "small-caps" }} >&nbsp; {username.toLowerCase()}</td>
+                                <td className="blurbg songtablerow" style={{ color: '#ebebeb' }} >{song.artists[0].name}</td>
+                                <td className="blurbg songtablerow">Zipcode</td>
+                                <td className="blurbg songtablerow">Link to Profile</td>
+                                <td className="blurbg songtablerow"> box </td>
+                                <td className="blurbg songtablerow"> box</td>
+                                <td className="blurbg songtablerow"><i className="far fa-play-circle"></i></td>
+
+                            </tbody>
+                        </table>
+                        <table className="table table-dark blurbg">
+                            <thead>
+                                <tr>
+                                    <td>Username</td>
+                                    <td>Zipcode</td>
+                                    <td>Link to Profile</td>
+                                    <td> box </td>
+                                    <td> box </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {/* {topSongs.map(song => <tr className="mx-auto my-2 shadow song-card" style={{ width: "80vw", textAlign: 'left' }}> */}
+
+                                {/* <img src="https://e7.pngegg.com/pngimages/383/640/png-clipart-infant-child-jesus-baby-child-baby-thumbnail.png" style={{ maxHeight: "48px" }} /> */}
+                                <td className="blurbg songtablerow" style={{ fontWeight: "900", fontVariant: "small-caps" }} >&nbsp; {username.toLowerCase()}</td>
+                                <td className="blurbg songtablerow" style={{ color: '#ebebeb' }} >{song.artists[0].name}</td>
+                                <td className="blurbg songtablerow">Zipcode</td>
+                                <td className="blurbg songtablerow">Link to Profile</td>
+                                <td className="blurbg songtablerow"> box </td>
+                                <td className="blurbg songtablerow"> box</td>
+                                <td className="blurbg songtablerow"><i className="far fa-play-circle"></i></td>
+
                             </tbody>
                         </table>
                     </div>
