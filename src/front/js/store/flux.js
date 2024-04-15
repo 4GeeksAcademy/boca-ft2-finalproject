@@ -78,7 +78,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				).then(res => res.json())
 					.then(data => console.log(data))
-					
+
 
 				fetch((process.env.BACKEND_URL + '/tracksong'), {
 					method: 'POST',
@@ -170,8 +170,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 							alert("Incorrect Username or Password")
 						}
 					})
-					.then(data => sessionStorage.setItem("token", data.access_token))
-					.then(data => setStore({ user: data }))
+					.then(data => {sessionStorage.setItem("token", data.access_token)
+					setStore({ user: data })
+				})
 			},
 			getToken: (code) => {
 				const authOptions = {
