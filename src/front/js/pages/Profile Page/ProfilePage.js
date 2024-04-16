@@ -18,7 +18,7 @@ export const ProfilePage = () => {
     const [events, setEvents] = useState([]);
     const [userPageData, setUserPage] = useState(null);
     const [friends, setFriends] = useState([]);
-    const [currentUserFriend,setCurrentUserFriend] = useState(false);
+    const [currentUserFriend, setCurrentUserFriend] = useState("follow");
 
 
     useEffect(() => {
@@ -86,11 +86,22 @@ export const ProfilePage = () => {
     }, [, store.spotifyToken]);
 
     useEffect(() => {
-        var testarray = friends.filter(relationship => relationship.friend_id == sessionStorage.getItem('uid') && relationship.request_status == 'friend')
-        if (testarray.length){
-            setCurrentUserFriend(true)
+        if (!location.pathname=="profile/myaccount"){
+            var testarray = store.friends.filter(relationship => relationship.friend_id == data.userData.uid)
+            if (testarray.length) {
+            var requestArray = testarray.filter(relationship => relationship.request_status == "requested")
+            console.log(requestArray);
+                if (requestArray.length) {
+                setCurrentUserFriend('requested')
+                }else {
+                setCurrentUserFriend('friends')
+                }
+
+        } else {
+            setCurrentUserFriend('follow')
         }
-    }, [friends])
+    }
+    }, [userPageData])
 
     if (loading) {
         return (
@@ -141,7 +152,9 @@ export const ProfilePage = () => {
                                 {genres.map(genre => (<><br /> <span className="badge rounded-pill text-bg-danger">{genre.genre}</span></>))}
                             </div>
                             <div>
-                                {currentUserFriend ? <button className="btn btn-success" onClick={() => { }}>Following</button> : <button className="btn btn-primary" onClick={() => { }}>Follow</button>}
+                                {currentUserFriend == "friends" && <button className="btn btn-success" onClick={() => { }}>Following</button>}
+                                {currentUserFriend == "follow" && <button className="btn btn-primary" onClick={() => { }}>Follow</button>}
+                                {currentUserFriend == "requested" && <button className="btn btn-secondary" onClick={() => { }}>Requested</button>}
                             </div>
                         </div>
                     </div>

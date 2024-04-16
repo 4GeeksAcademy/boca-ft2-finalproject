@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			friends: [],
 			playingSongUri: null,
 			userCordinates: null,
 			spotifyToken: null,
@@ -100,6 +101,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			//Function Refreshes On Load
+			setUserFriends:()=>{
+				fetch(process.env.BACKEND_URL + `/getprofile/${sessionStorage.getItem('uid')}`)
+				.then((response)=>response.json())
+				.then((data)=>(setStore({friends:data.friends})))
+			},
 
 			setUser: (data) => {
 				setStore({ user: data })
