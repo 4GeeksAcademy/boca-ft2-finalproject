@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../store/appContext";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import './ProfilePage.css'
 
 
@@ -85,7 +85,7 @@ export const ProfilePage = () => {
         };
 
         fetchData();
-    }, [, store.spotifyToken]);
+    }, [store.spotifyToken]);
 
     useEffect(() => {
         checkFriendStatus()
@@ -157,11 +157,11 @@ export const ProfilePage = () => {
         <div className="text-center" style={{ color: 'white' }}>
 
             <div className="card mx-auto mb-3" style={
-                { maxWidth: "80vw", height: "auto", backdropFilter: "blur(5px)", width: "30vw", backgroundColor: "#ffffff0f" }
+                { width: "80vw", height: "auto", backdropFilter: "blur(5px)", backgroundColor: "#ffffff0f" }
             }>
-                <div className="row g-0" style={{ width: "40vw" }}>
+                <div className="row g-0">
                     <div className="col-md-4">
-                        <img src="https://thumbs.dreamstime.com/b/kermit-frog-muppets-22242614.jpg" className="img-fluid mt-4" style={{
+                        <img src="https://thumbs.dreamstime.com/b/kermit-frog-muppets-22242614.jpg" className="img-fluid img-thumbnail mt-4" style={{
                             width: "auto",
                             height: "300px"
                         }} />
@@ -174,7 +174,7 @@ export const ProfilePage = () => {
                             <p className="card-text">{userPageData.username}</p>
                             <p className="card-text"><small className="text-body-secondary">Top Genres</small></p>
                             <div>
-                                {genres.map(genre => (<><br /> <span className="badge rounded-pill text-bg-danger">{genre.genre}</span></>))}
+                                {genres.map((genre, ind) => (<div key={ind}><br /> <span className="badge rounded-pill text-bg-danger">{genre.genre}</span></div>))}
                             </div>
                             <div style={{ display: location.pathname == "/profile/myaccount" && "none" }}>
                                 {currentUserFriend == "friends" && <button className="btn btn-success" onClick={() => { }}>Following</button>}
@@ -279,14 +279,14 @@ export const ProfilePage = () => {
                                 </tr>
                             </thead>
                             <tbody>
-
-                                <td className="blurbg songtablerow">Username</td>
-                                <td className="blurbg songtablerow">Zipcode</td>
-                                <td className="blurbg songtablerow">Link to Profile</td>
-                                <td className="blurbg songtablerow">  <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" /> </td>
-                                <td className="blurbg songtablerow">  <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" /></td>
-                                <td className="blurbg songtablerow"><i className="far fa-play-circle"></i></td>
-
+                                <tr>
+                                    <td className="blurbg songtablerow">Username</td>
+                                    <td className="blurbg songtablerow">Zipcode</td>
+                                    <td className="blurbg songtablerow">Link to Profile</td>
+                                    <td className="blurbg songtablerow">  <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" /> </td>
+                                    <td className="blurbg songtablerow">  <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" /></td>
+                                    <td className="blurbg songtablerow"><i className="far fa-play-circle"></i></td>
+                                </tr>
                             </tbody>
                         </table>
 
@@ -360,7 +360,7 @@ export const ProfilePage = () => {
                 <div className="tab-pane fade" id="albums" role="tabpanel" aria-labelledby="albums" tabIndex="2">
                     <h4>Favorite Albums</h4>
                     <div className="d-flex">
-                        {faveArtists.map(artist => (<div className="card  border-0 blurbg" style={{ width: "16rem" }}>
+                        {faveArtists.map((artist, ind) => (<div key={ind} className="card  border-0 blurbg" style={{ width: "16rem" }}>
                             <div className="cover">
                                 <img src="https://media.gettyimages.com/id/1337160870/photo/new-york-new-york-miss-piggy-performs-onstage-during-elsie-fest-2021-broadways-outdoor-music.jpg?s=612x612&w=0&k=20&c=VOMZOdOmA1XwHbTEuA1Gag5U7566Fut1lPAUlDKAFhg=" className="card-img-top" style={{ borderRadius: "0%" }} />
                             </div>
@@ -373,30 +373,38 @@ export const ProfilePage = () => {
                 </div>
                 <div className="tab-pane fade" style={{ display: 'inline-block', justifyContent: 'center', color: 'white' }} id="playlist" role="tabpanel" aria-labelledby="playlist-tab" tabIndex="0"  >
                     <h4 style={{ color: 'white' }}>User Playlists</h4>
-                    <div className="card d-flex blurbg" style={{ width: "30rem" }}>
-                        <div className="row g-0 cover">
-                            <div className="col">
-                                <img src="https://media.gettyimages.com/id/1337160870/photo/new-york-new-york-miss-piggy-performs-onstage-during-elsie-fest-2021-broadways-outdoor-music.jpg?s=612x612&w=0&k=20&c=VOMZOdOmA1XwHbTEuA1Gag5U7566Fut1lPAUlDKAFhg=" className="card-img-top" alt="..." />
+
+                    {store.playlists && store.playlists.length > 0 ? store.playlists.map((playlist, ind) =>
+                        <Link to={"/playlist/" + ind} key={ind}>
+                            <div className="playlist card d-flex blurbg" style={{ width: "30rem" }}>
+                                <div className="row g-0 cover">
+                                    <div className="col">
+                                        <img src="https://media.gettyimages.com/id/1337160870/photo/new-york-new-york-miss-piggy-performs-onstage-during-elsie-fest-2021-broadways-outdoor-music.jpg?s=612x612&w=0&k=20&c=VOMZOdOmA1XwHbTEuA1Gag5U7566Fut1lPAUlDKAFhg=" className="card-img-top" alt="..." />
+                                    </div>
+                                    <div className="col">
+                                        <img src="https://media.gettyimages.com/id/1337160870/photo/new-york-new-york-miss-piggy-performs-onstage-during-elsie-fest-2021-broadways-outdoor-music.jpg?s=612x612&w=0&k=20&c=VOMZOdOmA1XwHbTEuA1Gag5U7566Fut1lPAUlDKAFhg=" className="card-img-top" alt="..." />
+                                    </div>
+                                </div>
+                                <div className="row g-0 cover">
+                                    <div className="col">
+                                        <img src="https://media.gettyimages.com/id/1337160870/photo/new-york-new-york-miss-piggy-performs-onstage-during-elsie-fest-2021-broadways-outdoor-music.jpg?s=612x612&w=0&k=20&c=VOMZOdOmA1XwHbTEuA1Gag5U7566Fut1lPAUlDKAFhg=" className="card-img-top" alt="..." />
+                                    </div>
+                                    <div className="col">
+                                        <img src="https://media.gettyimages.com/id/1337160870/photo/new-york-new-york-miss-piggy-performs-onstage-during-elsie-fest-2021-broadways-outdoor-music.jpg?s=612x612&w=0&k=20&c=VOMZOdOmA1XwHbTEuA1Gag5U7566Fut1lPAUlDKAFhg=" className="card-img-top" alt="..." />
+                                    </div>
+                                </div>
+                                <div className="card-content" style={{ color: 'white' }}>
+                                    <h5 className="card-title">{playlist.playlist_name}</h5>
+                                </div>
+                                <div className="card-footer">
+                                    <small className="text-body-secondary">Last updated 3 mins ago</small>
+                                </div>
                             </div>
-                            <div className="col">
-                                <img src="https://media.gettyimages.com/id/1337160870/photo/new-york-new-york-miss-piggy-performs-onstage-during-elsie-fest-2021-broadways-outdoor-music.jpg?s=612x612&w=0&k=20&c=VOMZOdOmA1XwHbTEuA1Gag5U7566Fut1lPAUlDKAFhg=" className="card-img-top" alt="..." />
-                            </div>
-                        </div>
-                        <div className="row g-0 cover">
-                            <div className="col">
-                                <img src="https://media.gettyimages.com/id/1337160870/photo/new-york-new-york-miss-piggy-performs-onstage-during-elsie-fest-2021-broadways-outdoor-music.jpg?s=612x612&w=0&k=20&c=VOMZOdOmA1XwHbTEuA1Gag5U7566Fut1lPAUlDKAFhg=" className="card-img-top" alt="..." />
-                            </div>
-                            <div className="col">
-                                <img src="https://media.gettyimages.com/id/1337160870/photo/new-york-new-york-miss-piggy-performs-onstage-during-elsie-fest-2021-broadways-outdoor-music.jpg?s=612x612&w=0&k=20&c=VOMZOdOmA1XwHbTEuA1Gag5U7566Fut1lPAUlDKAFhg=" className="card-img-top" alt="..." />
-                            </div>
-                        </div>
-                        <div className="card-content" style={{ color: 'white' }}>
-                            <h5 className="card-title">Summer Playlist</h5>
-                        </div>
-                        <div className="card-footer">
-                            <small className="text-body-secondary">Last updated 3 mins ago</small>
-                        </div>
-                    </div>
+                        </Link>
+                    ) : (
+                        "Loading Playlists......"
+                    )
+                    }
 
                 </div>
             </div>

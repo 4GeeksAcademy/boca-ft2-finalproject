@@ -22,9 +22,7 @@ export const SideNav = () => {
                             <li className="logo" style={{ transform: 'rotate(-180deg)' }}>
 
                                 <img src={logo} style={{ height: "auto", width: "170px", marginRight: '55px', marginLeft: '0px', padding: '0px' }} onClick={() => navigate('/')} alt="" />
-                                {/* <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide"></link> */}
-
-                            </li>
+                            s</li>
                             {/* <li>
                                 <a href="#" className={location.pathname == '/DISCOVER' ? `nav-link active` : 'nav-link'} style={{ textOrientation: "sideways-left", writingMode: "vertical-lr" }} onClick={() => navigate("/home")}  >
 

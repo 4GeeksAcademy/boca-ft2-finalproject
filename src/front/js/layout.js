@@ -30,6 +30,7 @@ import ProfilePage from "./pages/Profile Page/ProfilePage.js";
 //create your first component
 import { useContext } from "react";
 import { Context } from "./store/appContext";
+import { PlaylistDetailPage } from "./pages/Profile Page/PlaylistDetails.js";
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
     // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
@@ -40,43 +41,40 @@ const Layout = () => {
 
 
     return (
-        <div>
-            <BrowserRouter basename={basename}>
-                <SideNav />
-                <ScrollToTop>
-                    <Routes>
-                        <Route element={<Landingpage />} path="/" />
-                        <Route element={<CreateAccount />} path="/createaccount" />
-                        <Route element={<Login />} path="/login" />
-                        <Route element={<ResetPassword />} path=
-                            "/resetpassword" />
-                        <Route element={<Home />} path="/home" />
+        <BrowserRouter basename={basename}>
+            <SideNav />
+            <ScrollToTop>
+                <Routes>
+                    <Route element={<Landingpage />} path="/" />
+                    <Route element={<CreateAccount />} path="/createaccount" />
+                    <Route element={<Login />} path="/login" />
+                    <Route element={<ResetPassword />} path=
+                        "/resetpassword" />
+                    <Route element={<Home />} path="/home" />
 
-                        <Route element={<Post />} path="/post" />
-                        <Route element={<Discover />} path="/discover" />
+                    <Route element={<Post />} path="/post" />
+                    <Route element={<Discover />} path="/discover" />
 
-                        <Route element={<Inbox />} path="/inbox" />
-                        <Route element={<ArtistSearch />} path="/search/artist" />
-                        <Route element={<AlbumSearch />} path="/search/album" />
-                        <Route element={<SongSearch />} path="/search/song" />
-                        <Route element={<UserSearch />} path="/search/user" />
+                    <Route element={<Inbox />} path="/inbox" />
+                    <Route element={<ArtistSearch />} path="/search/artist" />
+                    <Route element={<AlbumSearch />} path="/search/album" />
+                    <Route element={<SongSearch />} path="/search/song" />
+                    <Route element={<UserSearch />} path="/search/user" />
 
+                    <Route element={<Events />} path="/search/events" />
 
-                        <Route element={<Events />} path="/search/events" />
+                    <Route element={<ArtistPage />} path="/artist/:ind" />
+                    <Route element={<AlbumPage />} path="/album/:ind" />
+                    <Route element={<SongDetailPage />} path="/song/:ind" />
 
-                        <Route element={<ArtistPage />} path="/artist/:ind" />
-                        <Route element={<AlbumPage />} path="/album/:ind" />
-                        <Route element={<SongDetailPage />} path="/song/:ind" />
+                    <Route element={<ProfilePage />} path="/profile/:ind" />
+                    <Route element={<PlaylistDetailPage />} path="/playlist/:ind" />
 
-
-                        <Route element={<ProfilePage />} path="/profile/:ind" />
-
-                        <Route element={<h1>Not found!</h1>} />
-                    </Routes>
-                </ScrollToTop>
-                {store.playingSongUri && <SpotifyPlayBar />}
-            </BrowserRouter>
-        </div>
+                    <Route element={<h1>Not found!</h1>} />
+                </Routes>
+            </ScrollToTop>
+            {store.playingSongUri && <SpotifyPlayBar />}
+        </BrowserRouter>
     );
 };
 

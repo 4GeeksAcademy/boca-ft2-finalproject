@@ -31,7 +31,8 @@ const injectContext = PassedComponent => {
 			state.actions.setUserFriends()
 			state.actions.getUserInfo();
 			state.actions.spotifyTokenRefresh();
-			state.actions.getMessage(); // <---- calling this function from the flux.js actions
+			state.actions.getMessage();
+			if (sessionStorage.getItem('uid')) state.actions.getPlaylists(sessionStorage.getItem('uid'));// <---- calling this function from the flux.js actions
 			// state.actions.convertZipToCoordinates("4000 NE 21st Ave Fort Lauderdale Fl")
 		}, []);
 

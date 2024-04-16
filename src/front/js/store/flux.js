@@ -46,7 +46,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			setPlayingSongUri: (uri, artistId, songID) => {
 				const store = getStore()
 
-				setStore({ playingSongUri: uri })
+				setStore({ playingSongUri: uri });
+
 				fetch((`https://api.spotify.com/v1/artists/${artistId}`), {
 					headers: {
 						'Authorization': `Bearer ${store.spotifyToken}`

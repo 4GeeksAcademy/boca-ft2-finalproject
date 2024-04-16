@@ -3,10 +3,9 @@ import { Link } from "react-router-dom";
 import { Navigate, useNavigate, useLocation } from "react-router-dom"
 import "../../Spotify Views/Search Views/SongSearch.jsx"
 import { Searchpage } from "../../../component/Search/SearchBar.jsx";
-
 import { Context } from "../../../store/appContext.js";
-export const SongSearch = () => {
 
+export const SongSearch = () => {
 
 	const { store, actions } = useContext(Context);
 	const [searchResults, setSearchResults] = useState([]);

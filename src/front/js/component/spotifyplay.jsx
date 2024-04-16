@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Navigate, useNavigate } from "react-router-dom"
 import SpotifyPlayer from 'react-spotify-web-playback';
 import { Context } from "../store/appContext";
+
 export const SpotifyPlayBar = () => {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate()

@@ -52,7 +52,7 @@ export const CreateAccount = () => {
 				<br />
 
 				<h1 style={{ textAlign: "center", fontVariant: 'small-caps' }}>Create New Account</h1>
-				<form style={{ margin: '0 auto', }}>
+				<form style={{ margin: '0 auto' }}>
 					<div class="form-group">
 						<br />
 						<label htmlFor="exampleInputName" style={centerStyle}>USER NAME</label>
