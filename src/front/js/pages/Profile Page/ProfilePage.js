@@ -251,7 +251,7 @@ export const ProfilePage = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {top.songs.map}
+                                {/* {top.songs.map} */}
                                 <td className="blurbg songtablerow">Username</td>
                                 <td className="blurbg songtablerow">Link to Profile</td>
                                 <td className="blurbg songtablerow">  <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" /> </td>
@@ -352,11 +352,6 @@ export const ProfilePage = () => {
                         ))}
                     </div>
                 </div>
-
-
-
-
-
                 <div className="tab-pane fade" id="albums" role="tabpanel" aria-labelledby="albums" tabIndex="2">
                     <h4>Favorite Albums</h4>
                     <div className="d-flex">
