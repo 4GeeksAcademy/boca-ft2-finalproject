@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { Context } from "../../store/appContext";
 import { useLocation, Link } from "react-router-dom";
 import './ProfilePage.css'
@@ -8,6 +9,7 @@ export const ProfilePage = () => {
     const { store, actions } = useContext(Context);
     let location = useLocation();
     const data = location.state;
+    const navigate = useNavigate()
 
     const [loading, setLoading] = useState(true);
     const [genres, setGenres] = useState([]);
@@ -15,6 +17,9 @@ export const ProfilePage = () => {
     const [faveArtists, setFaveArtists] = useState([]);
     const [events, setEvents] = useState([]);
     const [userPageData, setUserPage] = useState(null);
+    const [friends, setFriends] = useState([]);
+    const [currentUserFriend, setCurrentUserFriend] = useState("follow");
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -24,8 +29,9 @@ export const ProfilePage = () => {
                 } else {
                     var response = await fetch(process.env.BACKEND_URL + `/getprofile/${data.userData.uid}`);
                 }
-
                 const responseData = await response.json();
+
+
 
                 // Fetch events data
                 const eventsData = await Promise.all(responseData.events.map(async (element) => {
@@ -62,12 +68,14 @@ export const ProfilePage = () => {
                     return songResponse.json();
                 }));
 
+                setFriends(responseData.friends)
                 setEvents(eventsData);
                 setFaveArtists(artistsData);
                 setGenres(responseData.genres);
                 setUserPage(responseData.user);
                 setTopSongs(songsData);
                 setLoading(false);
+
             } catch (error) {
                 console.error('Fetch error:', error);
                 // Optionally, handle the error by updating the UI to inform the user
@@ -76,6 +84,25 @@ export const ProfilePage = () => {
 
         fetchData();
     }, [store.spotifyToken]);
+
+    useEffect(() => {
+        if (!location.pathname == "profile/myaccount") {
+            var testarray = store.friends.filter(relationship => relationship.friend_id == data.userData.uid)
+            if (testarray.length) {
+                var requestArray = testarray.filter(relationship => relationship.request_status == "requested")
+                console.log(requestArray);
+                if (requestArray.length) {
+                    setCurrentUserFriend('requested')
+                } else {
+                    setCurrentUserFriend('friends')
+                }
+
+            } else {
+                setCurrentUserFriend('follow')
+            }
+        }
+    }, [userPageData])
+
 
     if (loading) {
         return (
@@ -118,15 +145,17 @@ export const ProfilePage = () => {
                     <div className="col-md-8 text-start" style={{ color: 'white' }}>
                         <div className="card-body">
                             <div className="d-flex">
-                                <h3 className="card-title title" style={{ fontFamily: "Audiowide, sans-serif" }}>{userPageData.username}</h3>
+                                <h5 className="card-title">{userPageData.first_name}&nbsp;{userPageData.last_name}</h5>
                             </div>
-                            <p className="card-text">Location: {userPageData.postal_code}</p>
+                            <p className="card-text">{userPageData.username}</p>
                             <p className="card-text"><small className="text-body-secondary">Top Genres</small></p>
                             <div>
                                 {genres.map((genre, ind) => (<div key={ind}><br /> <span className="badge rounded-pill text-bg-danger">{genre.genre}</span></div>))}
                             </div>
-                            <div>
-                                <button className="btn btn-primary" onClick={() => { }}>Follow</button>
+                            <div style={{ display: location.pathname == "/profile/myaccount" && "none" }}>
+                                {currentUserFriend == "friends" && <button className="btn btn-success" onClick={() => { }}>Following</button>}
+                                {currentUserFriend == "follow" && <button className="btn btn-primary" onClick={() => { }}>Follow</button>}
+                                {currentUserFriend == "requested" && <button className="btn btn-secondary" onClick={() => { }}>Requested</button>}
                             </div>
                         </div>
                     </div>
