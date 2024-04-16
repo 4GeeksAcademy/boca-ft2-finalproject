@@ -75,7 +75,7 @@ export const ProfilePage = () => {
         };
 
         fetchData();
-    }, [,store.spotifyToken]);
+    }, [, store.spotifyToken]);
 
     if (loading) {
         return (
@@ -89,7 +89,7 @@ export const ProfilePage = () => {
         fetch((process.env.BACKEND_URL + '/send/friendrequest'), {
             method: 'POST',
             headers: {
-            "Content-Type": "application/json"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 "uid": store.user.uid,
@@ -145,7 +145,9 @@ export const ProfilePage = () => {
 
                     <button className="nav-link" id="friendlist-tab" data-bs-toggle="tab" data-bs-target="#friendlist" type="button" role="tab" aria-controls="friendlist" aria-selected="false">Friendlist</button>
 
-                    {location.pathname == '/profile/myaccount' && (<button className="nav-link" id="albums-tab" data-bs-toggle="tab" data-bs-target="#albums" type="button" role="tab" aria-controls="albums" aria-selected="false">Friend Request</button>)}
+                    <button className="nav-link" id="albums-tab" data-bs-toggle="tab" data-bs-target="#albums" type="button" role="tab" aria-controls="album" aria-selected="false">Favorite Albums</button>
+
+                    {location.pathname == '/profile/myaccount' && (<button className="nav-link" id="friendrequest-tab" data-bs-toggle="tab" data-bs-target="#friendrequest" type="button" role="tab" aria-controls="friends" aria-selected="false">Friend Request</button>)}
                 </div>
             </nav>
 
@@ -170,8 +172,8 @@ export const ProfilePage = () => {
                                 {topSongs.map(song => <tr className="mx-auto my-2 shadow song-card" style={{ width: "80vw", textAlign: 'left' }}>
 
                                     {/* <img src="https://e7.pngegg.com/pngimages/383/640/png-clipart-infant-child-jesus-baby-child-baby-thumbnail.png" style={{ maxHeight: "48px" }} /> */}
-                                    {/* <td className="blurbg songtablerow" style={{ fontWeight: "900", fontVariant: "small-caps" }} >&nbsp; {song.name.toLowerCase()}</td> */}
-                                    {/* <td className="blurbg songtablerow" style={{ color: '#ebebeb' }} >{song.artists[0].name}</td> */}
+                                    <td className="blurbg songtablerow" style={{ fontWeight: "900", fontVariant: "small-caps" }} >&nbsp; {song.name.toLowerCase()}</td>
+                                    <td className="blurbg songtablerow" style={{ color: '#ebebeb' }} >{song.artists[0].name}</td>
                                     <td className="blurbg songtablerow">The Album</td>
                                     <td className="blurbg songtablerow">3:00</td>
                                     <td className="blurbg songtablerow"><i className="far fa-play-circle"></i></td>
@@ -182,7 +184,36 @@ export const ProfilePage = () => {
                 </div>
 
 
-                <div className="tab-pane fade show active" id="friendrequest" role="tabpanel" aria-labelledby="top-tracks-tab" tabIndex="0">
+                <div className="tab-pane fade show " id="friendlist" role="tabpanel" aria-labelledby="top-tracks-tab" tabIndex="1">
+                    <h4>Friends List:</h4>
+                    <div id="Friend Request text-center">
+                        <table className="table table-dark blurbg">
+                            <thead>
+                                <tr>
+                                    <td>Username</td>
+                                 
+                                    <td>Link to Profile</td>
+                                    <td> box </td>
+                                    <td> box </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <td className="blurbg songtablerow">Username</td>
+
+                                <td className="blurbg songtablerow">Link to Profile</td>
+                                <td className="blurbg songtablerow">  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" /> </td>
+                                <td className="blurbg songtablerow">  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" /></td>
+                                <td className="blurbg songtablerow"><i className="far fa-play-circle"></i></td>
+
+                            </tbody>
+                        </table>
+
+
+
+                    </div>
+                </div>
+                <div className="tab-pane fade show " id="friendrequest" role="tabpanel" aria-labelledby="top-tracks-tab" tabIndex="1">
                     <h4>Friend Request:</h4>
                     <div id="Friend Request text-center">
                         <table className="table table-dark blurbg">
@@ -196,43 +227,19 @@ export const ProfilePage = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {/* {topSongs.map(song => <tr className="mx-auto my-2 shadow song-card" style={{ width: "80vw", textAlign: 'left' }}> */}
 
-                                {/* <img src="https://e7.pngegg.com/pngimages/383/640/png-clipart-infant-child-jesus-baby-child-baby-thumbnail.png" style={{ maxHeight: "48px" }} /> */}
-                                {/* <td className="blurbg songtablerow" style={{ fontWeight: "900", fontVariant: "small-caps" }} >&nbsp; {username.toLowerCase()}</td> */}
-                                {/* <td className="blurbg songtablerow" style={{ color: '#ebebeb' }} >{song.artists[0].name}</td> */}
+                                <td className="blurbg songtablerow">Username</td>
                                 <td className="blurbg songtablerow">Zipcode</td>
                                 <td className="blurbg songtablerow">Link to Profile</td>
-                                <td className="blurbg songtablerow"> box </td>
-                                <td className="blurbg songtablerow"> box</td>
+                                <td className="blurbg songtablerow">  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" /> </td>
+                                <td className="blurbg songtablerow">  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" /></td>
                                 <td className="blurbg songtablerow"><i className="far fa-play-circle"></i></td>
 
                             </tbody>
                         </table>
-                        <table className="table table-dark blurbg">
-                            <thead>
-                                <tr>
-                                    <td>Username</td>
-                                    <td>Zipcode</td>
-                                    <td>Link to Profile</td>
-                                    <td> box </td>
-                                    <td> box </td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {/* {topSongs.map(song => <tr className="mx-auto my-2 shadow song-card" style={{ width: "80vw", textAlign: 'left' }}> */}
 
-                                {/* <img src="https://e7.pngegg.com/pngimages/383/640/png-clipart-infant-child-jesus-baby-child-baby-thumbnail.png" style={{ maxHeight: "48px" }} /> */}
-                                {/* <td className="blurbg songtablerow" style={{ fontWeight: "900", fontVariant: "small-caps" }} >&nbsp; {username.toLowerCase()}</td> */}
-                                {/* <td className="blurbg songtablerow" style={{ color: '#ebebeb' }} >{song.artists[0].name}</td> */}
-                                <td className="blurbg songtablerow">Zipcode</td>
-                                <td className="blurbg songtablerow">Link to Profile</td>
-                                <td className="blurbg songtablerow"> box </td>
-                                <td className="blurbg songtablerow"> box</td>
-                                <td className="blurbg songtablerow"><i className="far fa-play-circle"></i></td>
 
-                            </tbody>
-                        </table>
+
                     </div>
                 </div>
 
@@ -298,7 +305,7 @@ export const ProfilePage = () => {
 
 
 
-                <div className="tab-pane fade" id="albums" role="tabpanel" aria-labelledby="albums-tab" tabIndex="0">
+                <div className="tab-pane fade" id="albums" role="tabpanel" aria-labelledby="albums" tabIndex="2">
                     <h4>Favorite Albums</h4>
                     <div className="d-flex">
                         {faveArtists.map(artist => (<div className="card  border-0 blurbg" style={{ width: "16rem" }}>
