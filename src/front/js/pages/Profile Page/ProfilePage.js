@@ -86,21 +86,21 @@ export const ProfilePage = () => {
     }, [, store.spotifyToken]);
 
     useEffect(() => {
-        if (!location.pathname=="profile/myaccount"){
+        if (!location.pathname == "profile/myaccount") {
             var testarray = store.friends.filter(relationship => relationship.friend_id == data.userData.uid)
             if (testarray.length) {
-            var requestArray = testarray.filter(relationship => relationship.request_status == "requested")
-            console.log(requestArray);
+                var requestArray = testarray.filter(relationship => relationship.request_status == "requested")
+                console.log(requestArray);
                 if (requestArray.length) {
-                setCurrentUserFriend('requested')
-                }else {
-                setCurrentUserFriend('friends')
+                    setCurrentUserFriend('requested')
+                } else {
+                    setCurrentUserFriend('friends')
                 }
 
-        } else {
-            setCurrentUserFriend('follow')
+            } else {
+                setCurrentUserFriend('follow')
+            }
         }
-    }
     }, [userPageData])
 
 
@@ -152,7 +152,7 @@ export const ProfilePage = () => {
                             <div>
                                 {genres.map(genre => (<><br /> <span className="badge rounded-pill text-bg-danger">{genre.genre}</span></>))}
                             </div>
-                            <div>
+                            <div style={{ display: location.pathname == "/profile/myaccount" && "none" }}>
                                 {currentUserFriend == "friends" && <button className="btn btn-success" onClick={() => { }}>Following</button>}
                                 {currentUserFriend == "follow" && <button className="btn btn-primary" onClick={() => { }}>Follow</button>}
                                 {currentUserFriend == "requested" && <button className="btn btn-secondary" onClick={() => { }}>Requested</button>}
@@ -220,7 +220,7 @@ export const ProfilePage = () => {
                             <thead>
                                 <tr>
                                     <td>Username</td>
-                                 
+
                                     <td>Link to Profile</td>
                                     <td> box </td>
                                     <td> box </td>
