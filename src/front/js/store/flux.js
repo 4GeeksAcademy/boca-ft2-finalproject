@@ -1,12 +1,14 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			friends: [],
 			playingSongUri: null,
 			userCordinates: null,
 			spotifyToken: null,
 			spotifyPlayToken: null,
 			userSearchBarInput: "",
 			user: null,
+			playlists: [],
 			auth_url: `https://accounts.spotify.com/authorize?client_id=5eedb8285f214e62985fddba0f324895&response_type=code&redirect_uri=${process.env.REDIRECT_URL}&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state`,
 		},
 		actions: {
@@ -25,6 +27,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ userCordinates: res.results[0].geometry.location })
 					})
 			},
+
 			getUserInfo: () => {
 				var token = sessionStorage.getItem('token')
 				const opts = {
@@ -39,10 +42,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 						.then(data => setStore({ user: data }))
 				}
 			},
+
 			setPlayingSongUri: (uri, artistId, songID) => {
 				const store = getStore()
 
-				setStore({ playingSongUri: uri })
+				setStore({ playingSongUri: uri });
+
 				fetch((`https://api.spotify.com/v1/artists/${artistId}`), {
 					headers: {
 						'Authorization': `Bearer ${store.spotifyToken}`
@@ -97,6 +102,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			//Function Refreshes On Load
+			setUserFriends:()=>{
+				fetch(process.env.BACKEND_URL + `/getprofile/${sessionStorage.getItem('uid')}`)
+				.then((response)=>response.json())
+				.then((data)=>(setStore({friends:data.friends})))
+			},
 
 			setUser: (data) => {
 				setStore({ user: data })
@@ -127,32 +137,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 			},
 
-			getMessage: async () => {
-				// try {
-				// 	// fetching data from the backend
-				// 	const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
-				// 	const data = await resp.json()
-				// 	setStore({ message: data.message })
-				// 	// don't forget to return something, that is how the async resolves
-				// 	return data;
-				// } catch (error) {
-				// 	console.log("Error loading message from backend", error)
-				// }
+			setPlaylists: (plstArray) => {
+				setStore({ playlists: plstArray });
 			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
+			getPlaylists: (uid) => {
+				fetch(process.env.BACKEND_URL + '/get/playlists/' + uid)
+					.then(resp => resp.json())
+					.then(playlists => setStore({ playlists: playlists }))
+					.catch(err => console.log(err))
 			},
+
 			handleLogIn: (usernameInput, passwordInput) => {
 
 				const opts = {
@@ -165,6 +160,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						password: passwordInput
 					})
 				}
+
 				fetch(process.env.BACKEND_URL + '/login', opts)
 					.then(resp => {
 						if (resp.ok) {
@@ -174,8 +170,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 							alert("Incorrect Username or Password")
 						}
 					})
-					.then(data => { sessionStorage.setItem("token", data.access_token); sessionStorage.setItem("uid", data.user.uid); setStore({ user: data.user }) })
+					.then(data => {
+						sessionStorage.setItem("token", data.access_token); sessionStorage.setItem("uid", data.user.uid); setStore({ user: data.user });
+						getActions().getPlaylists(data.user.uid);
+					})
 			},
+
 			getToken: (code) => {
 				const authOptions = {
 					method: 'POST',
@@ -200,6 +200,34 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.error('Error:', error);
 						// Handle errors
 					});
+			},
+
+			getMessage: async () => {
+				// try {
+				// 	// fetching data from the backend
+				// 	const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
+				// 	const data = await resp.json()
+				// 	setStore({ message: data.message })
+				// 	// don't forget to return something, that is how the async resolves
+				// 	return data;
+				// } catch (error) {
+				// 	console.log("Error loading message from backend", error)
+				// }
+			},
+
+			changeColor: (index, color) => {
+				//get the store
+				const store = getStore();
+
+				//we have to loop the entire demo array to look for the respective index
+				//and change its color
+				const demo = store.demo.map((elm, i) => {
+					if (i === index) elm.background = color;
+					return elm;
+				});
+
+				//reset the global store
+				setStore({ demo: demo });
 			}
 		}
 	};

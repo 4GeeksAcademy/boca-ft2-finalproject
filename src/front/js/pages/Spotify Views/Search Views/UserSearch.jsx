@@ -54,7 +54,7 @@ export const UserSearch = () => {
                 <div className="col-3"></div>
                 <div className="col">
 
-                    {typeof searchResults == "string" ? <div className="div text-dark">{searchResults}</div> : searchResults.map((data, ind) => {
+                    {typeof searchResults == "string" ? <div className="div text-dark">{searchResults}</div> : searchResults.filter(data => data.uid != sessionStorage.getItem('uid')).map((data, ind) => {
 
                         return (
                             <div className="card" onClick={() => { navigate(`/profile/${data.username}`, { state: { userData: data } }) }} key={ind}>

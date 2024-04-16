@@ -1,28 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { Context } from "../../store/appContext";
 
 
+const PlaylistDropdown = (props) => {
 
-const PlaylistDropdown = () => {
+    const { store, actions } = useContext(Context);
+    const { playlists } = store;
+    const { getPlaylists, setPlaylists } = actions;
 
-    const [playlists, setPlaylists] = useState([
-        { uid: 1, title: "Fun playlist", songs: [] },
-        { uid: 2, title: "Sad playlist", songs: [] },
-        { uid: 3, title: "Cool playlist", songs: [] }
-    ])
-    const [currentSong, setCurrentSong] = useState({ title: "Happy Day2", artist: "Baby Jesus" });
     const [searchTitle, setSearchTitle] = useState("");
 
+    useEffect(() => {
+        getPlaylists(sessionStorage.getItem('uid'));
+    }, [])
+
     const addPlaylist = () => {
-        setPlaylists([...playlists, { uid: playlists.length + 1, title: searchTitle }]);
+        fetch(process.env.BACKEND_URL + "/new/playlist", {
+            method: 'POST',
+            body: JSON.stringify({
+                playlist_name: searchTitle,
+                uid: props.user_id,
+                song_id: props.song_id,
+                song_title: props.song_title
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(respObj => respObj.json())
+            .then(myPlaylists => setPlaylists(myPlaylists))
         setSearchTitle("");
     }
 
-    const addSongToPlst = (song, playlistID) => {
-        let updatePlaylists = playlists.map(plst => {
-            if (plst.uid == playlistID) return { ...plst, songs: [...plst.songs, song] }
-            else return plst;
+    const addSongToPlst = (playlistID) => {
+        fetch(process.env.BACKEND_URL + "/addsong/playlist", {
+            method: 'POST',
+            body: JSON.stringify({
+                uid: props.user_id,
+                playlist_id: playlistID,
+                song_id: props.song_id,
+                song_title: props.song_title
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
         })
-        setPlaylists(updatePlaylists);
+            .then(respObj => respObj.json())
+            .then(myPlaylists => setPlaylists(myPlaylists))
     }
 
     return (
@@ -42,10 +66,16 @@ const PlaylistDropdown = () => {
                     <ul className="list-unstyled mb-0">
                         {
                             playlists.filter(plst => {
-                                if (searchTitle) return plst.title.toLowerCase().includes(searchTitle);
+                                if (searchTitle) return plst.playlist_name.toLowerCase().includes(searchTitle);
                                 else return true;
                             })
-                                .map((playst, ind) => <li key={ind} onClick={() => addSongToPlst(currentSong, playst.uid)}><span className="dropdown-item" href="#">{playst.title}</span></li>)
+                                .map((playlst, ind) => <li key={ind} onClick={() => addSongToPlst(playlst.id)}>
+                                    <span
+                                        className="dropdown-item"
+                                        style={playlst.songs.find(song => song.song_id == props.song_id) ? { color: "gray", fontStyle: "italic" } : { color: "red", fontWeight: "500" }}>
+                                        {playlst.playlist_name}
+                                    </span>
+                                </li>)
                         }
                         <li><hr className="dropdown-divider" /></li>
                         <li

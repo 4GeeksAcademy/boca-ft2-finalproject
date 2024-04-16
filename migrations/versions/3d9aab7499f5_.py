@@ -1,8 +1,14 @@
 """empty message
 
-Revision ID: 3ecf0835fa27
+<<<<<<<< HEAD:migrations/versions/efcd8fba7ea1_.py
+Revision ID: efcd8fba7ea1
 Revises: 
-Create Date: 2024-04-15 15:02:16.995601
+Create Date: 2024-04-16 20:46:42.670858
+========
+Revision ID: 3d9aab7499f5
+Revises: 
+Create Date: 2024-04-16 14:39:41.346387
+>>>>>>>> 022487848ea093d03957253caf6c5996dff8e1b3:migrations/versions/3d9aab7499f5_.py
 
 """
 from alembic import op
@@ -10,7 +16,11 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '3ecf0835fa27'
+<<<<<<<< HEAD:migrations/versions/efcd8fba7ea1_.py
+revision = 'efcd8fba7ea1'
+========
+revision = '3d9aab7499f5'
+>>>>>>>> 022487848ea093d03957253caf6c5996dff8e1b3:migrations/versions/3d9aab7499f5_.py
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -30,7 +40,6 @@ def upgrade():
     sa.Column('about_me', sa.String(length=120), nullable=True),
     sa.Column('prof_pic_url', sa.String(length=250), nullable=True),
     sa.PrimaryKeyConstraint('uid'),
-    sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
     )
     op.create_table('event',
@@ -110,6 +119,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('playlist_id', sa.Integer(), nullable=True),
     sa.Column('song_id', sa.String(length=250), nullable=True),
+    sa.Column('song_title', sa.String(length=250), nullable=True),
     sa.ForeignKeyConstraint(['playlist_id'], ['playlist.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

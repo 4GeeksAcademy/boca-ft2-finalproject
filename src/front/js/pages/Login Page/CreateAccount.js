@@ -1,19 +1,20 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { Navigate, useNavigate } from "react-router-dom"
-
+import { Navigate, useNavigate } from "react-router-dom";
 import { Context } from "../../store/appContext";
 import x from '../../../img/SignUp.jpg';
 
 
 export const CreateAccount = () => {
 	const { store, actions } = useContext(Context);
+	const navigate = useNavigate();
+
 	const [emailInput, setEmailInput] = useState("")
 	const [usernameInput, setUsernameInput] = useState("")
 	const [passwordInput, setPasswordInput] = useState("")
 	const [dobInput, setDobInput] = useState("")
 	const [zipcodeInput, setZipCodeInput] = useState("")
-	const navigate = useNavigate()
+
 	const centerStyle = {
 		margin: '0 auto', textAlign: 'center', display: 'block', // This makes the label behave like a block-level element
 	}
@@ -33,7 +34,15 @@ export const CreateAccount = () => {
 			})
 		}
 		fetch(process.env.BACKEND_URL + '/createuser', opts)
-			.then(resp => { if (resp.ok) resp.json })
+			.then(resp => { if (resp.ok) return resp.json() })
+			.then(data => {
+				if (data.username) {
+					alert(`User ${data.username} was created`);
+					navigate("/login")
+				} else {
+					alert("User was not created - try again");
+				}
+			})
 	}
 
 	return (
@@ -43,7 +52,7 @@ export const CreateAccount = () => {
 				<br />
 
 				<h1 style={{ textAlign: "center", fontVariant: 'small-caps' }}>Create New Account</h1>
-				<form style={{ margin: '0 auto', }}>
+				<form style={{ margin: '0 auto' }}>
 					<div class="form-group">
 						<br />
 						<label htmlFor="exampleInputName" style={centerStyle}>USER NAME</label>
