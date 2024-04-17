@@ -98,6 +98,7 @@ export const ArtistPage = () => {
         <img src={`${data.artistData.images[0].url}`} alt="Artist Picture" width="500" height="600"></img>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide"></link>
         <div style={{ display: 'grid', justifyContent: 'center' }}>
+        <i className="far fa-play-circle" onClick={() => actions.setPlayingSongUri(data.artistData.uri)}></i>
 
           <table className="table">
             <thead>
