@@ -28,8 +28,8 @@ export const Home = () => {
         <div className="container">
             <a href={store.auth_url}>Connect Spotify</a>
             {/* <FriendsMusic /> */}
-            {/* <UpcomingEvents /> */}
-            {/* <Recomendations /> */}
+            <UpcomingEvents />
+            <Recomendations />
             {/* <PeerEvents /> */}
             {/* <PotentialFriends /> */}
             <FriendsNearby />
