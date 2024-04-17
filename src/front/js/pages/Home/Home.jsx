@@ -18,6 +18,7 @@ export const Home = () => {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate()
     useEffect(() => {
+        actions.setUserFriends()
         const code = new URLSearchParams(window.location.search).get('code');
         actions.getToken(code);
     }, [])

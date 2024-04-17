@@ -86,7 +86,16 @@
   } */
   
   .sidebar-menu li a.nav-link:hover {
-    background-color: #f5f5f5;
+    background-color: black;
+    filter:invert()
+  }
+
+  .sidebar-menu li a.nav-link active {
+    color:red
+  }
+
+  .nav-link.active {
+    color: red!important;
   }
   
   .sidebar-menu li a.nav-link:hover .icon {

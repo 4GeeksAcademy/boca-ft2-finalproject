@@ -10,13 +10,12 @@ export const SongDetailPage = () => {
     let location = useLocation();
     const data = location.state
     const { store, actions } = useContext(Context);
+
     const [song, setSong] = useState([]);
     const [songPlaying, setSongPlaying] = useState('')
     const navigate = useNavigate();
 
     //Fetches for diffrent data
-
-
 
     const getSongSpotify = () => {
         const opts = {
@@ -77,9 +76,7 @@ export const SongDetailPage = () => {
                         )
                     })
                 }
-            </table>
-
+            </table >
         </>
-
     );
 };
