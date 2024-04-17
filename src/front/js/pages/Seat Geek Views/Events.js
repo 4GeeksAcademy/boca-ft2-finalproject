@@ -44,20 +44,18 @@ export const Events = () => {
 						searchResults.map((data, ind) => {
 
 							return (
-
-								<div className="card" key={ind}>
-									<div className="cover artist">
-										<img src={data.images.huge} alt="cover" />
+								<div className="card" key={ind} style={{ width: "18rem", overflow: "auto", margin: "1rem" }}>
+									<div className="cover artist" style={{ maxHeight: "50%" }}>
+										<img src={data.images.huge} alt="cover" style={{ maxHeight: "100%", objectFit: "cover", width: "100%" }} />
 										<div className="play-icon">
 											<i className="fa fa-play"></i>
 										</div>
 									</div>
-									<div className="card-content">
+									<div className="card-content" style={{ maxHeight: "50%", overflow: "auto" }}>
 										<span>{data.name}</span>
 										<p>{data.stats.event_count}</p>
 									</div>
 								</div>
-
 							)
 						}
 						)}
