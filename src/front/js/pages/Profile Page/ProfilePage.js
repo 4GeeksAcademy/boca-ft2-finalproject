@@ -92,6 +92,9 @@ export const ProfilePage = () => {
     }, [loading, events])
     const checkFriendStatus = () => {
 
+    }, [loading, events])
+    const checkFriendStatus = () => {
+
         if (!location.pathname == "profile/myaccount") {
             var testarray = store.friends.filter(relationship => relationship.friend_id == data.userData.uid)
             console.log(testarray);
@@ -113,6 +116,7 @@ export const ProfilePage = () => {
             min = Math.floor((ms / 1000 / 60) << 0),
             sec = Math.floor((ms / 1000) % 60);
 
+        return (min + ':' + sec);
         return (min + ':' + sec);
     }
 
@@ -173,7 +177,7 @@ export const ProfilePage = () => {
                 }>
                     <div className="row g-0">
                         <div className="col-md-4">
-                            <img src="https://thumbs.dreamstime.com/b/kermit-frog-muppets-22242614.jpg" className="img-fluid img-thumbnail mt-4" style={{
+                            <img src="https://assets.petco.com/petco/image/upload/f_auto,q_auto/832448-center-1" className="img-fluid img-thumbnail mt-4" style={{
                                 width: "auto",
                                 height: "300px"
                             }} />
