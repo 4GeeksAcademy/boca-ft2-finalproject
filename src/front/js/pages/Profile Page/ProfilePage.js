@@ -91,20 +91,15 @@ export const ProfilePage = () => {
         checkFriendStatus()
     }, [loading, events])
     const checkFriendStatus = () => {
-
         if (!location.pathname == "profile/myaccount") {
             var testarray = store.friends.filter(relationship => relationship.friend_id == data.userData.uid)
             console.log(testarray);
             if (testarray.length) {
-                var requestArray = testarray.filter(relationship => relationship.request_status == "requested")
                 if (requestArray.length) {
                     setCurrentUserFriend('requested')
                     setRequest(requestArray)
                 } else {
                     setCurrentUserFriend('friends')
-                    var friendArray = testarray.filter(relationship => relationship.request_status == "friend")
-                    setFriends(friendArray)
-
                 }
 
             } else {
@@ -142,6 +137,11 @@ export const ProfilePage = () => {
         const iso8601String = now.toISOString();
         return (iso8601String);
     }
+    const logout = () => {
+        sessionStorage.clear('token')
+        navigate('/')
+    }
+
 
     if (loading) {
         return (
@@ -183,6 +183,16 @@ export const ProfilePage = () => {
                             </div>
                         </div>
                     </div>
+                    <div className="col 2">
+                        <div className="dropdown">
+                            <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Dropdown button
+                            </button>
+                            <ul className="dropdown-menu">
+                                <li><span className="dropdown-item" onClick={() => logout()} href="#">Logout</span></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -197,8 +207,6 @@ export const ProfilePage = () => {
                     <button className="nav-link" id="playlist-tab" data-bs-toggle="tab" data-bs-target="#playlist" type="button" role="tab" aria-controls="playlist" aria-selected="false">User Playlist</button>
 
                     <button className="nav-link" id="friendlist-tab" data-bs-toggle="tab" data-bs-target="#friendlist" type="button" role="tab" aria-controls="friendlist" aria-selected="false">Friendlist</button>
-
-                    <button className="nav-link" id="albums-tab" data-bs-toggle="tab" data-bs-target="#albums" type="button" role="tab" aria-controls="album" aria-selected="false">Favorite Albums</button>
 
                     {location.pathname == '/profile/myaccount' && (<button className="nav-link" id="friendrequest-tab" data-bs-toggle="tab" data-bs-target="#friendrequest" type="button" role="tab" aria-controls="friends" aria-selected="false">Friend Request</button>)}
                 </div>
@@ -251,12 +259,11 @@ export const ProfilePage = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {/* {top.songs.map} */}
-                                <td className="blurbg songtablerow">Username</td>
-                                <td className="blurbg songtablerow">Link to Profile</td>
-                                <td className="blurbg songtablerow">  <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" /> </td>
-                                <td className="blurbg songtablerow">  <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" /></td>
-                                <td className="blurbg songtablerow"><i className="far fa-play-circle"></i></td>
+                                {store.friends.map((friend, ind) => {
+                                    return <tr key={ind} onClick={() => { navigate(`/profile/${friend.user.uid}`, { state: { userData: friend.user } }) }}>
+                                        <td className="blurbg songtablerow">{friend.user.username}</td>
+                                    </tr>
+                                })}
 
                             </tbody>
                         </table>
@@ -272,21 +279,22 @@ export const ProfilePage = () => {
                             <thead>
                                 <tr>
                                     <td>Username</td>
-                                    <td>Zipcode</td>
+                                    <td>accept</td>
                                     <td>Link to Profile</td>
                                     <td> box </td>
-                                    <td> box </td>
+
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td className="blurbg songtablerow">Username</td>
-                                    <td className="blurbg songtablerow">Zipcode</td>
-                                    <td className="blurbg songtablerow">Link to Profile</td>
-                                    <td className="blurbg songtablerow">  <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" /> </td>
-                                    <td className="blurbg songtablerow">  <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" /></td>
-                                    <td className="blurbg songtablerow"><i className="far fa-play-circle"></i></td>
-                                </tr>
+                                {store.friendRequests.map((user) => {
+                                    return (
+                                        <tr key={user.user.uid}>
+                                            <td>{user.user.username}</td>
+                                            <td><i className="fas fa-check" style={{ color: "#30810e" }}></i></td>
+                                            <td><i className="fas fa-window-close" style={{ color: "#f50505" }}></i></td>
+                                        </tr>
+                                    )
+                                })}
                             </tbody>
                         </table>
 
@@ -352,20 +360,7 @@ export const ProfilePage = () => {
                         ))}
                     </div>
                 </div>
-                <div className="tab-pane fade" id="albums" role="tabpanel" aria-labelledby="albums" tabIndex="2">
-                    <h4>Favorite Albums</h4>
-                    <div className="d-flex">
-                        {faveArtists.map((artist, ind) => (<div key={ind} className="card  border-0 blurbg" style={{ width: "16rem" }}>
-                            <div className="cover">
-                                <img src="https://media.gettyimages.com/id/1337160870/photo/new-york-new-york-miss-piggy-performs-onstage-during-elsie-fest-2021-broadways-outdoor-music.jpg?s=612x612&w=0&k=20&c=VOMZOdOmA1XwHbTEuA1Gag5U7566Fut1lPAUlDKAFhg=" className="card-img-top" style={{ borderRadius: "0%" }} />
-                            </div>
-                            <div className="card-content" style={{ color: 'white' }}>
-                                <h5 className="card-title">{artist.name}</h5>
-                                <a href="#" className="btn btn-primary"  >See Album</a>
-                            </div>
-                        </div>))}
-                    </div>
-                </div>
+
                 <div className="tab-pane fade" style={{ display: 'inline-block', justifyContent: 'center', color: 'white' }} id="playlist" role="tabpanel" aria-labelledby="playlist-tab" tabIndex="0"  >
                     <h4 style={{ color: 'white' }}>User Playlists</h4>
 

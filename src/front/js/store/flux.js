@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			friendRequests: [],
 			friends: [],
 			playingSongUri: null,
 			userCordinates: null,
@@ -94,6 +95,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						"uid": store.user.uid,
 						"song_id": songID
 					})
+					
 
 				})
 					.then(res => res.json())
@@ -105,7 +107,39 @@ const getState = ({ getStore, getActions, setStore }) => {
 			setUserFriends:()=>{
 				fetch(process.env.BACKEND_URL + `/getprofile/${sessionStorage.getItem('uid')}`)
 				.then((response)=>response.json())
-				.then((data)=>(setStore({friends:data.friends})))
+				.then((data)=>{
+					
+					let requestedArray = data.friends.filter((friend)=>friend.request_status === "requested")
+					let tempFiller =[]
+					console.log(requestedArray);
+					requestedArray.map((element)=>{
+						console.log(element.friend_id);
+						fetch(process.env.BACKEND_URL + `/getprofile/${element.friend_id}`)
+						.then((response)=>response.json())
+						.then((data)=>{
+							tempFiller.push(data)
+							console.log(data);
+						})
+					})
+					setStore({friendRequests:tempFiller})
+					return data
+				}).then((data)=>{
+					(setStore({friends:data.friends}))
+					let requestedArray = data.friends.filter((friend)=>friend.request_status === "friend")
+					let tempFiller =[]
+					console.log(requestedArray);
+					requestedArray.map((element)=>{
+						console.log(element.friend_id);
+						fetch(process.env.BACKEND_URL + `/getprofile/${element.friend_id}`)
+						.then((response)=>response.json())
+						.then((data)=>{
+							tempFiller.push(data)
+							console.log(data);
+						})
+					})
+					(setStore({friends:tempFiller}))
+				})
+
 			},
 
 			setUser: (data) => {
