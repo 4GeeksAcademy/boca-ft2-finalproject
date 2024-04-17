@@ -42,7 +42,8 @@ const Layout = () => {
 
     return (
         <BrowserRouter basename={basename}>
-            <SideNav />
+            
+            {sessionStorage.getItem('token') && <SideNav />}
             <ScrollToTop>
                 <Routes>
                     <Route element={<Landingpage />} path="/" />

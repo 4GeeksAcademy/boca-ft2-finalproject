@@ -23,7 +23,7 @@ export const Searchpage = () => {
 
 						<div className="col d-flex justify-content-center" style={{ color: 'white' }}>
 							<button type="button searchbutton" style={whiteColor} className={`btn btn-outline-dark button-rounded ${location.pathname == '/search/artist' && 'active'}`} onClick={() => navigate("/search/artist")}>Artist</button>
-							<button type="button searchbutton" style={whiteColor} className={`btn btn-outline-dark button-rounded ${location.pathname == '/search/events' && 'active'}`} onClick={() => navigate("/search/events")}>Events</button>
+							{/* <button type="button searchbutton" style={whiteColor} className={`btn btn-outline-dark button-rounded ${location.pathname == '/search/events' && 'active'}`} onClick={() => navigate("/search/events")}>Events</button> */}
 							<button type="button searchbutton" style={whiteColor} className={`btn btn-outline-dark button-rounded ${location.pathname == '/search/song' && 'active'}`} onClick={() => navigate("/search/song")}>Songs</button>
 							<button type="button searchbutton" style={whiteColor} className={`btn btn-outline-dark button-rounded ${location.pathname == '/search/album' && 'active'}`} onClick={() => navigate("/search/album")}>Album</button>
 							<button type="button searchbutton" style={whiteColor} className="btn btn-outline-dark button-rounded">Playlist</button>
