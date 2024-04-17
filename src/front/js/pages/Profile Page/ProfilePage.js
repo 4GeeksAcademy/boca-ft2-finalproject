@@ -89,9 +89,9 @@ export const ProfilePage = () => {
 
     useEffect(() => {
         checkFriendStatus()
-    }, [loading,events])
-     const checkFriendStatus = () => {
-        
+    }, [loading, events])
+    const checkFriendStatus = () => {
+
         if (!location.pathname == "profile/myaccount") {
             var testarray = store.friends.filter(relationship => relationship.friend_id == data.userData.uid)
             console.log(testarray);
@@ -117,7 +117,7 @@ export const ProfilePage = () => {
             min = Math.floor((ms / 1000 / 60) << 0),
             sec = Math.floor((ms / 1000) % 60);
 
-        return(min + ':' + sec);
+        return (min + ':' + sec);
     }
 
     const sendFollowRequest = () => {
@@ -137,10 +137,10 @@ export const ProfilePage = () => {
 
     }
 
-    const currentTimeIS08601=()=>{
+    const currentTimeIS08601 = () => {
         const now = new Date(Date.now());
         const iso8601String = now.toISOString();
-        return(iso8601String);
+        return (iso8601String);
     }
 
     if (loading) {
@@ -150,7 +150,7 @@ export const ProfilePage = () => {
             </div>
         )
     }
-   
+
 
 
     return (
@@ -161,7 +161,7 @@ export const ProfilePage = () => {
             }>
                 <div className="row g-0">
                     <div className="col-md-4">
-                        <img src="https://thumbs.dreamstime.com/b/kermit-frog-muppets-22242614.jpg" className="img-fluid img-thumbnail mt-4" style={{
+                        <img src="https://assets.petco.com/petco/image/upload/f_auto,q_auto/832448-center-1" className="img-fluid img-thumbnail mt-4" style={{
                             width: "auto",
                             height: "300px"
                         }} />
@@ -222,13 +222,13 @@ export const ProfilePage = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {topSongs.map((song,ind) => <tr className="mx-auto my-2 shadow song-card" key={ind} style={{ width: "80vw", textAlign: 'left' }}>
+                                {topSongs.map((song, ind) => <tr className="mx-auto my-2 shadow song-card" key={ind} style={{ width: "80vw", textAlign: 'left' }}>
 
                                     <img src={song.album.images[1].url} />
                                     <td className="blurbg songtablerow" style={{ fontWeight: "900", fontVariant: "small-caps" }} >&nbsp; {song.name.toLowerCase()}</td>
                                     <td className="blurbg songtablerow" style={{ color: '#ebebeb' }} >{song.artists[0].name}</td>
                                     <td className="blurbg songtablerow">{song.album.name}</td>
-                                    <td className="blurbg songtablerow">{covertTrackMS(song.duration_ms) }</td>
+                                    <td className="blurbg songtablerow">{covertTrackMS(song.duration_ms)}</td>
                                     <td className="blurbg songtablerow"><i className="far fa-play-circle" onClick={() => actions.setPlayingSongUri(song.uri, song.artists[0].id, song.id)}></i></td>
                                 </tr>)}
                             </tbody>
@@ -303,7 +303,7 @@ export const ProfilePage = () => {
                         }}>
                             <p className="text-start">Visited Events</p>
                             <div className="d-flex">
-                                {events.filter(event => event.date <  currentTimeIS08601()).map((event,key) => (<div className="card border-light m-2 shadow" key={key} style={{ maxWidth: "14rem" }}>
+                                {events.filter(event => event.date < currentTimeIS08601()).map((event, key) => (<div className="card border-light m-2 shadow" key={key} style={{ maxWidth: "14rem" }}>
                                     <div className="card-header">{event.date}</div>
                                     <div className="card-body">
                                         <h5 className="card-title">{event.name}</h5>
@@ -315,7 +315,7 @@ export const ProfilePage = () => {
                         <div className="upcoming-events mx-3" style={{ border: "0.5px solid lightgray", width: "45vw" }}>
                             <p className="text-start">Upcoming Events</p>
                             <div className="d-flex">
-                                {events.filter(event => event.datetime_local > currentTimeIS08601()).map((event,key) => (<div className="card border-light m-2 shadow" key={key} style={{ maxWidth: "14rem" }}>
+                                {events.filter(event => event.datetime_local > currentTimeIS08601()).map((event, key) => (<div className="card border-light m-2 shadow" key={key} style={{ maxWidth: "14rem" }}>
                                     <div className="card-header">{event.title}</div>
                                     <div className="card-body">
                                         <h5 className="card-title">{event.name}</h5>
@@ -333,9 +333,9 @@ export const ProfilePage = () => {
                         {faveArtists.map((artist, ind) => (
                             <div
                                 className="card"
-                                onClick={() => { 
-                                    navigate(`/artist/${artist.name}`, { state: { artistData: artist } }) 
-                                    }} 
+                                onClick={() => {
+                                    navigate(`/artist/${artist.name}`, { state: { artistData: artist } })
+                                }}
                                 key={ind}>
 
                                 <div className="cover">
