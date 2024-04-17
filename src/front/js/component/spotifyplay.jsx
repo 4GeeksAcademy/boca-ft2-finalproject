@@ -31,8 +31,6 @@ export const SpotifyPlayBar = () => {
                     trackArtistColor: '#ccc',
                     trackNameColor: 'white',
                 }}
-                hideCoverArt={false}
-
             />
         </div>
     </div>

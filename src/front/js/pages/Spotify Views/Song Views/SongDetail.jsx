@@ -41,7 +41,7 @@ export const SongDetailPage = () => {
 
 
     return (
-        <>
+        <div className="container p-5 mb-5">
             <h1>{data.songData.name}</h1>
             <img src={data.songData.album.images[0].url} alt="Album Picture" width="500" height="600"></img>
             <h3>{data.songData.artists[0].name}</h3>
@@ -77,6 +77,6 @@ export const SongDetailPage = () => {
                     })
                 }
             </table >
-        </>
+        </div>
     );
 };
