@@ -208,7 +208,7 @@ def get_playlist(uid):
     return jsonify(serial), 200
 
 #RETURNS USER PLAYLIST FOR ONE FETCH PURPOSE
-@api.route('/new/playlist', methods=['POST']) 
+@api.route('/new/playlist', methods=['POST'] ) 
 def make_new_playlist():
     sent_info = request.json
     new_playlist = Playlist(uid=sent_info['uid'], playlist_name=sent_info['playlist_name'])

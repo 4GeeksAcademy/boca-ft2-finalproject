@@ -125,7 +125,7 @@ export const ArtistPage = () => {
                       <td>{trackData.name}</td>
                       <td>{trackData.album.artists[0].name}</td>
                       <td>{duration}</td>
-                      <td onClick={() => actions.setPlayingSongUri(trackData.uri, trackData.artists[0].id, trackData.id)}><i className="far fa-play-circle"></i></td>
+                      <td onClick={() => actions.setPlayingSongUri(trackData.uri, trackData.artists[0].id, trackData.id, trackData.artists[0].name)}><i className="far fa-play-circle"></i></td>
                     </tr>
                   )
                 })
