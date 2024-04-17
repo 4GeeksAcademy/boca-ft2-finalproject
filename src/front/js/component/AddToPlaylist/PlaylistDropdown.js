@@ -53,7 +53,7 @@ const PlaylistDropdown = (props) => {
         <div className="text-center playlist-dropdown">
             <div className="dropdown">
                 <button type="button" className="btn btn-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-                <i class="fa-solid fa-bars"></i>
+                    <i class="fa-solid fa-bars" style={{ color: "white" }}></i>
                 </button>
                 <form className="dropdown-menu p-4">
                     <div className="mb-3">

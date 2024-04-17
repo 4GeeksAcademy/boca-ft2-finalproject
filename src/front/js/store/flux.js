@@ -152,8 +152,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			spotifyTokenRefresh: () => {
-				const clientID = "5eedb8285f214e62985fddba0f324895"
-				const clientSecret = "0a207a4fb61c487d8b987298b4dd3344"
+				const clientID = "10508e4566674d8c87803e50bb6150b1"
+				const clientSecret = "c1ff15c06fec4b339b251d113e343e01"
 				fetch((`https://accounts.spotify.com/api/token`), {
 					method: 'POST',
 					headers: {

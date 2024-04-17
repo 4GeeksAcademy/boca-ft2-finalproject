@@ -13,7 +13,7 @@ export default function Recomendations() {
     const peerAlsoListenedTo = "Also Listened To Music"
 
     const peerProfileImage = "https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
-    const colorScheme = ['#BDD9BF', '#2E4052', "#FFC857", "#FFFFFF", '#412234']
+    const colorScheme = ['#BDD9BF', '#2E4052', "#FFC857", "#FFFFFF", '#412234', '#e83c3c']
 
     const getUserInfo = () => {
         const uid = sessionStorage.getItem("uid")
@@ -41,31 +41,24 @@ export default function Recomendations() {
     return (
 
         <>
-            <span style={{ color: colorScheme[2] }}>Based on your previous listens, we recommend:</span>
+            <h3 style={{ color: colorScheme[2] }}>Based on your previous listens, we recommend:</h3>
             {recomendations ? recomendations.tracks.map((trackInfo, ind) => {
-                return <div className="card m-2" style={{ width: "18rem", color: colorScheme[0], backgroundColor: colorScheme[1],height:"300px" }} key={ind}>
-                    <img src={trackInfo.album.images[0].url} className="card-img-top" />
-                    <div className="card-body">
-                        <h5 className="card-title">
-                        <h5>{trackInfo.name}</h5>
-                        </h5>
-                    </div>
-                    
-                    <ul className="list-group list-group-flush">
-                        <li className="list-group-item">by: {trackInfo.artists[0].name}</li>
-                    </ul>
-                    <div className="card-body">
+                return (
+                    <div className="card m-2 bgblur" style={{ width: "18rem", color: colorScheme[0] }} key={ind}>
                         <Link to={`/song/${trackInfo.name}`} state={{ songData: trackInfo }}>
-                            
-                        
-                        
-                        
-                        
-                        
+                            <img src={trackInfo.album.images[0].url} className="card-img-top" />
+                            <div className="card-body">
+                                <h5 className="card-title" style={{ color: colorScheme[5] }}>
+                                    {trackInfo.name}
+                                </h5>
+                            </div>
+                            <ul className="list-group list-group-flush">
+                                <li className="list-group-item" style={{ background: "rgb(0,0,0,0)", color: colorScheme[2] }}>by: {trackInfo.artists[0].name}</li>
+                            </ul>
+                            <div className="card-body">
+                            </div>
                         </Link>
-
-                    </div>
-                </div>
+                    </div>)
             })
                 : <div></div>}
         </>

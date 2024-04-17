@@ -25,11 +25,12 @@ export default function UpcomingEvents() {
     const eventImage = "https://media.istockphoto.com/id/1143602469/vector/placeholder-icon-vector-from-event-collection-thin-line-placeholder-outline-icon-vector.jpg?s=170667a&w=0&k=20&c=GeKWSSSEhJg2RT7MJK_9ftAfPfOfh5Epmz1Iprg_i-Y="
     const colorScheme = ['#cccccc', '#454545', "#e83c3c", "#ffcc24", '#F8E9E9']
     return (
-        <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
+        <>
+            <h3 style={{ color: colorScheme[3] }}>Upcoming Events near you:</h3>
             {events ? events.results.map((eventInfo, ind) => {
                 var date = new Date(eventInfo.datetime_local)
                 return (
-                    <div className="card blurbg" key={ind} style={{ width: "18rem", height: "25rem", overflow: "hidden", margin: "1rem", color: colorScheme[0], backgroundColor: colorScheme[1], display: 'flex', flexDirection: 'column' }}>
+                    <div className="card blurbg m-2" key={ind} style={{ width: "18rem", height: "25rem", overflow: "hidden", color: colorScheme[0], backgroundColor: colorScheme[1], display: 'flex', flexDirection: 'column' }}>
                         <img src={eventImage} className="card-img-top" alt="..." style={{ maxHeight: "50%", objectFit: "cover", width: "100%" }} />
                         <div className="card-body" style={{ maxHeight: "50%", overflowY: "auto", flex: '1 0 auto' }}>
                             <p className="card-title">
@@ -43,6 +44,6 @@ export default function UpcomingEvents() {
                     </div>)
             })
                 : <div></div>}
-        </div>
+        </>
     )
 }

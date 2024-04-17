@@ -152,7 +152,6 @@ export const ProfilePage = () => {
     }
 
 
-
     return (
         <div className="text-center" style={{ color: 'white' }}>
 
@@ -161,7 +160,7 @@ export const ProfilePage = () => {
             }>
                 <div className="row g-0">
                     <div className="col-md-4">
-                        <img src="https://assets.petco.com/petco/image/upload/f_auto,q_auto/832448-center-1" className="img-fluid img-thumbnail mt-4" style={{
+                        <img src={userPageData.prof_pic_url} className="img-fluid img-thumbnail mt-4" style={{
                             width: "auto",
                             height: "300px"
                         }} />
@@ -176,22 +175,17 @@ export const ProfilePage = () => {
                             <div>
                                 {genres.map((genre, ind) => (<div key={ind}><br /> <span className="badge rounded-pill text-bg-danger">{genre.genre}</span></div>))}
                             </div>
-                            <div style={{ display: location.pathname == "/profile/myaccount" && "none" }}>
-                                {currentUserFriend == "friends" && <button className="btn btn-success" onClick={() => { }}>Following</button>}
-                                {currentUserFriend == "follow" && <button className="btn btn-primary" onClick={() => { }}>Follow</button>}
-                                {currentUserFriend == "requested" && <button className="btn btn-secondary" onClick={() => { }}>Requested</button>}
-                            </div>
                         </div>
                     </div>
                     <div className="col 2">
-                        <div className="dropdown">
+                        {location.pathname == '/profile/myaccount' && (<div className="dropdown">
                             <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Dropdown button
                             </button>
                             <ul className="dropdown-menu">
                                 <li><span className="dropdown-item" onClick={() => logout()} href="#">Logout</span></li>
                             </ul>
-                        </div>
+                        </div>)}
                     </div>
                 </div>
             </div>
@@ -206,7 +200,7 @@ export const ProfilePage = () => {
 
                     <button className="nav-link" id="playlist-tab" data-bs-toggle="tab" data-bs-target="#playlist" type="button" role="tab" aria-controls="playlist" aria-selected="false">User Playlist</button>
 
-                    <button className="nav-link" id="friendlist-tab" data-bs-toggle="tab" data-bs-target="#friendlist" type="button" role="tab" aria-controls="friendlist" aria-selected="false">Friendlist</button>
+                    {location.pathname == '/profile/myaccount' && (<button className="nav-link" id="friendlist-tab" data-bs-toggle="tab" data-bs-target="#friendlist" type="button" role="tab" aria-controls="friendlist" aria-selected="false">Friendlist</button>)}
 
                     {location.pathname == '/profile/myaccount' && (<button className="nav-link" id="friendrequest-tab" data-bs-toggle="tab" data-bs-target="#friendrequest" type="button" role="tab" aria-controls="friends" aria-selected="false">Friend Request</button>)}
                 </div>
@@ -232,12 +226,11 @@ export const ProfilePage = () => {
                             <tbody>
                                 {topSongs.map((song, ind) => <tr className="mx-auto my-2 shadow song-card" key={ind} style={{ width: "80vw", textAlign: 'left' }}>
 
-                                    <img src={song.album.images[1].url} />
                                     <td className="blurbg songtablerow" style={{ fontWeight: "900", fontVariant: "small-caps" }} >&nbsp; {song.name.toLowerCase()}</td>
-                                    <td className="blurbg songtablerow" style={{ color: '#ebebeb' }} >{song.artists[0].name}</td>
-                                    <td className="blurbg songtablerow">{song.album.name}</td>
-                                    <td className="blurbg songtablerow">{covertTrackMS(song.duration_ms)}</td>
-                                    <td className="blurbg songtablerow"><i className="far fa-play-circle" onClick={() => actions.setPlayingSongUri(song.uri, song.artists[0].id, song.id,song.artists[0].name)}></i></td>
+                                    <td className="blurbg songtablerow" style={{ fontWeight: "900", fontVariant: "small-caps" }} >{song.artists[0].name}</td>
+                                    <td className="blurbg songtablerow" style={{ fontWeight: "900", fontVariant: "small-caps" }} >{song.album.name}</td>
+                                    <td className="blurbg songtablerow" style={{ fontWeight: "900", fontVariant: "small-caps" }}>{covertTrackMS(song.duration_ms)}</td>
+                                    <td className="blurbg songtablerow"><i className="far fa-play-circle" onClick={() => actions.setPlayingSongUri(song.uri, song.artists[0].id, song.id, song.artists[0].name)}></i></td>
                                 </tr>)}
                             </tbody>
                         </table>
@@ -247,15 +240,11 @@ export const ProfilePage = () => {
 
                 <div className="tab-pane fade show " id="friendlist" role="tabpanel" aria-labelledby="top-tracks-tab" tabIndex="1">
                     <h4>Friends List:</h4>
-                    <div id="Friend Request text-center">
-                        <table className="table table-dark blurbg">
+                    <div id="Friend Request">
+                        <table className="table table-dark">
                             <thead>
                                 <tr>
                                     <td>Username</td>
-
-                                    <td>Link to Profile</td>
-                                    <td> box </td>
-                                    <td> box </td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -279,10 +268,8 @@ export const ProfilePage = () => {
                             <thead>
                                 <tr>
                                     <td>Username</td>
-                                    <td>accept</td>
-                                    <td>Link to Profile</td>
-                                    <td> box </td>
-
+                                    <td>Accept</td>
+                                    <td>Decline</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -311,25 +298,30 @@ export const ProfilePage = () => {
                         }}>
                             <p className="text-start">Visited Events</p>
                             <div className="d-flex">
-                                {events.filter(event => event.date < currentTimeIS08601()).map((event, key) => (<div className="card border-light m-2 shadow" key={key} style={{ maxWidth: "14rem" }}>
-                                    <div className="card-header">{event.date}</div>
-                                    <div className="card-body">
-                                        <h5 className="card-title">{event.name}</h5>
-                                        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    </div>
-                                </div>))}
+                                {events.filter(event => event.date < currentTimeIS08601()).map((event, key) => {
+                                    return (<div className="card border-light m-2 shadow" key={key} style={{ maxWidth: "14rem" }}>
+                                        <div className="card-header">{event.date}</div>
+                                        <div className="card-body">
+                                            <h5 className="card-title">{event.name}</h5>
+                                        </div>
+                                    </div>)
+                                })}
                             </div>
                         </div>
                         <div className="upcoming-events mx-3" style={{ border: "0.5px solid lightgray", width: "45vw" }}>
                             <p className="text-start">Upcoming Events</p>
                             <div className="d-flex">
-                                {events.filter(event => event.datetime_local > currentTimeIS08601()).map((event, key) => (<div className="card border-light m-2 shadow" key={key} style={{ maxWidth: "14rem" }}>
-                                    <div className="card-header">{event.title}</div>
-                                    <div className="card-body">
-                                        <h5 className="card-title">{event.name}</h5>
-                                        <p className="card-text">{event.venue.name_v2}</p>
-                                    </div>
-                                </div>))}
+                                {events.filter(event => event.datetime_local > currentTimeIS08601()).map((event, key) => {
+                                    var date = new Date(event.datetime_local)
+                                    return (<div className="card border-light m-2 shadow" key={key} style={{ maxWidth: "14rem" }}>
+                                        <div className="card-header">{event.title}</div>
+                                        <div className="card-body">
+                                            <h5 className="card-title">{event.name}</h5>
+                                            <p className="card-text">{event.venue.name_v2}</p>
+                                            <p className="card-text">{date.toDateString()}</p>
+                                        </div>
+                                    </div>)
+                                })}
                             </div>
                         </div>
                     </div>
@@ -337,10 +329,10 @@ export const ProfilePage = () => {
 
                 <div className="tab-pane fade" id="artists" role="tabpanel" aria-labelledby="artists-tab" tabIndex="0">
                     <h4>Favorite Artists:</h4>
-                    <div className="d-flex">
+                    <div className="d-flex justify-content-center">
                         {faveArtists.map((artist, ind) => (
                             <div
-                                className="card"
+                                className="card m-2"
                                 onClick={() => {
                                     navigate(`/artist/${artist.name}`, { state: { artistData: artist } })
                                 }}
@@ -369,25 +361,14 @@ export const ProfilePage = () => {
                             <div className="playlist card d-flex blurbg" style={{ width: "30rem" }}>
                                 <div className="row g-0 cover">
                                     <div className="col">
-                                        <img src="https://media.gettyimages.com/id/1337160870/photo/new-york-new-york-miss-piggy-performs-onstage-during-elsie-fest-2021-broadways-outdoor-music.jpg?s=612x612&w=0&k=20&c=VOMZOdOmA1XwHbTEuA1Gag5U7566Fut1lPAUlDKAFhg=" className="card-img-top" alt="..." />
-                                    </div>
-                                    <div className="col">
-                                        <img src="https://media.gettyimages.com/id/1337160870/photo/new-york-new-york-miss-piggy-performs-onstage-during-elsie-fest-2021-broadways-outdoor-music.jpg?s=612x612&w=0&k=20&c=VOMZOdOmA1XwHbTEuA1Gag5U7566Fut1lPAUlDKAFhg=" className="card-img-top" alt="..." />
-                                    </div>
-                                </div>
-                                <div className="row g-0 cover">
-                                    <div className="col">
-                                        <img src="https://media.gettyimages.com/id/1337160870/photo/new-york-new-york-miss-piggy-performs-onstage-during-elsie-fest-2021-broadways-outdoor-music.jpg?s=612x612&w=0&k=20&c=VOMZOdOmA1XwHbTEuA1Gag5U7566Fut1lPAUlDKAFhg=" className="card-img-top" alt="..." />
-                                    </div>
-                                    <div className="col">
-                                        <img src="https://media.gettyimages.com/id/1337160870/photo/new-york-new-york-miss-piggy-performs-onstage-during-elsie-fest-2021-broadways-outdoor-music.jpg?s=612x612&w=0&k=20&c=VOMZOdOmA1XwHbTEuA1Gag5U7566Fut1lPAUlDKAFhg=" className="card-img-top" alt="..." />
+                                        <img src="https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2?v=v2" style={{ height: "200px", width: "200px" }} className="card-img-top img-thumbnail" alt="..." />
                                     </div>
                                 </div>
                                 <div className="card-content" style={{ color: 'white' }}>
                                     <h5 className="card-title">{playlist.playlist_name}</h5>
                                 </div>
                                 <div className="card-footer">
-                                    <small className="text-body-secondary">Last updated 3 mins ago</small>
+                                    {/* <small className="text-body-secondary">Last updated 3 mins ago</small> */}
                                 </div>
                             </div>
                         </Link>

@@ -53,7 +53,8 @@ export const SongDetailPage = () => {
                         <th scope="col">Track Name</th>
                         <th scope="col">Artist</th>
                         <th scope="col">Duration</th>
-                        <th scope="col">#</th>
+                        <th scope="col">Play</th>
+                        <th scope="col">Playlist</th>
 
                     </tr>
                 </thead>
@@ -66,10 +67,17 @@ export const SongDetailPage = () => {
                                     <td>{trackData.name}</td>
                                     <td>{trackData.artists[0].name}</td>
                                     <td>{(trackData.duration_ms / 1000) / 60}</td>
-                                    <div>
-                                        <td className="btn btn-success" onClick={() => actions.setPlayingSongUri(trackData.uri, trackData.artists[0].id, trackData.id, trackData.artists[0].name)}></td>
-                                        <PlaylistDropdown />
-                                    </div>
+                                    <td>
+                                        <i className="far fa-play-circle" onClick={() => actions.setPlayingSongUri(trackData.uri, trackData.artists[0].id, trackData.id, trackData.artists[0].name)}></i>
+                                    </td>
+                                    <td>
+                                        <PlaylistDropdown
+                                            song_id={trackData.id}
+                                            user_id={sessionStorage.getItem('uid')}
+                                            song_title={trackData.name}
+                                        />
+                                    </td>
+
 
                                 </tr>
                             </tbody>

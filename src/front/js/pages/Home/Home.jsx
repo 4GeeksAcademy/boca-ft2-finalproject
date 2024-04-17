@@ -26,18 +26,21 @@ export const Home = () => {
     return (
 
         <div className="container">
-            <a href={store.auth_url}>Connect Spotify</a>
-            <div className="row">
-            <Recomendations />
+            <a href={store.auth_url} className="btn btn-danger">Connect to Spotify</a>
+            <div className="row mt-4 d-flex justify-content-center" style={{ borderBottom: "1px solid gray" }}>
+                <Recomendations />
             </div>
-            <div className="row">
-            <FriendsNearby />
-            </div> 
-            <div className="row">         
-            <Concert />
+            <div className="row mt-3 d-flex justify-content-center" style={{ borderBottom: "1px solid white" }}>
+                <UpcomingEvents />
+            </div>
+            <div className="row mt-3 d-flex justify-content-center" style={{ borderBottom: "1px solid white" }}>
+                <FriendsNearby />
+            </div>
+            <div className="row mt-3 d-flex justify-content-center">
+                <Concert />
             </div>
 
-            
+
 
 
 

@@ -84,20 +84,21 @@ export default function FriendsNearby() {
         }
     };
 
-    const colorScheme = ['#222222', "#FFFFFF", "#4B4E6D", '#84DCC6', '#95A3B3'];
+    const colorScheme = ['#222222', "#FFFFFF", "#4B4E6D", '#84DCC6', '#95A3B3', '#ffcc24', '#e83c3c'];
 
     return (
         <>
+            <h3 style={{ color: colorScheme[5] }}>Users that are nearby:</h3>
             {friendsData ? friendsData.map((userInfo, ind) => {
                 const uid = sessionStorage.getItem('uid');
-                if (userInfo.user.uid !== uid) {
+                if (userInfo.user.uid != uid) {
                     return (
-                        <div key={ind} className="card" style={{ width: "18rem", color: colorScheme[0], backgroundColor: colorScheme[1] }}>
+                        <div key={ind} className="card m-2 blurbg" style={{ width: "18rem", color: "white", backgroundColor: colorScheme[1] }}>
                             <img src={userInfo.user.prof_pic_url} className="card-img-top" alt="..." />
                             <div className="card-body">
                                 <h5 className="card-title">
-                                    <span style={{ color: colorScheme[2] }}>{userInfo.user.username} </span>
-                                    also lives near {userInfo.user.postal_code}, would you like to connect?  </h5>
+                                    <span style={{ color: colorScheme[6] }}>{userInfo.user.username} </span>
+                                    also lives near <span style={{ color: colorScheme[5] }}>{userInfo.user.postal_code}</span>, would you like to connect?  </h5>
                             </div>
                             <h5>{userInfo.user.username} listens to</h5>
                             <ul className="list-group list-group-flush">
@@ -105,15 +106,12 @@ export default function FriendsNearby() {
                                     <li className="list-group-item">Loading...</li>
                                 ) : (
                                     (artistInfo && artistInfo.length > 0) ? userInfo.artists.map(artist => (
-                                        <li key={artist.id} className="list-group-item">
-                                            <span style={{ color: colorScheme[3] }}>{artist.artist_name}</span>
+                                        <li key={artist.id} style={{ background: "rgb(0,0,0,0)" }} className="list-group-item">
+                                            <span style={{ color: "#FFA500" }}>{artist.artist_name}</span>
                                         </li>
                                     )) : <li className="list-group-item">No Artists</li>
                                 )}
                             </ul>
-                            <div className="card-body">
-                                <a href="#" className="card-link" style={{ color: colorScheme[2] }}>Connect With { }</a>
-                            </div>
                         </div>
                     );
                 }
