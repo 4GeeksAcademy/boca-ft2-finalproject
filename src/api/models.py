@@ -37,7 +37,7 @@ class User(db.Model):
             "first_name": self.first_name,
             "last_name": self.last_name,
             "about_me": self.about_me,
-            "prof_pic_url": self.prof_pic_url
+            "prof_pic_url": self.prof_pic_url,
             # do not serialize the password, its a security breach
         }
     
@@ -219,14 +219,15 @@ class TrackTopArtists(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     uid = db.Column(db.Integer, db.ForeignKey(User.uid))
     artist_id = db.Column(db.String(250))
+    artist_name = db.Column(db.String(250))
     count = db.Column(db.Integer, default=0)
 
-    def track_top_artists(artist_id, uid):
-            top_artists = TrackTopArtists.query.filter_by(uid=uid, artist_id=artist_id).first()
+    def track_top_artists(artist_id, uid, artist_name):
+            top_artists = TrackTopArtists.query.filter_by(uid=uid, artist_id=artist_id, artist_name=artist_name).first()
             if top_artists:
                 top_artists.count += 1
             else: 
-                top_artists = TrackTopArtists(uid=uid, artist_id=artist_id, count=1)
+                top_artists = TrackTopArtists(uid=uid, artist_id=artist_id,artist_name=artist_name, count=1)
                 db.session.add(top_artists)
             db.session.commit()
 
@@ -235,5 +236,6 @@ class TrackTopArtists(db.Model):
             "id": self.id,
             "uid": self.uid,
             "artist_id": self.artist_id,
+            "artist_name": self.artist_name,
             "count": self.count
         }

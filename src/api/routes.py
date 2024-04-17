@@ -169,7 +169,7 @@ def handle_get_user():
 @api.route('/trackartist', methods=['POST'])
 def handle_artit_song():
     sent_info = request.json
-    TrackTopArtists.track_top_artists(sent_info['artist_id'], sent_info['uid'])
+    TrackTopArtists.track_top_artists(sent_info['artist_id'], sent_info['uid'], sent_info['artist_name'])
     return jsonify('Tracked Artist'), 200
 
 @api.route('getfriends/<uid>', methods=['GET'])
@@ -208,7 +208,7 @@ def get_playlist(uid):
     return jsonify(serial), 200
 
 #RETURNS USER PLAYLIST FOR ONE FETCH PURPOSE
-@api.route('/new/playlist', methods=['POST']) 
+@api.route('/new/playlist', methods=['POST'] ) 
 def make_new_playlist():
     sent_info = request.json
     new_playlist = Playlist(uid=sent_info['uid'], playlist_name=sent_info['playlist_name'])
@@ -235,3 +235,9 @@ def add_new_song():
     #returns all playlists for current user  
     return jsonify(serial), 200
 
+@api.route('/findothersnearby/<uid>', methods=['GET'])
+def handle_find_nearby(uid):
+    sent_user = User.query.filter_by(uid=uid).first()
+    all_users_nearby = User.query.filter_by(postal_code=sent_user.postal_code)
+    list_nearby = list(map(lambda x: x.serialize(), all_users_nearby))
+    return jsonify(nearby=list_nearby), 200

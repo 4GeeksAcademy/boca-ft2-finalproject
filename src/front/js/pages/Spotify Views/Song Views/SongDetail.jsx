@@ -66,14 +66,9 @@ export const SongDetailPage = () => {
                                     <td>{trackData.name}</td>
                                     <td>{trackData.artists[0].name}</td>
                                     <td>{(trackData.duration_ms / 1000) / 60}</td>
-                                    <div className="d-flex justify-content-between">
-                                        <i className="far fa-play-circle" onClick={() => actions.setPlayingSongUri(trackData.uri, trackData.artists[0].id, trackData.id)}>
-                                        </i>
-                                        <PlaylistDropdown
-                                            song_id={trackData.id}
-                                            user_id={sessionStorage.getItem('uid')}
-                                            song_title={trackData.name}
-                                        />
+                                    <div>
+                                        <td className="btn btn-success" onClick={() => actions.setPlayingSongUri(trackData.uri, trackData.artists[0].id, trackData.id, trackData.artists[0].name)}></td>
+                                        <PlaylistDropdown />
                                     </div>
 
                                 </tr>
