@@ -237,7 +237,7 @@ export const ProfilePage = () => {
                                     <td className="blurbg songtablerow" style={{ color: '#ebebeb' }} >{song.artists[0].name}</td>
                                     <td className="blurbg songtablerow">{song.album.name}</td>
                                     <td className="blurbg songtablerow">{covertTrackMS(song.duration_ms)}</td>
-                                    <td className="blurbg songtablerow"><i className="far fa-play-circle" onClick={() => actions.setPlayingSongUri(song.uri, song.artists[0].id, song.id)}></i></td>
+                                    <td className="blurbg songtablerow"><i className="far fa-play-circle" onClick={() => actions.setPlayingSongUri(song.uri, song.artists[0].id, song.id,song.artists[0].name)}></i></td>
                                 </tr>)}
                             </tbody>
                         </table>

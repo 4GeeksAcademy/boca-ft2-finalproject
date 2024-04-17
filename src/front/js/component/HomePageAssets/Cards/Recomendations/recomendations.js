@@ -41,22 +41,27 @@ export default function Recomendations() {
     return (
 
         <>
+            <span style={{ color: colorScheme[2] }}>Based on your previous listens, we recommend:</span>
             {recomendations ? recomendations.tracks.map((trackInfo, ind) => {
-
-                return <div className="card" style={{ width: "18rem", color: colorScheme[0], backgroundColor: colorScheme[1] }} key={ind}>
+                return <div className="card m-2" style={{ width: "18rem", color: colorScheme[0], backgroundColor: colorScheme[1],height:"300px" }} key={ind}>
                     <img src={trackInfo.album.images[0].url} className="card-img-top" />
                     <div className="card-body">
                         <h5 className="card-title">
-                            <span style={{ color: colorScheme[2] }}>Based on your previous listens, we recommend:</span>
+                        <h5>{trackInfo.name}</h5>
                         </h5>
                     </div>
-                    <h5>{trackInfo.name}</h5>
+                    
                     <ul className="list-group list-group-flush">
                         <li className="list-group-item">by: {trackInfo.artists[0].name}</li>
                     </ul>
                     <div className="card-body">
                         <Link to={`/song/${trackInfo.name}`} state={{ songData: trackInfo }}>
-                            <button className="card-link" style={{ color: colorScheme[2] }}>Go to song page.</button>
+                            
+                        
+                        
+                        
+                        
+                        
                         </Link>
 
                     </div>
