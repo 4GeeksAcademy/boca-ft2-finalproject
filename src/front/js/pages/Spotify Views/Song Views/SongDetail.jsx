@@ -68,7 +68,7 @@ export const SongDetailPage = () => {
                                     <td>{trackData.artists[0].name}</td>
                                     <td>{(trackData.duration_ms / 1000) / 60}</td>
                                     <div>
-                                        <td className="btn btn-success" onClick={() => actions.setPlayingSongUri(trackData.uri, trackData.artists[0].id, trackData.id)}></td>
+                                        <td className="btn btn-success" onClick={() => actions.setPlayingSongUri(trackData.uri, trackData.artists[0].id, trackData.id, trackData.artists[0].name)}></td>
                                         <PlaylistDropdown />
                                     </div>
 

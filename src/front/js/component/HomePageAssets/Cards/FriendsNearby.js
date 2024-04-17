@@ -6,7 +6,8 @@ export default function FriendsNearby() {
     const [userInfo, setUserInfo] = useState();
     const [nearbyUsers, setNearbyUsers] = useState();
     const [friendsData, setFriendsData] = useState();
-    const [artistInfo, setArtistInfo] = useState([]);
+    const [artistInfo, setArtistInfo] = useState()
+
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -50,11 +51,9 @@ export default function FriendsNearby() {
             setFriendsData([]);
         }
     };
-
     useEffect(() => {
         getArtistInfo();
     }, [friendsData]);
-
     const getArtistInfo = () => {
         const opts = {
             method: 'GET',
@@ -105,11 +104,11 @@ export default function FriendsNearby() {
                                 {loading ? (
                                     <li className="list-group-item">Loading...</li>
                                 ) : (
-                                    (artistInfo && artistInfo.length > 0) ? artistInfo.map(artist => (
+                                    (artistInfo && artistInfo.length > 0) ? userInfo.artists.map(artist => (
                                         <li key={artist.id} className="list-group-item">
-                                            <span style={{ color: colorScheme[3] }}>{artist.name}</span>
+                                            <span style={{ color: colorScheme[3] }}>{artist.artist_name}</span>
                                         </li>
-                                    )) : <li className="list-group-item">No artist</li>
+                                    )) : <li className="list-group-item">No Artists</li>
                                 )}
                             </ul>
                             <div className="card-body">

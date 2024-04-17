@@ -39,7 +39,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						.then(data => setStore({ user: data }))
 				}
 			},
-			setPlayingSongUri: (uri, artistId, songID) => {
+			setPlayingSongUri: (uri, artistId, songID, artistName) => {
 				const store = getStore()
 
 				setStore({ playingSongUri: uri })
@@ -73,7 +73,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 					body: JSON.stringify({
 						"uid": store.user.uid,
-						"artist_id": artistId
+						"artist_id": artistId,
+						"artist_name": artistName
 					})
 				}
 				).then(res => res.json())

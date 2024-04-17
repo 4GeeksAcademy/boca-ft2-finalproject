@@ -159,7 +159,7 @@ def handle_get_user():
 @api.route('/trackartist', methods=['POST'])
 def handle_artit_song():
     sent_info = request.json
-    TrackTopArtists.track_top_artists(sent_info['artist_id'], sent_info['uid'])
+    TrackTopArtists.track_top_artists(sent_info['artist_id'], sent_info['uid'], sent_info['artist_name'])
     return jsonify('Tracked Artist'), 200
 
 
