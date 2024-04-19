@@ -98,7 +98,7 @@ export const ArtistPage = () => {
         <img src={`${data.artistData.images[0].url}`} alt="Artist Picture" width="500" height="600"></img>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide"></link>
         <div style={{ display: 'grid', justifyContent: 'center' }}>
-        <i className="far fa-play-circle" onClick={() => actions.setPlayingSongUri(data.artistData.uri)}></i>
+          <i className="far fa-play-circle" onClick={() => actions.setPlayingSongUri(data.artistData.uri)}></i>
 
           <table className="table">
             <thead>
@@ -150,7 +150,7 @@ export const ArtistPage = () => {
         {
           artistAlbums.map((albumData, ind) => {
             return (
-              <div className="card artistTable" style={{ width: "18rem", background: gradient, border: "1px solid" }} key={ind}>
+              <div className="card artistTable" style={{ height: "400px", overflow: "auto", overflow: "auto", background: gradient, border: "1px solid", margin: '15px' }} key={ind}>
                 <img src={albumData.images[1].url} className="card-img-top" alt="..." />
                 <div className="card-body">
                   <h5 className="card-title">{albumData.name}</h5>

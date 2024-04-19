@@ -46,7 +46,7 @@ export const SongSearch = () => {
 						searchResults.map((data, ind) => {
 
 							return (
-								<div className="card" onClick={() => { navigate(`/song/${data.name}`, { state: { songData: data } }) }} key={ind}>
+								<div className="card" style={{ height: "400px", overflow: "auto", margin: "5px" }} onClick={() => { navigate(`/song/${data.name}`, { state: { songData: data } }) }} key={ind}>
 									<div className="cover">
 										<img src={data.album.images[1].url} alt="cover" />
 										<div className="play-icon">

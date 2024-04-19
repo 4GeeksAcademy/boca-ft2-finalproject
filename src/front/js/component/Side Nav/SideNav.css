@@ -60,7 +60,8 @@
   
   .sidebar-menu li a.nav-link { /* This is the class that is being used in the SideNav.js file FONTCOLOR*/
     border-radius: 10px;
-    padding: 16px 15px;
+    padding: 36% 15px;
+    font-size:larger;
     color: #fffbfb;
     text-decoration: none;
     display: flex;
@@ -87,7 +88,8 @@
   
   .sidebar-menu li a.nav-link:hover {
     background-color: black;
-    filter:invert()
+    color:red;
+    transition: 1s;
   }
 
   .sidebar-menu li a.nav-link active {

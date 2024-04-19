@@ -36,7 +36,7 @@ export const AlbumPage = () => {
     useEffect(() => {
         getAlbumInfoSpotify()
     }, []);
-    
+
     const covertTrackMS = (msIn) => {
         var ms = msIn,
             min = Math.floor((ms / 1000 / 60) << 0),
@@ -46,14 +46,14 @@ export const AlbumPage = () => {
     }
 
 
-   
+
 
     return (
         <>
 
 
             <h1>{data.albumData.name}</h1>
-            <img src={data.albumData.images[0].url} alt="Artist Picture" width="500" height="600"></img>
+            <img src={data.albumData.images[0].url} alt="Artist Picture" style={{ height: 'auto', width: '50%' }}></img>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide"></link>
             <h3>{data.albumData.artists[0].name}</h3>
             <i className="far fa-play-circle" onClick={() => actions.setPlayingSongUri(data.albumData.uri)}></i>
@@ -78,7 +78,7 @@ export const AlbumPage = () => {
                                     <td>{trackData.name}</td>
                                     <td>{trackData.artists[0].name}</td>
                                     <td>{covertTrackMS(trackData.duration_ms)}</td>
-                                    <td><i className="far fa-play-circle" onClick={() => actions.setPlayingSongUri(trackData.uri, trackData.artists[0].id, trackData.id,trackData.artists[0].name)}></i></td>
+                                    <td><i className="far fa-play-circle" onClick={() => actions.setPlayingSongUri(trackData.uri, trackData.artists[0].id, trackData.id, trackData.artists[0].name)}></i></td>
                                 </tr>
                             </tbody>
                         )
