@@ -44,7 +44,7 @@ export const ArtistSearch = () => {
 						searchResults.map((data, ind) => {
 							return (
 
-								<div className="card" onClick={() => { navigate(`/artist/${data.name}`, { state: { artistData: data } }) }}  key={ind}>
+								<div className="card" style={{ height: "400px", overflow: "auto", margin: "5px" }} onClick={() => { navigate(`/artist/${data.name}`, { state: { artistData: data } }) }} key={ind}>
 									<div className="cover artist">
 										<img src={data.images[1].url} className="xyz" alt="cover" />
 										<div className="play-icon">

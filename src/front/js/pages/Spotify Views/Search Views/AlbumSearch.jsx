@@ -48,7 +48,7 @@ export const AlbumSearch = () => {
 						searchResults.map((data, ind) => {
 
 							return (
-								<div className="card" onClick={() => { navigate(`/album/${data.name}`, { state: { albumData: data } }) }} key={ind}>
+								<div className="card" style={{ height: "400px", overflow: "auto", margin: "5px" }} onClick={() => { navigate(`/album/${data.name}`, { state: { albumData: data } }) }} key={ind}>
 
 									<div className="cover">
 										<img src={data.images[0].url} alt="cover" />
