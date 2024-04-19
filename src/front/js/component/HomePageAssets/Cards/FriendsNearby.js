@@ -84,7 +84,7 @@ export default function FriendsNearby() {
         }
     };
 
-    const colorScheme = ['#222222', "#FFFFFF", "#4B4E6D", '#84DCC6', '#95A3B3'];
+    const colorScheme = ['#FFFFFF', "#FFFFFF", "#4B4E6D", '#84DCC6', '#95A3B3'];
 
     return (
         <>
@@ -92,8 +92,8 @@ export default function FriendsNearby() {
                 const uid = sessionStorage.getItem('uid');
                 if (userInfo.user.uid !== uid) {
                     return (
-                        <div key={ind} className="card" style={{ width: "18rem", color: colorScheme[0], backgroundColor: colorScheme[1] }}>
-                            <img src={userInfo.user.prof_pic_url} className="card-img-top" alt="..." />
+                        <div key={ind} className="card blurbg" style={{ width: "18rem", color: colorScheme[0], backgroundColor: colorScheme[1] }}>
+                            <img src={userInfo.user.prof_pic_url} className="card-img-top" alt="Loading..." />
                             <div className="card-body">
                                 <h5 className="card-title">
                                     <span style={{ color: colorScheme[2] }}>{userInfo.user.username} </span>
@@ -112,7 +112,7 @@ export default function FriendsNearby() {
                                 )}
                             </ul>
                             <div className="card-body">
-                                <a href="#" className="card-link" style={{ color: colorScheme[2] }}>Connect With { }</a>
+                                <a href="#" className="card-link" style={{ color: colorScheme[2], background: 'none' }}>Connect With { }</a>
                             </div>
                         </div>
                     );

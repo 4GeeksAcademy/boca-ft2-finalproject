@@ -17,11 +17,11 @@ export const SideNav = () => {
             <div className="row">
                 <div className="col-2">
                     <div className="sidebar">
-                    <img className="mb-3"src={logo} style={{ height: "auto", width: "50%", marginRight: '0px', marginLeft: '0px', padding: '0px' }} onClick={() => navigate('/')} alt="" />
+                        <img className="mb-3" src={logo} style={{ height: "auto", width: "110%", marginRight: '0px', marginLeft: '0px', padding: '0px' }} onClick={() => navigate('/')} alt="" />
                         <ul className="sidebar-menu ms-3 ">
                             <li className="logo" style={{ transform: 'rotate(-180deg)' }}>
 
-                                
+
                             </li>
                             {/* <li>
                                 <a href="#" className={location.pathname == '/DISCOVER' ? `nav-link active` : 'nav-link'} style={{ textOrientation: "sideways-left", writingMode: "vertical-lr" }} onClick={() => navigate("/home")}  >
@@ -61,7 +61,7 @@ export const SideNav = () => {
                         Notifications
                     </a>
                 </li> */}
-{/* 
+                            {/* 
                             <li>
                                 <a href="#" className={location.pathname == '/post' ? `nav-link active` : 'nav-link'} onClick={() => navigate("/post")} >
                                     <span className="icon">

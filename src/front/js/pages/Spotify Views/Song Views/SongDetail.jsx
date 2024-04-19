@@ -43,7 +43,7 @@ export const SongDetailPage = () => {
     return (
         <div className="container p-5 mb-5">
             <h1>{data.songData.name}</h1>
-            <img src={data.songData.album.images[0].url} alt="Album Picture" width="500" height="600"></img>
+            <img src={data.songData.album.images[0].url} alt="Album Picture" style={{ height: 'auto', width: '50%' }}></img>
             <h3>{data.songData.artists[0].name}</h3>
             <button className="btn btn-primary" onClick={() => { navigate(`/album/${data.songData.album.name}`, { state: { albumData: data.songData.album } }) }}>Listen to rest of songs {data.songData.album.name} </button>
             <table className="table">
